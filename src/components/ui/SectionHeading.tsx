@@ -36,7 +36,7 @@ export function SectionHeading({
         id={id}
         className={cn(
           "font-serif text-section text-balance",
-          tone === "dark" ? "text-ivory" : "text-noir",
+          tone === "dark" ? "text-ivory" : "text-navy",
         )}
       >
         {title}
@@ -45,7 +45,8 @@ export function SectionHeading({
         <p
           className={cn(
             "mt-4 text-lede text-pretty sm:mt-5",
-            tone === "dark" ? "text-ivory/75" : "text-charcoal/80",
+            align === "center" && "mx-auto",
+            tone === "dark" ? "text-ivory/75" : "text-charcoal",
           )}
         >
           {lede}

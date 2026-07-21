@@ -29,7 +29,7 @@ export function ThankYouClient({ brochureAvailable }: { brochureAvailable: boole
   }, [brochureAvailable, cancelled, seconds]);
 
   return (
-    <main className="film-grain flex min-h-[100svh] flex-col items-center justify-center bg-noir px-6 py-20 text-center text-ivory">
+    <main className="film-grain flex min-h-[100svh] flex-col items-center justify-center bg-navy px-6 py-20 text-center text-ivory">
       <p className="font-serif text-2xl lowercase tracking-tight">
         tsar <span className="text-gold">darbaar</span>
       </p>
@@ -49,7 +49,7 @@ export function ThankYouClient({ brochureAvailable }: { brochureAvailable: boole
         {brochureAvailable ? (
           <Button
             href={BROCHURE_PATH}
-            className="w-full"
+            className="btn-on-navy w-full"
             showArrow
             onClick={() => track("brochure_download")}
           >

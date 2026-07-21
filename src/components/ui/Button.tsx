@@ -18,11 +18,11 @@ type ButtonProps = {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-gold text-noir hover:bg-gold-deep active:bg-gold-deep border border-transparent",
+    "btn-luxury-primary bg-gold text-navy border border-transparent",
   secondary:
-    "bg-transparent text-ivory border border-ivory/70 hover:bg-ivory/10 active:bg-ivory/15",
+    "btn-luxury-secondary bg-transparent text-ivory border border-champagne/70",
   ghost:
-    "bg-transparent text-noir border border-noir/20 hover:bg-noir/[0.08] active:bg-noir/[0.12]",
+    "btn-luxury-ghost bg-transparent text-navy border border-border",
 };
 
 export function Button({
@@ -37,7 +37,7 @@ export function Button({
   "aria-label": ariaLabel,
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex min-h-12 items-center justify-center gap-2 px-6 py-3.5 text-[13px] font-semibold tracking-[0.08em] uppercase transition-colors duration-[var(--duration-fast)] ease-out rounded-[var(--radius-xs)] disabled:opacity-60 disabled:pointer-events-none group touch-manipulation sm:px-8",
+    "btn-luxury inline-flex min-h-12 items-center justify-center gap-2.5 px-6 py-3.5 text-[13px] font-semibold tracking-[0.08em] uppercase rounded-[var(--radius-xs)] disabled:opacity-60 disabled:pointer-events-none group touch-manipulation sm:px-8",
     variants[variant],
     className,
   );
@@ -46,10 +46,7 @@ export function Button({
     <>
       <span>{children}</span>
       {showArrow ? (
-        <ArrowRight
-          className="size-4 transition-transform duration-[var(--duration-fast)] group-hover:translate-x-1"
-          aria-hidden
-        />
+        <ArrowRight className="btn-arrow size-4 shrink-0" aria-hidden />
       ) : null}
     </>
   );

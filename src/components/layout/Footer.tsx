@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { FOOTER, NAV_LINKS, SITE } from "@/lib/constants";
+import { Button } from "@/components/ui/Button";
+import { ENQUIRY, FOOTER, NAV_LINKS, SITE } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 
 function InstagramIcon({ className }: { className?: string }) {
@@ -47,14 +48,14 @@ function LinkedInIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="film-grain bg-noir text-ivory">
-      <div className="container-site section-pad !pb-12 !pt-20">
+    <footer className="film-grain bg-navy text-ivory">
+      <div className="container-site section-pad !pb-10 !pt-16 md:!pt-20">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <p className="font-serif text-3xl lowercase tracking-tight">
+            <p className="font-serif text-3xl lowercase tracking-tight md:text-[2.1rem]">
               tsar <span className="text-gold">darbaar</span>
             </p>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ivory/70">
+            <p className="mt-4 max-w-xs text-sm leading-[1.7] text-ivory/70">
               {FOOTER.tagline}
             </p>
             <p className="mt-3 text-sm text-ivory/55">
@@ -78,7 +79,7 @@ export function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="gold-underline text-sm text-ivory/75"
+                    className="inline-flex min-h-11 items-center gold-underline text-sm text-ivory/75"
                   >
                     {link.label}
                   </a>
@@ -87,7 +88,7 @@ export function Footer() {
               <li>
                 <a
                   href="#enquiry"
-                  className="gold-underline text-sm text-ivory/75"
+                  className="inline-flex min-h-11 items-center gold-underline text-sm text-ivory/75"
                 >
                   Request a Consultation
                 </a>
@@ -122,33 +123,47 @@ export function Footer() {
                   {SITE.phone}
                 </a>
               </li>
-              <li className="max-w-xs leading-relaxed">{SITE.address}</li>
+              <li className="max-w-xs leading-[1.7]">{SITE.address}</li>
               <li className="text-ivory/55">GSTIN {SITE.gstin}</li>
             </ul>
-            <div className="mt-6 flex gap-4">
+            <div className="mt-6 flex gap-5">
               <a
                 href={SITE.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="text-ivory/70 transition-colors hover:text-gold"
+                className="tap-target flex items-center justify-center text-ivory/70 transition-colors hover:text-gold"
               >
-                <InstagramIcon className="size-5" />
+                <InstagramIcon className="size-6" />
               </a>
               <a
                 href={SITE.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="text-ivory/70 transition-colors hover:text-gold"
+                className="tap-target flex items-center justify-center text-ivory/70 transition-colors hover:text-gold"
               >
-                <LinkedInIcon className="size-5" />
+                <LinkedInIcon className="size-6" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-ivory/10 pt-6 text-xs text-ivory/45 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        <div className="mt-12 flex flex-col items-center gap-4 border-t border-gold/35 pt-10 sm:mt-14">
+          <Button
+            href="#enquiry"
+            showArrow
+            className="btn-on-navy w-full max-w-sm sm:w-auto"
+            onClick={() => track("nav_cta_click", { device: "footer" })}
+          >
+            Request a Consultation
+          </Button>
+          <p className="cta-note cta-note-on-dark text-center">
+            {ENQUIRY.ctaNote}
+          </p>
+        </div>
+
+        <div className="mt-10 flex flex-col gap-4 border-t border-ivory/10 pt-6 text-xs text-ivory/45 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
           <p>© 2026 {SITE.parent}</p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link

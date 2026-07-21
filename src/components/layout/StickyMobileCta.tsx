@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { ENQUIRY } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 
 export function StickyMobileCta() {
@@ -51,16 +52,18 @@ export function StickyMobileCta() {
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-noir/10 bg-ivory/95 p-3 backdrop-blur-md lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-ivory/95 px-3 pt-3 backdrop-blur-xl lg:hidden"
       style={{ paddingBottom: "max(0.75rem, var(--safe-bottom))" }}
     >
       <Button
         href="#enquiry"
         className="h-12 w-full !py-0 text-[12px] sm:text-[13px]"
+        showArrow
         onClick={() => track("nav_cta_click", { device: "mobile_sticky" })}
       >
         Request a Consultation
       </Button>
+      <p className="cta-note pb-1 text-center text-[11px]">{ENQUIRY.ctaNote}</p>
     </div>
   );
 }

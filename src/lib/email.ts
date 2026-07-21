@@ -38,7 +38,7 @@ function fieldRows(lead: LeadPayload) {
     .filter(([, v]) => Boolean(v))
     .map(
       ([label, value]) =>
-        `<tr><td style="padding:6px 12px 6px 0;color:#8C6D3F;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:6px 0;color:#121112;">${escapeHtml(value!)}</td></tr>`,
+        `<tr><td style="padding:6px 12px 6px 0;color:#B8925B;vertical-align:top;">${escapeHtml(label)}</td><td style="padding:6px 0;color:#131936;">${escapeHtml(value!)}</td></tr>`,
     )
     .join("");
 }
@@ -66,7 +66,7 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
     replyTo: lead.email,
     subject,
     html: `
-      <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#121112;">
+      <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#131936;">
         <h1 style="font-size:22px;font-weight:400;">New TSAR Darbaar enquiry</h1>
         <table style="width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:14px;">
           ${fieldRows(lead)}
@@ -84,13 +84,13 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
     to: [lead.email],
     subject: "We've received your enquiry - TSAR Darbaar",
     html: `
-      <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#121112;background:#F7F4EE;padding:32px;">
-        <p style="font-size:28px;margin:0 0 16px;">tsar <span style="color:#B08D57;">darbaar</span></p>
+      <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#131936;background:#F7F3EC;padding:32px;">
+        <p style="font-size:28px;margin:0 0 16px;">tsar <span style="color:#B8925B;">darbaar</span></p>
         <h1 style="font-size:24px;font-weight:400;margin:0 0 12px;">We've received your enquiry</h1>
-        <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#2B2A28;">
+        <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#6B5A47;">
           Thank you, ${escapeHtml(lead.name)}. A TSAR Darbaar consultant will respond within one business day - with questions, not a sales pitch.
         </p>
-        <p style="font-family:system-ui,sans-serif;font-size:14px;color:#2B2A28;margin-top:24px;">
+        <p style="font-family:system-ui,sans-serif;font-size:14px;color:#6B5A47;margin-top:24px;">
           Prefer to talk sooner?<br/>
           <a href="mailto:${SITE.email}" style="color:#B08D57;">${SITE.email}</a>
           ·

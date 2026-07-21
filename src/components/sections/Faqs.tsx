@@ -21,7 +21,7 @@ export function Faqs() {
             id="faqs-heading"
             title={FAQS.headline}
             align="center"
-            className="mb-12"
+            className="mb-8 sm:mb-10"
           />
         </FadeIn>
 
@@ -36,7 +36,7 @@ export function Faqs() {
               <Accordion
                 items={FAQS.items.slice(Math.ceil(FAQS.items.length / 2))}
                 defaultOpenId={undefined}
-                className="border-t border-noir/10 lg:border-t-0"
+                className="lg:border-t-0"
                 onOpen={onOpen}
               />
             </div>

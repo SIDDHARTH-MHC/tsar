@@ -317,10 +317,12 @@ export function EnquiryForm() {
         </div>
       ) : null}
 
-      <Button type="submit" className="w-full" disabled={isSubmitting}>
+      <Button type="submit" className="w-full" disabled={isSubmitting} showArrow>
         {isSubmitting ? "Sending…" : ENQUIRY.submitLabel}
       </Button>
-      <p className="text-center text-xs text-charcoal/55">{ENQUIRY.underButton}</p>
+      <p className="text-center text-xs leading-relaxed text-charcoal/55">
+        {ENQUIRY.underButton}
+      </p>
     </form>
   );
 }

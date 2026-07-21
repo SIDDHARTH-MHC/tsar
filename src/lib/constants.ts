@@ -42,20 +42,28 @@ export const LEGACY = {
     "Built on the perfumery of TSAR - fragrances crafted in India, for Indian spaces and seasons.",
   credentials: [
     {
-      title: "In-house perfumery",
-      copy: "every fragrance composed by our own house, not resold.",
+      title: "Years of perfumery expertise",
+      copy: "composed by a house that lives in fragrance, not equipment.",
     },
     {
-      title: "50+ commercial-grade fragrances",
-      copy: "a library curated for large spaces.",
+      title: "Crafted in India",
+      copy: "formulated for Indian air, climate, and hospitality rhythms.",
     },
     {
-      title: "Safe by formulation",
-      copy: "vegan, paraben-free, non-carcinogenic, non-irritating oils.",
+      title: "Commercial fragrance library",
+      copy: "50+ grades curated for lobbies, floors, and large spaces.",
     },
     {
-      title: "Service-first operations",
-      copy: "24-hour complaint resolution, guaranteed.",
+      title: "Nationwide servicing",
+      copy: "consistent scent and support across cities and sites.",
+    },
+    {
+      title: "Dedicated support",
+      copy: "a named contact who knows your spaces and schedule.",
+    },
+    {
+      title: "Written SLA",
+      copy: "24-hour complaint resolution and hardware replacement.",
     },
   ],
 } as const;
@@ -90,49 +98,49 @@ export const INDUSTRIES = {
       industry: "Hotels & Resorts",
       outcome: "MEMORABLE GUEST ARRIVAL",
       line: "A lobby scent your guests will recognize in any city.",
-      tone: "from-[#1a1625] to-[#3d2f1f]",
+      tone: "from-[#131936] to-[#2a3558]",
     },
     {
       industry: "Corporate & Tech Parks",
       outcome: "ELEVATED WORKPLACE AMBIENCE",
       line: "Receptions and workspaces that feel as sharp as the work.",
-      tone: "from-[#141820] to-[#2a3340]",
+      tone: "from-[#10182e] to-[#243356]",
     },
     {
       industry: "Luxury Retail & Malls",
       outcome: "STRONGER BRAND IDENTITY",
       line: "Longer visits, richer atmosphere, a scent that is only yours.",
-      tone: "from-[#1c1410] to-[#4a3220]",
+      tone: "from-[#151c38] to-[#3a2f24]",
     },
     {
       industry: "Restaurants & Cafés",
       outcome: "ELEVATED DINING ATMOSPHERE",
       line: "An arrival aroma that begins the meal before the menu does.",
-      tone: "from-[#1a1210] to-[#3d2818]",
+      tone: "from-[#12182e] to-[#2f281c]",
     },
     {
       industry: "Salons & Spas",
       outcome: "DEEPER RELAXATION",
       line: "Calm you can breathe - from the first minute of the visit.",
-      tone: "from-[#151818] to-[#2c3830]",
+      tone: "from-[#101628] to-[#243830]",
     },
     {
       industry: "Healthcare & Wellness",
       outcome: "CALMER, WELCOMING SPACES",
       line: "Gentle, safe scenting that softens clinical environments.",
-      tone: "from-[#14161a] to-[#2a3038]",
+      tone: "from-[#11162a] to-[#243040]",
     },
     {
       industry: "Co-working & Experience Centers",
       outcome: "SPACES PEOPLE RETURN TO",
       line: "Memberships renewed by atmosphere, not just amenities.",
-      tone: "from-[#161412] to-[#302820]",
+      tone: "from-[#121628] to-[#2a241c]",
     },
     {
       industry: "Clubhouses & Real Estate",
       outcome: "LIFESTYLE AT FIRST BREATH",
       line: "Show flats and lobbies that sell the life, not the layout.",
-      tone: "from-[#181410] to-[#3a2c1c]",
+      tone: "from-[#131936] to-[#3a3020]",
     },
   ],
   specifierLine:
@@ -366,10 +374,12 @@ export const ENQUIRY = {
   headline: "Begin your scent story.",
   reassurance:
     "Tell us about your space. A TSAR Darbaar consultant will respond within one business day - with questions, not a sales pitch.",
+  responsePromise: "Business enquiries answered within one working day.",
   preferTalk: "Prefer to talk?",
   whatsappLabel: "Or message us on WhatsApp →",
   submitLabel: "Request Consultation",
-  underButton: "No obligation. No spam. Your details stay with us.",
+  underButton: "Free consultation · No obligation. No spam. Your details stay with us.",
+  ctaNote: "Free consultation · No obligation",
   optionalDivider: "Help us prepare (optional)",
   industryOptions: [
     "Hotels & Resorts",

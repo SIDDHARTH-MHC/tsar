@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <main className="film-grain flex min-h-[100svh] flex-col items-center justify-center bg-noir px-6 py-20 text-center text-ivory">
+    <main className="film-grain flex min-h-[100svh] flex-col items-center justify-center bg-navy px-6 py-20 text-center text-ivory">
       <p className="font-serif text-2xl lowercase tracking-tight">
         tsar <span className="text-gold">darbaar</span>
       </p>
@@ -18,7 +18,9 @@ export default function NotFound() {
         continue your scent story.
       </p>
       <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-        <Button href="/">Back to home</Button>
+        <Button href="/" className="btn-on-navy">
+          Back to home
+        </Button>
         <Button href="/#enquiry" variant="secondary">
           Request a Consultation
         </Button>

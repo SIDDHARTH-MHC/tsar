@@ -16,8 +16,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "72px",
-          background: "#121112",
-          color: "#F7F4EE",
+          background: "#131936",
+          color: "#F7F3EC",
           fontFamily: "Georgia, serif",
         }}
       >
@@ -30,7 +30,7 @@ export default function OpenGraphImage() {
           }}
         >
           tsar{" "}
-          <span style={{ color: "#B08D57", marginLeft: 16 }}>darbaar</span>
+          <span style={{ color: "#B8925B", marginLeft: 16 }}>darbaar</span>
         </div>
         <div
           style={{
@@ -38,7 +38,7 @@ export default function OpenGraphImage() {
             fontSize: 28,
             maxWidth: 820,
             lineHeight: 1.35,
-            color: "rgba(247,244,238,0.78)",
+            color: "rgba(247,243,236,0.78)",
             fontFamily: "system-ui, sans-serif",
           }}
         >
@@ -51,7 +51,7 @@ export default function OpenGraphImage() {
             fontSize: 16,
             letterSpacing: "0.14em",
             textTransform: "uppercase",
-            color: "#B08D57",
+            color: "#B8925B",
             fontFamily: "system-ui, sans-serif",
           }}
         >

@@ -13,7 +13,7 @@ export function EnquirySection() {
       className="scroll-mt-[calc(var(--header-h)+var(--safe-top)+12px)] bg-ivory"
     >
       <div className="grid lg:grid-cols-5">
-        <div className="film-grain bg-noir px-5 py-12 text-ivory sm:px-8 sm:py-16 md:px-12 lg:col-span-2 lg:px-14 lg:py-24">
+        <div className="film-grain bg-navy px-5 py-12 text-ivory sm:px-8 sm:py-14 md:px-12 lg:col-span-2 lg:px-14 lg:py-20">
           <FadeIn>
             <h2
               id="enquiry-heading"
@@ -24,12 +24,15 @@ export function EnquirySection() {
             <p className="mt-4 max-w-md text-lede text-pretty text-ivory/75 sm:mt-5">
               {ENQUIRY.reassurance}
             </p>
+            <p className="mt-5 border-l border-gold/50 pl-4 text-sm font-medium tracking-[0.02em] text-gold">
+              {ENQUIRY.responsePromise}
+            </p>
             <div className="mt-8 space-y-3 text-sm sm:mt-10">
               <p className="text-ivory/55">{ENQUIRY.preferTalk}</p>
               <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
                 <a
                   href={SITE.phoneHref}
-                  className="inline-flex min-h-11 items-center gold-underline text-ivory"
+                  className="inline-flex min-h-12 items-center gold-underline text-ivory"
                   onClick={() =>
                     track("phone_click", { placement: "enquiry_panel" })
                   }
@@ -39,7 +42,7 @@ export function EnquirySection() {
                 <span className="hidden text-ivory/40 sm:inline">·</span>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="inline-flex min-h-11 items-center break-all gold-underline text-ivory"
+                  className="inline-flex min-h-12 items-center break-all gold-underline text-ivory"
                   onClick={() =>
                     track("email_click", { placement: "enquiry_panel" })
                   }
@@ -64,8 +67,11 @@ export function EnquirySection() {
           </FadeIn>
         </div>
 
-        <div className="bg-ivory px-5 py-12 sm:px-8 sm:py-16 md:px-12 lg:col-span-3 lg:px-16 lg:py-24">
+        <div className="bg-ivory px-5 py-12 sm:px-8 sm:py-14 md:px-12 lg:col-span-3 lg:px-16 lg:py-20">
           <FadeIn>
+            <p className="mb-6 text-sm font-medium text-charcoal/70 lg:hidden">
+              {ENQUIRY.responsePromise}
+            </p>
             <EnquiryForm />
           </FadeIn>
         </div>

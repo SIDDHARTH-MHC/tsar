@@ -61,7 +61,7 @@ export function WhatsAppFab() {
       rel="noopener noreferrer"
       aria-label="Message us on WhatsApp"
       onClick={() => track("whatsapp_click", { placement: "fab" })}
-      className="fixed z-40 flex size-12 items-center justify-center rounded-full bg-noir text-ivory shadow-[var(--shadow-hover)] transition-colors active:bg-charcoal lg:size-14"
+      className="fixed z-40 flex size-12 items-center justify-center rounded-full bg-navy text-ivory shadow-[var(--shadow-hover)] transition-colors hover:bg-gold hover:text-navy active:bg-ink lg:size-14"
       style={{
         right: "max(1rem, var(--safe-right))",
         bottom: stickyUp

@@ -31,17 +31,18 @@ export function WhyTsar() {
     <section
       id={WHY_TSAR.id}
       aria-labelledby="why-tsar-heading"
-      className="section-pad bg-sand"
+      className="section-pad film-grain bg-navy text-ivory"
     >
       <div className="container-site">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <FadeIn>
             <div
-              className="aspect-[4/5] w-full bg-gradient-to-br from-[#2a2218] via-[#4a3a28] to-[#1a1612] sm:aspect-[2/3] md:aspect-[3/4] lg:sticky lg:top-28 lg:max-h-[70vh]"
+              className="group relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-br from-[#1a2344] via-[#2a3558] to-[#0e1224] sm:aspect-[2/3] md:aspect-[3/4] lg:sticky lg:top-28 lg:max-h-[70vh]"
               aria-hidden
             >
-              <div className="flex h-full items-end p-8">
-                <p className="font-serif text-2xl italic text-ivory/80">
+              <div className="absolute inset-0 origin-center bg-[radial-gradient(circle_at_30%_20%,rgba(184,146,91,0.18),transparent_45%),linear-gradient(160deg,#1a2344_0%,#131936_55%,#0e1224_100%)] transition-transform duration-[var(--duration-ambient)] ease-out group-hover:scale-[1.04]" />
+              <div className="relative flex h-full items-end p-8">
+                <p className="font-serif text-2xl italic text-ivory/85">
                   In-house perfumery.
                   <br />
                   Oils. Glass. Hands.
@@ -52,7 +53,11 @@ export function WhyTsar() {
 
           <div>
             <FadeIn>
-              <SectionHeading id="why-tsar-heading" title={WHY_TSAR.headline} />
+              <SectionHeading
+                id="why-tsar-heading"
+                title={WHY_TSAR.headline}
+                tone="dark"
+              />
             </FadeIn>
 
             <ul ref={listRef} className="mt-10 space-y-5">
@@ -60,15 +65,15 @@ export function WhyTsar() {
                 <li key={item.title} className="flex gap-4">
                   <span
                     className={cn(
-                      "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border border-gold text-gold transition-opacity duration-500",
+                      "mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border border-gold text-gold transition-opacity duration-500",
                       visible ? "opacity-100" : "opacity-0",
                     )}
                     style={{ transitionDelay: `${i * 200}ms` }}
                   >
-                    <Check className="size-3.5" strokeWidth={2.5} aria-hidden />
+                    <Check className="size-3.5" strokeWidth={1.5} aria-hidden />
                   </span>
-                  <p className="text-base leading-snug text-charcoal">
-                    <strong className="font-semibold text-noir">{item.title}</strong>
+                  <p className="text-base leading-[1.7] text-ivory/70">
+                    <strong className="font-semibold text-ivory">{item.title}</strong>
                     {" - "}
                     {item.copy}
                   </p>
@@ -79,11 +84,11 @@ export function WhyTsar() {
             <div className="mt-12 grid gap-6 sm:grid-cols-2">
               {WHY_TSAR.reasons.map((reason, i) => (
                 <FadeIn key={reason.title} delay={0.1 + i * 0.08}>
-                  <div className="border border-noir/10 bg-ivory p-6">
-                    <h3 className="font-sans text-base font-semibold text-noir">
+                  <div className="border border-champagne/25 bg-navy/40 p-6 backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-[var(--duration-base)] ease-[var(--ease-luxury)] hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)]">
+                    <h3 className="font-sans text-base font-semibold text-ivory">
                       {reason.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-[1.65] text-charcoal/80">
+                    <p className="mt-3 text-sm leading-[1.7] text-ivory/70">
                       {reason.copy}
                     </p>
                   </div>
