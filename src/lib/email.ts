@@ -47,7 +47,8 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
   const resend = getResend();
   const to = process.env.ENQUIRY_TO_EMAIL ?? SITE.email;
   const from =
-    process.env.ENQUIRY_FROM_EMAIL ?? `TSAR Darbaar <onboarding@resend.dev>`;
+    process.env.ENQUIRY_FROM_EMAIL ??
+    `TSAR Darbaar <no-reply@darbaarbytsar.com>`;
 
   if (!resend) {
     console.info("[email] RESEND_API_KEY missing - skipping send", {
