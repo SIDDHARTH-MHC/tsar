@@ -1,6 +1,9 @@
+"use client";
+
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { INDUSTRIES } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 
 export function Industries() {
   return (
@@ -65,7 +68,16 @@ function IndustryCard({
   tone: string;
 }) {
   return (
-    <article className="group relative aspect-[3/4] overflow-hidden bg-noir">
+    <article
+      className="group relative aspect-[3/4] overflow-hidden bg-noir"
+      tabIndex={0}
+      onClick={() => track("industry_card_click", { industry })}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          track("industry_card_click", { industry });
+        }
+      }}
+    >
       <div
         className={`absolute inset-0 bg-gradient-to-br ${tone} transition-transform duration-[var(--duration-ambient)] ease-out group-hover:scale-[1.04]`}
         aria-hidden

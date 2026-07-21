@@ -1,156 +1,227 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ENQUIRY } from "@/lib/constants";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useForm,
+  type UseFormRegisterReturn,
+} from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { enquirySchema, type EnquiryFormValues } from "@/lib/schema";
+import { ENQUIRY, SITE } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
 
-type FormState = {
-  name: string;
-  company: string;
-  email: string;
-  phone: string;
-  industry: string;
-  city: string;
-  locations: string;
-  plan: string;
-  message: string;
-};
-
-const initial: FormState = {
-  name: "",
-  company: "",
-  email: "",
-  phone: "",
-  industry: "",
-  city: "",
-  locations: "",
-  plan: "Not sure yet",
-  message: "",
-};
-
-export function EnquiryForm() {
-  const [values, setValues] = useState<FormState>(initial);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>(
-    {},
-  );
-  const [touched, setTouched] = useState<Partial<Record<keyof FormState, boolean>>>(
-    {},
-  );
-  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const plan = params.get("plan");
-    if (plan && ENQUIRY.planOptions.includes(plan as (typeof ENQUIRY.planOptions)[number])) {
-      setValues((v) => ({ ...v, plan }));
-    }
-
-    const onHash = () => {
-      const hash = window.location.hash;
-      if (hash.includes("plan=")) {
-        const q = new URLSearchParams(hash.split("?")[1] ?? "");
-        const p = q.get("plan");
-        if (p) setValues((v) => ({ ...v, plan: decodeURIComponent(p) }));
-      }
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (cb: () => void) => void;
+      execute: (
+        siteKey: string,
+        options: { action: string },
+      ) => Promise<string>;
     };
-    onHash();
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
-  }, []);
-
-  function validateField(key: keyof FormState, value: string): string | undefined {
-    switch (key) {
-      case "name":
-        return value.trim().length < 2 ? "Please tell us your name." : undefined;
-      case "company":
-        return value.trim().length < 2
-          ? "Please add your company name."
-          : undefined;
-      case "email":
-        return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
-          ? "That email doesn't look right — mind checking it?"
-          : undefined;
-      case "phone": {
-        const digits = value.replace(/\D/g, "").replace(/^91/, "");
-        return digits.length !== 10
-          ? "Please enter a 10-digit phone number."
-          : undefined;
-      }
-      case "city":
-        return value && value.trim().length < 2
-          ? "Please enter a valid city."
-          : undefined;
-      default:
-        return undefined;
-    }
   }
+}
 
-  function setField(key: keyof FormState, value: string) {
-    setValues((v) => ({ ...v, [key]: value }));
-    if (touched[key] || errors[key]) {
-      setErrors((e) => ({ ...e, [key]: validateField(key, value) }));
-    }
-  }
+function readUtms() {
+  if (typeof window === "undefined") return {};
+  const p = new URLSearchParams(window.location.search);
+  return {
+    utm_source: p.get("utm_source") ?? undefined,
+    utm_medium: p.get("utm_medium") ?? undefined,
+    utm_campaign: p.get("utm_campaign") ?? undefined,
+  };
+}
 
-  function onBlur(key: keyof FormState) {
-    setTouched((t) => ({ ...t, [key]: true }));
-    setErrors((e) => ({ ...e, [key]: validateField(key, values[key]) }));
-  }
-
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const nextErrors: Partial<Record<keyof FormState, string>> = {};
-    (["name", "company", "email", "phone"] as const).forEach((key) => {
-      const err = validateField(key, values[key]);
-      if (err) nextErrors[key] = err;
-    });
-    if (values.city) {
-      const err = validateField("city", values.city);
-      if (err) nextErrors.city = err;
-    }
-    setErrors(nextErrors);
-    setTouched({
-      name: true,
-      company: true,
-      email: true,
-      phone: true,
-      city: true,
-    });
-
-    if (Object.keys(nextErrors).length) {
-      const first = Object.keys(nextErrors)[0];
-      document.getElementById(`field-${first}`)?.focus();
+function loadRecaptcha(siteKey: string) {
+  return new Promise<void>((resolve, reject) => {
+    if (window.grecaptcha) {
+      resolve();
       return;
     }
+    const existing = document.querySelector<HTMLScriptElement>(
+      'script[data-recaptcha="v3"]',
+    );
+    if (existing) {
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", () => reject());
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+    script.async = true;
+    script.dataset.recaptcha = "v3";
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("reCAPTCHA failed to load"));
+    document.head.appendChild(script);
+  });
+}
 
-    // Visual + structure pass: navigate to thank-you without API
-    setStatus("sending");
-    await new Promise((r) => setTimeout(r, 600));
-    window.location.href = "/thank-you";
-  }
+async function getRecaptchaToken(siteKey: string | undefined) {
+  if (!siteKey) return undefined;
+  await loadRecaptcha(siteKey);
+  return new Promise<string>((resolve, reject) => {
+    window.grecaptcha?.ready(() => {
+      window.grecaptcha
+        ?.execute(siteKey, { action: "enquiry" })
+        .then(resolve)
+        .catch(reject);
+    });
+  });
+}
+
+export function EnquiryForm() {
+  const router = useRouter();
+  const started = useRef(false);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setFocus,
+    formState: { errors, isSubmitting },
+  } = useForm<EnquiryFormValues>({
+    resolver: zodResolver(enquirySchema),
+    mode: "onBlur",
+    reValidateMode: "onChange",
+    defaultValues: {
+      name: "",
+      company: "",
+      email: "",
+      phone: "",
+      industry: "",
+      city: "",
+      locations: "",
+      plan: "Not sure yet",
+      message: "",
+      website: "",
+      landing_variant: "default",
+      page_url: "",
+      ...readUtms(),
+    },
+  });
+
+  useEffect(() => {
+    setValue("page_url", window.location.href);
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get("plan");
+    if (
+      plan &&
+      ENQUIRY.planOptions.includes(plan as (typeof ENQUIRY.planOptions)[number])
+    ) {
+      setValue("plan", plan);
+    }
+  }, [setValue]);
+
+  useEffect(() => {
+    if (!siteKey) return;
+    const root = document.getElementById("enquiry");
+    if (!root) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          void loadRecaptcha(siteKey).catch(() => undefined);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    obs.observe(root);
+    return () => obs.disconnect();
+  }, [siteKey]);
+
+  const onFirstFocus = useCallback(() => {
+    if (started.current) return;
+    started.current = true;
+    track("form_start", {
+      prefilled_plan:
+        new URLSearchParams(window.location.search).get("plan") ?? undefined,
+    });
+  }, []);
+
+  const onSubmit = handleSubmit(
+    async (values) => {
+      setServerError(null);
+      try {
+        const recaptchaToken = await getRecaptchaToken(siteKey);
+        const res = await fetch("/api/enquiry", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...values, recaptchaToken }),
+        });
+        const body = (await res.json()) as {
+          ok: boolean;
+          error?: string;
+          fieldErrors?: Record<string, string>;
+        };
+
+        if (!res.ok || !body.ok) {
+          if (body.fieldErrors) {
+            const first = Object.keys(body.fieldErrors)[0];
+            track("form_error", { first_error_field: first });
+          }
+          setServerError(
+            body.error ??
+              `Something went wrong on our side. Please try again, or write to us directly at ${SITE.email} / call ${SITE.phone}.`,
+          );
+          return;
+        }
+
+        track("form_submit", {
+          industry: values.industry,
+          plan: values.plan,
+          locations: values.locations,
+        });
+        router.push("/thank-you");
+      } catch {
+        setServerError(
+          `Something went wrong on our side. Please try again, or write to us directly at ${SITE.email} / call ${SITE.phone}.`,
+        );
+      }
+    },
+    (formErrors) => {
+      const first = Object.keys(formErrors)[0];
+      track("form_error", { first_error_field: first });
+      if (first) setFocus(first as keyof EnquiryFormValues);
+    },
+  );
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6" noValidate>
+    <form onSubmit={onSubmit} className="relative space-y-6" noValidate>
+      <div
+        className="absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden"
+        aria-hidden
+      >
+        <label htmlFor="field-website">Website</label>
+        <input
+          id="field-website"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("website")}
+        />
+      </div>
+
       <Field
         id="name"
         label="Full name"
         required
         autoComplete="name"
-        value={values.name}
-        error={errors.name}
-        onChange={(v) => setField("name", v)}
-        onBlur={() => onBlur("name")}
+        error={errors.name?.message}
+        registration={register("name")}
+        onFocus={onFirstFocus}
       />
       <Field
         id="company"
         label="Company"
         required
         autoComplete="organization"
-        value={values.company}
-        error={errors.company}
-        onChange={(v) => setField("company", v)}
-        onBlur={() => onBlur("company")}
+        error={errors.company?.message}
+        registration={register("company")}
+        onFocus={onFirstFocus}
       />
       <Field
         id="email"
@@ -158,10 +229,9 @@ export function EnquiryForm() {
         type="email"
         required
         autoComplete="email"
-        value={values.email}
-        error={errors.email}
-        onChange={(v) => setField("email", v)}
-        onBlur={() => onBlur("email")}
+        error={errors.email?.message}
+        registration={register("email")}
+        onFocus={onFirstFocus}
       />
       <Field
         id="phone"
@@ -169,10 +239,9 @@ export function EnquiryForm() {
         type="tel"
         required
         autoComplete="tel"
-        value={values.phone}
-        error={errors.phone}
-        onChange={(v) => setField("phone", v)}
-        onBlur={() => onBlur("phone")}
+        error={errors.phone?.message}
+        registration={register("phone")}
+        onFocus={onFirstFocus}
         hint="+91"
       />
 
@@ -184,55 +253,69 @@ export function EnquiryForm() {
           <SelectField
             id="industry"
             label="Industry"
-            value={values.industry}
+            registration={register("industry")}
             options={ENQUIRY.industryOptions}
-            onChange={(v) => setField("industry", v)}
+            onFocus={onFirstFocus}
           />
           <Field
             id="city"
             label="City"
-            value={values.city}
-            error={errors.city}
-            onChange={(v) => setField("city", v)}
-            onBlur={() => onBlur("city")}
+            error={errors.city?.message}
+            registration={register("city")}
+            onFocus={onFirstFocus}
           />
           <SelectField
             id="locations"
             label="Number of locations"
-            value={values.locations}
+            registration={register("locations")}
             options={ENQUIRY.locationOptions}
-            onChange={(v) => setField("locations", v)}
+            onFocus={onFirstFocus}
           />
           <SelectField
             id="plan"
             label="Interested in"
-            value={values.plan}
+            registration={register("plan")}
             options={ENQUIRY.planOptions}
-            onChange={(v) => setField("plan", v)}
             allowEmpty={false}
+            onFocus={onFirstFocus}
           />
           <div>
-            <label htmlFor="field-message" className="mb-2 block text-sm font-medium text-noir">
+            <label
+              htmlFor="field-message"
+              className="mb-2 block text-sm font-medium text-noir"
+            >
               Message
             </label>
             <textarea
               id="field-message"
               rows={4}
               placeholder={ENQUIRY.messagePlaceholder}
-              value={values.message}
-              onChange={(e) => setField("message", e.target.value)}
               className="w-full resize-y rounded-[var(--radius-xs)] border border-noir/15 bg-ivory px-4 py-3 text-base text-noir outline-none transition-colors duration-[var(--duration-fast)] placeholder:text-charcoal/40 focus:border-gold"
+              {...register("message")}
+              onFocus={onFirstFocus}
             />
           </div>
         </div>
       </div>
 
       <div aria-live="polite" className="sr-only">
-        {Object.values(errors).filter(Boolean).join(". ")}
+        {Object.values(errors)
+          .map((e) => e?.message)
+          .filter(Boolean)
+          .join(". ")}
       </div>
 
-      <Button type="submit" className="w-full" disabled={status === "sending"}>
-        {status === "sending" ? "Sending…" : ENQUIRY.submitLabel}
+      {serverError ? (
+        <div
+          role="alert"
+          className="border border-error/40 bg-error/5 px-4 py-3 text-sm text-error"
+        >
+          {serverError}
+        </div>
+      ) : null}
+
+      <Button type="submit" className="w-full" disabled={isSubmitting}>
+        {isSubmitting ? "Sending…" : ENQUIRY.submitLabel}
       </Button>
       <p className="text-center text-xs text-charcoal/55">{ENQUIRY.underButton}</p>
     </form>
@@ -242,25 +325,23 @@ export function EnquiryForm() {
 function Field({
   id,
   label,
-  value,
-  onChange,
-  onBlur,
   error,
   required,
   type = "text",
   autoComplete,
   hint,
+  registration,
+  onFocus,
 }: {
   id: string;
   label: string;
-  value: string;
-  onChange: (v: string) => void;
-  onBlur?: () => void;
   error?: string;
   required?: boolean;
   type?: string;
   autoComplete?: string;
   hint?: string;
+  registration: UseFormRegisterReturn;
+  onFocus?: () => void;
 }) {
   return (
     <div>
@@ -278,10 +359,6 @@ function Field({
           id={`field-${id}`}
           type={type}
           autoComplete={autoComplete}
-          required={required}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onBlur={onBlur}
           aria-invalid={!!error}
           aria-describedby={error ? `error-${id}` : undefined}
           className={cn(
@@ -289,6 +366,10 @@ function Field({
             hint && "pl-12",
             error ? "border-error" : "border-noir/15",
           )}
+          {...registration}
+          onFocus={() => {
+            onFocus?.();
+          }}
         />
       </div>
       {error ? (
@@ -303,17 +384,17 @@ function Field({
 function SelectField({
   id,
   label,
-  value,
   options,
-  onChange,
+  registration,
   allowEmpty = true,
+  onFocus,
 }: {
   id: string;
   label: string;
-  value: string;
   options: readonly string[];
-  onChange: (v: string) => void;
+  registration: UseFormRegisterReturn;
   allowEmpty?: boolean;
+  onFocus?: () => void;
 }) {
   return (
     <div>
@@ -322,9 +403,11 @@ function SelectField({
       </label>
       <select
         id={`field-${id}`}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
         className="w-full appearance-none rounded-[var(--radius-xs)] border border-noir/15 bg-ivory px-4 py-3 text-base text-noir outline-none transition-colors duration-[var(--duration-fast)] focus:border-gold"
+        {...registration}
+        onFocus={() => {
+          onFocus?.();
+        }}
       >
         {allowEmpty ? <option value="">Select…</option> : null}
         {options.map((opt) => (

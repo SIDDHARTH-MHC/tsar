@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
+import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { Hero } from "@/components/sections/Hero";
 import { WhyScent } from "@/components/sections/WhyScent";
 import { Industries } from "@/components/sections/Industries";
@@ -26,6 +27,7 @@ export default function HomePage() {
       </main>
       <Footer />
       <StickyMobileCta />
+      <WhatsAppFab />
     </>
   );
 }

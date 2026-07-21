@@ -1,6 +1,9 @@
+"use client";
+
 import { EnquiryForm } from "@/components/form/EnquiryForm";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ENQUIRY, SITE, whatsappHref } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 
 export function EnquirySection() {
   return (
@@ -24,13 +27,22 @@ export function EnquirySection() {
             <div className="mt-10 space-y-2 text-sm">
               <p className="text-ivory/55">{ENQUIRY.preferTalk}</p>
               <p>
-                <a href={SITE.phoneHref} className="gold-underline text-ivory">
+                <a
+                  href={SITE.phoneHref}
+                  className="gold-underline text-ivory"
+                  onClick={() =>
+                    track("phone_click", { placement: "enquiry_panel" })
+                  }
+                >
                   {SITE.phone}
                 </a>
                 <span className="mx-2 text-ivory/40">·</span>
                 <a
                   href={`mailto:${SITE.email}`}
                   className="gold-underline text-ivory"
+                  onClick={() =>
+                    track("email_click", { placement: "enquiry_panel" })
+                  }
                 >
                   {SITE.email}
                 </a>
@@ -41,6 +53,9 @@ export function EnquirySection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold text-gold gold-underline"
+                  onClick={() =>
+                    track("whatsapp_click", { placement: "enquiry_panel" })
+                  }
                 >
                   {ENQUIRY.whatsappLabel}
                 </a>

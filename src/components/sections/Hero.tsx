@@ -3,6 +3,7 @@
 import { useReducedMotion, motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { HERO, LEGACY } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 import { FlaskConical, Leaf, Library, ShieldCheck } from "lucide-react";
 
 const icons = [FlaskConical, Library, Leaf, ShieldCheck];
@@ -70,13 +71,24 @@ export function Hero() {
               className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
               {...line(0.56)}
             >
-              <Button href={HERO.primaryCta.href} className="w-full sm:w-auto">
+              <Button
+                href={HERO.primaryCta.href}
+                className="w-full sm:w-auto"
+                onClick={() =>
+                  track("hero_cta_click", { cta_label: HERO.primaryCta.label })
+                }
+              >
                 {HERO.primaryCta.label}
               </Button>
               <Button
                 href={HERO.secondaryCta.href}
                 variant="secondary"
                 className="w-full sm:w-auto"
+                onClick={() =>
+                  track("hero_cta_click", {
+                    cta_label: HERO.secondaryCta.label,
+                  })
+                }
               >
                 {HERO.secondaryCta.label}
               </Button>

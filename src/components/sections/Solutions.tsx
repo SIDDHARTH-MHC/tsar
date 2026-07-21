@@ -1,9 +1,12 @@
+"use client";
+
 import { Check } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SOLUTIONS } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 
 export function Solutions() {
@@ -102,6 +105,7 @@ function PlanCard({
         href={`/?plan=${encodeURIComponent(plan.cta.planValue)}#enquiry`}
         className="mt-8 w-full"
         showArrow
+        onClick={() => track("plan_cta_click", { plan: plan.cta.planValue })}
       >
         {plan.cta.label}
       </Button>

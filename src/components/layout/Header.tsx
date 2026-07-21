@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { NAV_LINKS, SITE } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 
 export function Header() {
@@ -78,6 +79,7 @@ export function Header() {
             href="#enquiry"
             variant="primary"
             className="!py-3 !px-6 text-[12px]"
+            onClick={() => track("nav_cta_click", { device: "desktop" })}
           >
             Request a Consultation
           </Button>
@@ -115,7 +117,10 @@ export function Header() {
             <Button
               href="#enquiry"
               className="w-full"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                track("nav_cta_click", { device: "mobile" });
+                setOpen(false);
+              }}
             >
               Request a Consultation
             </Button>

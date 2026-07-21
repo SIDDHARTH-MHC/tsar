@@ -1,5 +1,7 @@
 import { Cormorant_Garamond, Figtree } from "next/font/google";
 import type { Metadata } from "next";
+import { Analytics } from "@/components/analytics/Analytics";
+import { allJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 const serif = Cormorant_Garamond({
@@ -8,6 +10,7 @@ const serif = Cormorant_Garamond({
   style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
+  preload: true,
 });
 
 const sans = Figtree({
@@ -21,7 +24,12 @@ export const metadata: Metadata = {
   title: "TSAR Darbaar | Scent Branding & Commercial Fragrance Solutions India",
   description:
     "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service — across India. Request a consultation.",
-  metadataBase: new URL("https://darbaar.tsarperfumes.com"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://darbaar.tsarperfumes.com",
+  ),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "TSAR Darbaar | Scent Branding & Commercial Fragrance Solutions India",
     description:
@@ -42,13 +50,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = allJsonLd();
+
   return (
     <html lang="en-IN" className={`${serif.variable} ${sans.variable}`}>
       <body className="font-sans antialiased">
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
+        <Analytics />
       </body>
     </html>
   );

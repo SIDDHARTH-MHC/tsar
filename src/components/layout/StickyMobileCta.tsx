@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { track } from "@/lib/analytics";
 
 export function StickyMobileCta() {
   const [visible, setVisible] = useState(false);
@@ -45,7 +46,11 @@ export function StickyMobileCta() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-noir/10 bg-ivory p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
-      <Button href="#enquiry" className="h-14 w-full !py-0">
+      <Button
+        href="#enquiry"
+        className="h-14 w-full !py-0"
+        onClick={() => track("nav_cta_click", { device: "mobile_sticky" })}
+      >
         Request a Consultation
       </Button>
     </div>
