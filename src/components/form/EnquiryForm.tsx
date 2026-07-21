@@ -410,10 +410,7 @@ function SelectField({
       </label>
       <select
         id={`field-${id}`}
-        className="input-field appearance-none bg-[length:12px] bg-[right_16px_center] bg-no-repeat pr-10"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232B2A28' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")`,
-        }}
+        className="input-field input-select"
         {...registration}
         onFocus={() => {
           onFocus?.();
