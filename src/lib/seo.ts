@@ -15,6 +15,14 @@ export function organizationJsonLd() {
     sameAs: [SITE.instagram, SITE.linkedin, SITE.parentUrl],
     email: SITE.email,
     telephone: SITE.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "2/350, 2nd Floor, Nirankari Colony",
+      addressLocality: "Delhi",
+      postalCode: "110009",
+      addressCountry: "IN",
+    },
+    vatID: SITE.gstin,
   };
 }
 

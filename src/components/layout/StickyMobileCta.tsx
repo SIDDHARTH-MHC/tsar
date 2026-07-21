@@ -15,14 +15,18 @@ export function StickyMobileCta() {
     let pastHero = false;
     let formInView = false;
 
-    const update = () => setVisible(pastHero && !formInView);
+    const update = () => {
+      const next = pastHero && !formInView;
+      setVisible(next);
+      document.body.classList.toggle("has-sticky-cta", next);
+    };
 
     const heroObs = new IntersectionObserver(
       ([entry]) => {
         pastHero = !entry.isIntersecting;
         update();
       },
-      { threshold: 0.15 },
+      { threshold: 0.1 },
     );
 
     const formObs = new IntersectionObserver(
@@ -30,7 +34,7 @@ export function StickyMobileCta() {
         formInView = entry.isIntersecting;
         update();
       },
-      { threshold: 0.2 },
+      { threshold: 0.15 },
     );
 
     heroObs.observe(hero);
@@ -39,16 +43,20 @@ export function StickyMobileCta() {
     return () => {
       heroObs.disconnect();
       formObs.disconnect();
+      document.body.classList.remove("has-sticky-cta");
     };
   }, []);
 
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-noir/10 bg-ivory p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-noir/10 bg-ivory/95 p-3 backdrop-blur-md lg:hidden"
+      style={{ paddingBottom: "max(0.75rem, var(--safe-bottom))" }}
+    >
       <Button
         href="#enquiry"
-        className="h-14 w-full !py-0"
+        className="h-12 w-full !py-0 text-[12px] sm:text-[13px]"
         onClick={() => track("nav_cta_click", { device: "mobile_sticky" })}
       >
         Request a Consultation

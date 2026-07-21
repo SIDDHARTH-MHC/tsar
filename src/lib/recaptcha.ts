@@ -5,7 +5,7 @@ export async function verifyRecaptcha(token: string | undefined, ip?: string) {
 
   // Allow local/dev without keys; require token when secret is configured
   if (!secret) {
-    console.info("[recaptcha] secret missing — skipping verify");
+    console.info("[recaptcha] secret missing - skipping verify");
     return { ok: true as const, score: 1, skipped: true as const };
   }
 

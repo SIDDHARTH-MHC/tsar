@@ -21,7 +21,7 @@ export function Solutions() {
           <div className="mx-auto max-w-4xl text-center">
             <h2
               id="solutions-heading"
-              className="font-serif text-[28px] leading-[1.15] tracking-[-0.01em] text-noir md:text-[40px] lg:text-[48px]"
+              className="font-serif text-section text-balance text-noir"
             >
               {SOLUTIONS.manifesto.headline}
             </h2>
@@ -78,7 +78,7 @@ function PlanCard({
   return (
     <article
       className={cn(
-        "flex h-full flex-col border bg-ivory p-7 transition-shadow duration-[var(--duration-base)] hover:shadow-[var(--shadow-hover)] md:p-8",
+        "flex h-full flex-col border bg-ivory p-5 transition-shadow duration-[var(--duration-base)] hover:shadow-[var(--shadow-hover)] sm:p-7 md:p-8",
         plan.featured
           ? "border-gold border-t-[3px] lg:-my-3 lg:py-10"
           : "border-noir/10",

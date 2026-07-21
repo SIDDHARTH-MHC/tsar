@@ -50,14 +50,14 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
     process.env.ENQUIRY_FROM_EMAIL ?? `TSAR Darbaar <onboarding@resend.dev>`;
 
   if (!resend) {
-    console.info("[email] RESEND_API_KEY missing — skipping send", {
+    console.info("[email] RESEND_API_KEY missing - skipping send", {
       company: lead.company,
       email: lead.email,
     });
     return { skipped: true as const };
   }
 
-  const subject = `New enquiry · ${lead.company} · ${lead.industry ?? "—"} · ${lead.city ?? "—"}`;
+  const subject = `New enquiry · ${lead.company} · ${lead.industry ?? "-"} · ${lead.city ?? "-"}`;
 
   const internal = await resend.emails.send({
     from,
@@ -81,13 +81,13 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
   const ack = await resend.emails.send({
     from,
     to: [lead.email],
-    subject: "We've received your enquiry — TSAR Darbaar",
+    subject: "We've received your enquiry - TSAR Darbaar",
     html: `
       <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#121112;background:#F7F4EE;padding:32px;">
         <p style="font-size:28px;margin:0 0 16px;">tsar <span style="color:#B08D57;">darbaar</span></p>
         <h1 style="font-size:24px;font-weight:400;margin:0 0 12px;">We've received your enquiry</h1>
         <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#2B2A28;">
-          Thank you, ${escapeHtml(lead.name)}. A TSAR Darbaar consultant will respond within one business day — with questions, not a sales pitch.
+          Thank you, ${escapeHtml(lead.name)}. A TSAR Darbaar consultant will respond within one business day - with questions, not a sales pitch.
         </p>
         <p style="font-family:system-ui,sans-serif;font-size:14px;color:#2B2A28;margin-top:24px;">
           Prefer to talk sooner?<br/>

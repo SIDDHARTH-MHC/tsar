@@ -3,14 +3,16 @@ export const SITE = {
   parent: "TSAR Perfumes",
   parentUrl: "https://tsarperfumes.com",
   url: "https://darbaar.tsarperfumes.com",
-  email: "darbaar@tsarperfumes.com",
-  phone: "+91 00000 00000",
-  phoneHref: "tel:+910000000000",
-  whatsapp: "910000000000",
+  email: "admin@perfumesbytsar.com",
+  phone: "+91 98100 89673",
+  phoneHref: "tel:+919810089673",
+  whatsapp: "919810089673",
   whatsappMessage:
     "Hi TSAR Darbaar, I'd like to discuss scenting for my business.",
-  city: "India",
-  instagram: "https://instagram.com/tsarperfumes",
+  address: "2/350, 2nd Floor, Nirankari Colony, Delhi - 110009",
+  city: "Delhi",
+  gstin: "07CASPC9241B1ZS",
+  instagram: "https://www.instagram.com/perfumesbytsar/",
   linkedin: "https://linkedin.com/company/tsarperfumes",
 } as const;
 
@@ -30,14 +32,14 @@ export const HERO = {
   eyebrow: "SCENT BRANDING BY TSAR PERFUMES",
   headline: "Your space has a story. Give it a scent.",
   subheadline:
-    "TSAR Darbaar creates signature scent identities for hotels, offices, retail spaces and wellness environments — designed by perfumers, installed and maintained by professionals, across India.",
+    "TSAR Darbaar creates signature scent identities for hotels, offices, retail spaces and wellness environments - designed by perfumers, installed and maintained by professionals, across India.",
   primaryCta: { label: "Request a Consultation", href: "#enquiry" },
   secondaryCta: { label: "Explore Our Plans", href: "#plans" },
 } as const;
 
 export const LEGACY = {
   bandLine:
-    "Built on the perfumery of TSAR — fragrances crafted in India, for Indian spaces and seasons.",
+    "Built on the perfumery of TSAR - fragrances crafted in India, for Indian spaces and seasons.",
   credentials: [
     {
       title: "In-house perfumery",
@@ -65,7 +67,7 @@ export const WHY_SCENT = {
   columns: [
     {
       title: "Scent is remembered longest.",
-      copy: "Of all the senses, smell is wired most directly to emotion and memory. A space with a signature scent is recalled long after the visit — and recognized instantly on return.",
+      copy: "Of all the senses, smell is wired most directly to emotion and memory. A space with a signature scent is recalled long after the visit - and recognized instantly on return.",
     },
     {
       title: "Scent shapes how time feels.",
@@ -73,7 +75,7 @@ export const WHY_SCENT = {
     },
     {
       title: "Scent completes a brand.",
-      copy: "You've designed what your space looks and sounds like. A signature scent is the final layer — the one dimension of your brand experience your competitors haven't touched.",
+      copy: "You've designed what your space looks and sounds like. A signature scent is the final layer - the one dimension of your brand experience your competitors haven't touched.",
     },
   ],
   cta: { label: "See how it works for your industry", href: "#industries" },
@@ -82,7 +84,7 @@ export const WHY_SCENT = {
 export const INDUSTRIES = {
   id: "industries",
   headline: "Every industry has its own air.",
-  lede: "We compose for the way your space is actually used — its size, its airflow, its guests, its purpose.",
+  lede: "We compose for the way your space is actually used - its size, its airflow, its guests, its purpose.",
   cards: [
     {
       industry: "Hotels & Resorts",
@@ -111,7 +113,7 @@ export const INDUSTRIES = {
     {
       industry: "Salons & Spas",
       outcome: "DEEPER RELAXATION",
-      line: "Calm you can breathe — from the first minute of the visit.",
+      line: "Calm you can breathe - from the first minute of the visit.",
       tone: "from-[#151818] to-[#2c3830]",
     },
     {
@@ -134,7 +136,7 @@ export const INDUSTRIES = {
     },
   ],
   specifierLine:
-    "Architect or interior designer? We collaborate at the design stage — scent specified like any other material.",
+    "Architect or interior designer? We collaborate at the design stage - scent specified like any other material.",
   specifierCta: { label: "Talk to us early.", href: "#enquiry" },
 } as const;
 
@@ -144,7 +146,7 @@ export const SOLUTIONS = {
     headline:
       "We don't fragrance spaces. We create signature atmospheres that become part of your brand.",
     lines: [
-      "Anyone can plug in a diffuser. TSAR Darbaar begins where equipment ends — with what your brand should smell like, and the discipline to keep it smelling that way, month after month.",
+      "Anyone can plug in a diffuser. TSAR Darbaar begins where equipment ends - with what your brand should smell like, and the discipline to keep it smelling that way, month after month.",
       "Composed in-house for Indian climates. Engineered around your architecture. Managed like a service, not a sale.",
     ],
   },
@@ -163,7 +165,7 @@ export const SOLUTIONS = {
         "Professional aroma system installation, planned for your space",
         "Choice of 50+ premium in-house fragrances",
         "Fragrance consultation to match scent to space and brand",
-        "Monthly fragrance refills — scheduled, never chased",
+        "Monthly fragrance refills - scheduled, never chased",
         "Preventive maintenance and servicing included",
         "Complaints resolved within 24 hours",
         "Hardware failure? Replaced within 24 hours",
@@ -178,9 +180,9 @@ export const SOLUTIONS = {
       badge: "Our signature engagement",
       features: [
         "Everything in Essential, plus:",
-        "Brand Discovery — we study your brand before we compose",
+        "Brand Discovery - we study your brand before we compose",
         "Signature fragrance developed exclusively for you",
-        "Exclusive ownership — your scent is never offered to another client",
+        "Exclusive ownership - your scent is never offered to another client",
         "Dedicated relationship manager",
         "Priority support and scent branding consultation",
       ],
@@ -202,7 +204,7 @@ export const SOLUTIONS = {
       cta: { label: "Enquire about Supply", planValue: "Fragrance Supply" },
     },
   ],
-  note: "Plans are tailored to your space and locations. Share a few details and we'll recommend the right structure — no obligation.",
+  note: "Plans are tailored to your space and locations. Share a few details and we'll recommend the right structure - no obligation.",
 } as const;
 
 export const WHY_TSAR = {
@@ -237,7 +239,7 @@ export const WHY_TSAR = {
   reasons: [
     {
       title: "Formulated to be safe around people, all day.",
-      copy: "Our oils carry the standards of our perfumery: vegan, paraben-free, non-carcinogenic, and non-irritating. In spaces where people spend hours — offices, hospitals, hotels — that isn't a detail. It's the foundation.",
+      copy: "Our oils carry the standards of our perfumery: vegan, paraben-free, non-carcinogenic, and non-irritating. In spaces where people spend hours - offices, hospitals, hotels - that isn't a detail. It's the foundation.",
     },
     {
       title: "Service written into the contract, not the brochure.",
@@ -253,12 +255,12 @@ export const HOW_IT_WORKS = {
     {
       number: "01",
       title: "Discover",
-      copy: "We visit your space or meet online — understanding your brand, your visitors, and how the space breathes.",
+      copy: "We visit your space or meet online - understanding your brand, your visitors, and how the space breathes.",
     },
     {
       number: "02",
       title: "Compose",
-      copy: "We shortlist from our library — or begin composing your signature scent. You approve by nose, not by brochure.",
+      copy: "We shortlist from our library - or begin composing your signature scent. You approve by nose, not by brochure.",
     },
     {
       number: "03",
@@ -273,7 +275,7 @@ export const HOW_IT_WORKS = {
     {
       number: "05",
       title: "Optimize",
-      copy: "We revisit intensity, coverage and seasonality as your space evolves — a scent identity is tended, not installed.",
+      copy: "We revisit intensity, coverage and seasonality as your space evolves - a scent identity is tended, not installed.",
     },
   ],
   cta: { label: "Start with a Consultation", href: "#enquiry" },
@@ -288,13 +290,13 @@ export const FAQS = {
       question:
         "Is ambient scenting safe for staff and guests who are in the space all day?",
       answer:
-        "Yes. Our fragrance oils are vegan, paraben-free, non-carcinogenic, and non-irritating, and diffusion levels are calibrated for continuous occupancy — ambient presence, not perfume-counter intensity. Intensity is zoned and adjustable, and we fine-tune after installation based on your feedback.",
+        "Yes. Our fragrance oils are vegan, paraben-free, non-carcinogenic, and non-irritating, and diffusion levels are calibrated for continuous occupancy - ambient presence, not perfume-counter intensity. Intensity is zoned and adjustable, and we fine-tune after installation based on your feedback.",
     },
     {
       id: "cost",
       question: "What does it cost?",
       answer:
-        "Every engagement is scoped to your space — its size, layout, number of zones, and the plan you choose. After a consultation (on-site or online), you'll receive a clear, itemized proposal. There are no charges for the consultation.",
+        "Every engagement is scoped to your space - its size, layout, number of zones, and the plan you choose. After a consultation (on-site or online), you'll receive a clear, itemized proposal. There are no charges for the consultation.",
     },
     {
       id: "relation",
@@ -312,7 +314,7 @@ export const FAQS = {
       id: "exclusive",
       question: "Can we have a fragrance no one else has?",
       answer:
-        "Yes — that's our Signature plan. We study your brand, compose a fragrance exclusively for you, and guarantee it is never offered to another client. Your scent remains yours.",
+        "Yes - that's our Signature plan. We study your brand, compose a fragrance exclusively for you, and guarantee it is never offered to another client. Your scent remains yours.",
     },
     {
       id: "supply",
@@ -324,13 +326,13 @@ export const FAQS = {
       id: "timeline",
       question: "How long does it take from enquiry to installation?",
       answer:
-        "Typically a few weeks: consultation, scent selection or development, then installation planned around your operating hours. Signature fragrance development takes longer — a composed scent is worth the wait.",
+        "Typically a few weeks: consultation, scent selection or development, then installation planned around your operating hours. Signature fragrance development takes longer - a composed scent is worth the wait.",
     },
     {
       id: "locations",
       question: "Do you serve multiple locations and cities?",
       answer:
-        "Yes. We provide nationwide servicing and manage multi-location deployments across India with consistent fragrance, service standards, and a single point of contact. When you expand, your scent expands with you — new locations are added to your existing plan and schedule.",
+        "Yes. We provide nationwide servicing and manage multi-location deployments across India with consistent fragrance, service standards, and a single point of contact. When you expand, your scent expands with you - new locations are added to your existing plan and schedule.",
     },
     {
       id: "floors",
@@ -348,13 +350,13 @@ export const FAQS = {
       id: "dining",
       question: "Will the fragrance interfere with food and dining?",
       answer:
-        "No — this is a core part of curation. For restaurants and cafés we select appetite-neutral compositions, scent arrival and lounge zones rather than dining areas, and calibrate intensity so the cuisine always leads.",
+        "No - this is a core part of curation. For restaurants and cafés we select appetite-neutral compositions, scent arrival and lounge zones rather than dining areas, and calibrate intensity so the cuisine always leads.",
     },
     {
       id: "refills",
       question: "How often are refills required?",
       answer:
-        "Monthly, as part of every plan — scheduled by us, adjusted to your operating hours and diffusion intensity. You never track a refill date.",
+        "Monthly, as part of every plan - scheduled by us, adjusted to your operating hours and diffusion intensity. You never track a refill date.",
     },
   ],
 } as const;
@@ -363,7 +365,7 @@ export const ENQUIRY = {
   id: "enquiry",
   headline: "Begin your scent story.",
   reassurance:
-    "Tell us about your space. A TSAR Darbaar consultant will respond within one business day — with questions, not a sales pitch.",
+    "Tell us about your space. A TSAR Darbaar consultant will respond within one business day - with questions, not a sales pitch.",
   preferTalk: "Prefer to talk?",
   whatsappLabel: "Or message us on WhatsApp →",
   submitLabel: "Request Consultation",
@@ -389,7 +391,7 @@ export const ENQUIRY = {
     "Fragrance Supply",
   ],
   messagePlaceholder:
-    "Tell us about your space — size, current setup, timeline…",
+    "Tell us about your space - size, current setup, timeline…",
 } as const;
 
 export const FOOTER = {
@@ -403,5 +405,5 @@ export const THANK_YOU = {
   body: "A TSAR Darbaar consultant will call you within one business day.",
   brochureLabel: "Download Our Company Profile (PDF)",
   exploreLabel: "Explore TSAR Perfumes →",
-  redirectNote: "Company Profile coming soon — you can explore TSAR Perfumes meanwhile.",
+  redirectNote: "Company Profile coming soon - you can explore TSAR Perfumes meanwhile.",
 } as const;

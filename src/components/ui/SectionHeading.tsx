@@ -28,19 +28,14 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <p
-          className={cn(
-            "mb-4 text-[13px] font-semibold uppercase tracking-[0.14em]",
-            tone === "dark" ? "text-gold" : "text-gold",
-          )}
-        >
+        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-gold sm:mb-4 sm:text-[13px]">
           {eyebrow}
         </p>
       ) : null}
       <h2
         id={id}
         className={cn(
-          "font-serif text-[32px] leading-[1.1] tracking-[-0.01em] md:text-[48px]",
+          "font-serif text-section text-balance",
           tone === "dark" ? "text-ivory" : "text-noir",
         )}
       >
@@ -49,7 +44,7 @@ export function SectionHeading({
       {lede ? (
         <p
           className={cn(
-            "mt-5 text-base leading-[1.65] md:text-lg",
+            "mt-4 text-lede text-pretty sm:mt-5",
             tone === "dark" ? "text-ivory/75" : "text-charcoal/80",
           )}
         >

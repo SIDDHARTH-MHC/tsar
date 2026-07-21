@@ -34,14 +34,14 @@ export function Accordion({
         const buttonId = `${baseId}-${item.id}-button`;
 
         return (
-          <div key={item.id} className="py-5">
+          <div key={item.id} className="py-3 sm:py-5">
             <h3>
               <button
                 id={buttonId}
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={panelId}
-                className="flex w-full items-start justify-between gap-6 text-left"
+                className="flex min-h-12 w-full items-center justify-between gap-4 py-1 text-left sm:items-start sm:gap-6"
                 onClick={() => {
                   const next = isOpen ? undefined : item.id;
                   setOpenId(next);

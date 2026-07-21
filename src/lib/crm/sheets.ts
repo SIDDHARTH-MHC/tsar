@@ -13,7 +13,7 @@ export async function appendLeadToSheet(lead: LeadPayload) {
   );
 
   if (!sheetId || !email || !key) {
-    console.info("[crm/sheets] credentials missing — skipping append");
+    console.info("[crm/sheets] credentials missing - skipping append");
     return { skipped: true as const };
   }
 

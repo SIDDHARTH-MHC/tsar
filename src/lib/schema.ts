@@ -11,7 +11,7 @@ export const enquirySchema = z.object({
   email: z
     .string()
     .trim()
-    .email("That email doesn't look right — mind checking it?"),
+    .email("That email doesn't look right - mind checking it?"),
   phone: z
     .string()
     .trim()
@@ -29,7 +29,7 @@ export const enquirySchema = z.object({
   locations: z.string().optional(),
   plan: z.string().optional(),
   message: z.string().optional(),
-  /** Honeypot — must stay empty */
+  /** Honeypot - must stay empty */
   website: z.string().optional(),
   recaptchaToken: z.string().optional(),
   utm_source: z.string().optional(),

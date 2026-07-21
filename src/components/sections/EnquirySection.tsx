@@ -10,49 +10,49 @@ export function EnquirySection() {
     <section
       id={ENQUIRY.id}
       aria-labelledby="enquiry-heading"
-      className="scroll-mt-20 bg-ivory"
+      className="scroll-mt-[calc(var(--header-h)+var(--safe-top)+12px)] bg-ivory"
     >
       <div className="grid lg:grid-cols-5">
-        <div className="film-grain bg-noir px-6 py-16 text-ivory md:px-12 lg:col-span-2 lg:px-14 lg:py-24">
+        <div className="film-grain bg-noir px-5 py-12 text-ivory sm:px-8 sm:py-16 md:px-12 lg:col-span-2 lg:px-14 lg:py-24">
           <FadeIn>
             <h2
               id="enquiry-heading"
-              className="font-serif text-[36px] leading-[1.1] tracking-[-0.01em] md:text-[44px]"
+              className="font-serif text-section text-balance tracking-[-0.01em]"
             >
               {ENQUIRY.headline}
             </h2>
-            <p className="mt-5 max-w-md text-base leading-[1.65] text-ivory/75">
+            <p className="mt-4 max-w-md text-lede text-pretty text-ivory/75 sm:mt-5">
               {ENQUIRY.reassurance}
             </p>
-            <div className="mt-10 space-y-2 text-sm">
+            <div className="mt-8 space-y-3 text-sm sm:mt-10">
               <p className="text-ivory/55">{ENQUIRY.preferTalk}</p>
-              <p>
+              <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
                 <a
                   href={SITE.phoneHref}
-                  className="gold-underline text-ivory"
+                  className="inline-flex min-h-11 items-center gold-underline text-ivory"
                   onClick={() =>
                     track("phone_click", { placement: "enquiry_panel" })
                   }
                 >
                   {SITE.phone}
                 </a>
-                <span className="mx-2 text-ivory/40">·</span>
+                <span className="hidden text-ivory/40 sm:inline">·</span>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="gold-underline text-ivory"
+                  className="inline-flex min-h-11 items-center break-all gold-underline text-ivory"
                   onClick={() =>
                     track("email_click", { placement: "enquiry_panel" })
                   }
                 >
                   {SITE.email}
                 </a>
-              </p>
-              <p className="pt-4">
+              </div>
+              <p className="pt-2">
                 <a
                   href={whatsappHref()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-gold gold-underline"
+                  className="inline-flex min-h-12 items-center font-semibold text-gold gold-underline"
                   onClick={() =>
                     track("whatsapp_click", { placement: "enquiry_panel" })
                   }
@@ -64,7 +64,7 @@ export function EnquirySection() {
           </FadeIn>
         </div>
 
-        <div className="bg-ivory px-6 py-16 md:px-12 lg:col-span-3 lg:px-16 lg:py-24">
+        <div className="bg-ivory px-5 py-12 sm:px-8 sm:py-16 md:px-12 lg:col-span-3 lg:px-16 lg:py-24">
           <FadeIn>
             <EnquiryForm />
           </FadeIn>

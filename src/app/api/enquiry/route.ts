@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import * as Sentry from "@sentry/nextjs";
 import { enquirySchema, toLeadPayload } from "@/lib/schema";
 import { sendEnquiryEmails } from "@/lib/email";
 import { appendLeadToSheet } from "@/lib/crm/sheets";
@@ -7,10 +8,23 @@ import { verifyRecaptcha } from "@/lib/recaptcha";
 
 export const runtime = "nodejs";
 
+const recentKeys = new Map<string, number>();
+const IDEMPOTENCY_WINDOW_MS = 60_000;
+
 function clientIp(req: Request) {
   const forwarded = req.headers.get("x-forwarded-for");
   if (forwarded) return forwarded.split(",")[0]?.trim() ?? "unknown";
   return req.headers.get("x-real-ip") ?? "unknown";
+}
+
+function isDuplicate(key: string) {
+  const now = Date.now();
+  for (const [k, ts] of recentKeys) {
+    if (now - ts > IDEMPOTENCY_WINDOW_MS) recentKeys.delete(k);
+  }
+  if (recentKeys.has(key)) return true;
+  recentKeys.set(key, now);
+  return false;
 }
 
 export async function POST(req: Request) {
@@ -55,7 +69,6 @@ export async function POST(req: Request) {
 
   const data = parsed.data;
 
-  // Honeypot: silent success, discard
   if (data.website && data.website.trim().length > 0) {
     console.info("[enquiry] honeypot tripped", { ip });
     return NextResponse.json({ ok: true });
@@ -70,14 +83,22 @@ export async function POST(req: Request) {
   }
 
   const lead = toLeadPayload(data);
+  const idempotencyKey = `${lead.email.toLowerCase()}|${lead.company.toLowerCase()}|${lead.phone}`;
+  if (isDuplicate(idempotencyKey)) {
+    console.info("[enquiry] duplicate suppressed", { email: lead.email });
+    return NextResponse.json({ ok: true, duplicate: true });
+  }
 
-  // Durable structured log (Vercel → exportable)
   console.info("[enquiry:lead]", JSON.stringify(lead));
 
   try {
     await sendEnquiryEmails(lead);
   } catch (err) {
     console.error("[enquiry] email failed", err);
+    Sentry.captureException(err, {
+      tags: { route: "/api/enquiry", severity: "p1" },
+      extra: { company: lead.company, email: lead.email },
+    });
     return NextResponse.json(
       {
         ok: false,
@@ -88,9 +109,11 @@ export async function POST(req: Request) {
     );
   }
 
-  // CRM is fire-and-forget — never fail the user submission
   void appendLeadToSheet(lead).catch((err) => {
     console.error("[enquiry] sheets append failed", err);
+    Sentry.captureException(err, {
+      tags: { route: "/api/enquiry", sink: "sheets" },
+    });
   });
 
   return NextResponse.json({ ok: true });

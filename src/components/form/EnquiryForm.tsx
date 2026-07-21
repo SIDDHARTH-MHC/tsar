@@ -227,6 +227,7 @@ export function EnquiryForm() {
         id="email"
         label="Work email"
         type="email"
+        inputMode="email"
         required
         autoComplete="email"
         error={errors.email?.message}
@@ -237,6 +238,7 @@ export function EnquiryForm() {
         id="phone"
         label="Phone"
         type="tel"
+        inputMode="tel"
         required
         autoComplete="tel"
         error={errors.phone?.message}
@@ -290,7 +292,8 @@ export function EnquiryForm() {
               id="field-message"
               rows={4}
               placeholder={ENQUIRY.messagePlaceholder}
-              className="w-full resize-y rounded-[var(--radius-xs)] border border-noir/15 bg-ivory px-4 py-3 text-base text-noir outline-none transition-colors duration-[var(--duration-fast)] placeholder:text-charcoal/40 focus:border-gold"
+              enterKeyHint="done"
+              className="input-field min-h-[120px] resize-y placeholder:text-charcoal/40"
               {...register("message")}
               onFocus={onFirstFocus}
             />
@@ -328,6 +331,7 @@ function Field({
   error,
   required,
   type = "text",
+  inputMode,
   autoComplete,
   hint,
   registration,
@@ -338,6 +342,7 @@ function Field({
   error?: string;
   required?: boolean;
   type?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   autoComplete?: string;
   hint?: string;
   registration: UseFormRegisterReturn;
@@ -351,20 +356,22 @@ function Field({
       </label>
       <div className="relative">
         {hint ? (
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-charcoal/45">
+          <span className="pointer-events-none absolute left-4 top-1/2 z-[1] -translate-y-1/2 text-sm text-charcoal/45">
             {hint}
           </span>
         ) : null}
         <input
           id={`field-${id}`}
           type={type}
+          inputMode={inputMode}
           autoComplete={autoComplete}
+          enterKeyHint="next"
           aria-invalid={!!error}
           aria-describedby={error ? `error-${id}` : undefined}
           className={cn(
-            "w-full rounded-[var(--radius-xs)] border bg-ivory px-4 py-3 text-base text-noir outline-none transition-colors duration-[var(--duration-fast)] focus:border-gold",
+            "input-field",
             hint && "pl-12",
-            error ? "border-error" : "border-noir/15",
+            error && "border-error",
           )}
           {...registration}
           onFocus={() => {
@@ -403,7 +410,10 @@ function SelectField({
       </label>
       <select
         id={`field-${id}`}
-        className="w-full appearance-none rounded-[var(--radius-xs)] border border-noir/15 bg-ivory px-4 py-3 text-base text-noir outline-none transition-colors duration-[var(--duration-fast)] focus:border-gold"
+        className="input-field appearance-none bg-[length:12px] bg-[right_16px_center] bg-no-repeat pr-10"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%232B2A28' d='M1 1l5 5 5-5'/%3E%3C/svg%3E")`,
+        }}
         {...registration}
         onFocus={() => {
           onFocus?.();

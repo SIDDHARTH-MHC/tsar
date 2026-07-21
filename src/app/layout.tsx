@@ -1,5 +1,5 @@
 import { Cormorant_Garamond, Figtree } from "next/font/google";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@/components/analytics/Analytics";
 import { allJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -23,7 +23,7 @@ const sans = Figtree({
 export const metadata: Metadata = {
   title: "TSAR Darbaar | Scent Branding & Commercial Fragrance Solutions India",
   description:
-    "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service — across India. Request a consultation.",
+    "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service - across India. Request a consultation.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://darbaar.tsarperfumes.com",
   ),
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TSAR Darbaar | Scent Branding & Commercial Fragrance Solutions India",
     description:
-      "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service — across India.",
+      "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service - across India.",
     type: "website",
     locale: "en_IN",
   },
@@ -43,6 +43,27 @@ export const metadata: Metadata = {
     description:
       "Signature scent identities for hotels, offices, retail and wellness spaces across India.",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "TSAR Darbaar",
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F7F4EE" },
+    { media: "(prefers-color-scheme: dark)", color: "#121112" },
+  ],
+  colorScheme: "light",
 };
 
 export default function RootLayout({

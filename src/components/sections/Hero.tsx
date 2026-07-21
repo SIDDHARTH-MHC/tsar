@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducedMotion, motion } from "framer-motion";
+import { useReducedMotion, LazyMotion, domAnimation, m } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { HERO, LEGACY } from "@/lib/constants";
 import { track } from "@/lib/analytics";
@@ -15,17 +15,17 @@ export function Hero() {
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 40 },
+          initial: { opacity: 0, y: 28 },
           animate: { opacity: 1, y: 0 },
           transition: {
-            duration: 0.7,
+            duration: 0.55,
             delay,
             ease: [0.22, 1, 0.36, 1] as const,
           },
         };
 
   return (
-    <>
+    <LazyMotion features={domAnimation} strict>
       <section
         id="hero"
         className="film-grain relative flex min-h-[100svh] items-end overflow-hidden bg-noir"
@@ -35,11 +35,11 @@ export function Hero() {
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-noir via-noir/55 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-noir via-noir/60 to-transparent"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0 opacity-30 md:opacity-40"
           style={{
             backgroundImage:
               "radial-gradient(circle at 70% 30%, rgba(176,141,87,0.18), transparent 40%)",
@@ -47,29 +47,29 @@ export function Hero() {
           aria-hidden
         />
 
-        <div className="container-site relative z-10 w-full pb-28 pt-32 md:pb-36 md:pt-40">
+        <div className="container-site relative z-10 w-full pb-16 pt-[calc(5.5rem+var(--safe-top))] sm:pb-20 md:pb-28 md:pt-40">
           <div className="max-w-3xl lg:max-w-4xl">
-            <motion.p
-              className="mb-5 text-[13px] font-semibold uppercase tracking-[0.14em] text-gold"
-              {...line(0.15)}
+            <m.p
+              className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-gold sm:mb-5 sm:text-[13px]"
+              {...line(0.1)}
             >
               {HERO.eyebrow}
-            </motion.p>
-            <motion.h1
-              className="font-serif text-[40px] leading-[1.05] tracking-[-0.01em] text-ivory md:text-[64px] lg:text-[72px]"
-              {...line(0.28)}
+            </m.p>
+            <m.h1
+              className="font-serif text-display text-balance text-ivory"
+              {...line(0.2)}
             >
               {HERO.headline}
-            </motion.h1>
-            <motion.p
-              className="mt-6 max-w-2xl text-base leading-[1.65] text-ivory/75 md:text-lg"
-              {...line(0.42)}
+            </m.h1>
+            <m.p
+              className="mt-5 max-w-2xl text-lede text-pretty text-ivory/75 sm:mt-6"
+              {...line(0.3)}
             >
               {HERO.subheadline}
-            </motion.p>
-            <motion.div
-              className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
-              {...line(0.56)}
+            </m.p>
+            <m.div
+              className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row"
+              {...line(0.4)}
             >
               <Button
                 href={HERO.primaryCta.href}
@@ -92,31 +92,34 @@ export function Hero() {
               >
                 {HERO.secondaryCta.label}
               </Button>
-            </motion.div>
+            </m.div>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 md:block">
+        <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 md:bottom-8 md:block">
           <div className="scroll-cue" aria-hidden />
         </div>
       </section>
 
       <div className="border-b border-noir/10 bg-ivory">
-        <div className="container-site py-10 md:py-12">
+        <div className="container-site py-8 sm:py-10 md:py-12">
           <div className="mx-auto flex max-w-3xl items-center gap-4">
             <span className="hidden h-px flex-1 bg-gold/50 sm:block" />
-            <p className="text-center font-serif text-base italic leading-snug text-charcoal/85 md:text-lg">
+            <p className="text-center font-serif text-[15px] italic leading-snug text-balance text-charcoal/85 sm:text-base md:text-lg">
               {LEGACY.bandLine}
             </p>
             <span className="hidden h-px flex-1 bg-gold/50 sm:block" />
           </div>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {LEGACY.credentials.map((item, i) => {
               const Icon = icons[i];
               return (
                 <li key={item.title} className="flex gap-3">
-                  <Icon className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
-                  <div>
+                  <Icon
+                    className="mt-0.5 size-5 shrink-0 text-gold"
+                    aria-hidden
+                  />
+                  <div className="min-w-0">
                     <p className="text-sm font-semibold text-noir">{item.title}</p>
                     <p className="mt-1 text-sm leading-relaxed text-charcoal/70">
                       {item.copy}
@@ -128,6 +131,6 @@ export function Hero() {
           </ul>
         </div>
       </div>
-    </>
+    </LazyMotion>
   );
 }

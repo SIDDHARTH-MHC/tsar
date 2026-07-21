@@ -17,10 +17,8 @@ export function HowItWorks() {
 
     const onScroll = () => {
       const rect = el.getBoundingClientRect();
-      const view = window.innerHeight * 0.65;
-      const start = view;
-      const end = rect.height;
-      const raw = (start - rect.top) / end;
+      const view = window.innerHeight * 0.7;
+      const raw = (view - rect.top) / Math.max(rect.height, 1);
       setProgress(Math.min(1, Math.max(0, raw)));
     };
 
@@ -41,21 +39,24 @@ export function HowItWorks() {
             id="how-it-works-heading"
             title={HOW_IT_WORKS.headline}
             align="center"
-            className="mb-16"
+            className="mb-12 sm:mb-16"
           />
         </FadeIn>
 
-        <ol ref={ref} className="relative grid gap-10 lg:grid-cols-5 lg:gap-4">
+        <ol ref={ref} className="relative grid gap-8 sm:gap-10 lg:grid-cols-5 lg:gap-4">
+          {/* Mobile vertical track */}
           <div
-            className="pointer-events-none absolute left-5 top-5 bottom-5 w-px bg-gold/20 lg:left-0 lg:right-0 lg:top-[22px] lg:bottom-auto lg:h-px lg:w-full"
+            className="pointer-events-none absolute left-5 top-5 bottom-5 w-px bg-gold/20 lg:hidden"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute left-5 top-5 w-px origin-top bg-gold lg:left-0 lg:top-[22px] lg:h-px lg:origin-left"
-            style={{
-              height: undefined,
-              transform: `scaleY(${progress})`,
-            }}
+            className="pointer-events-none absolute left-5 top-5 bottom-5 w-px origin-top bg-gold lg:hidden"
+            style={{ transform: `scaleY(${progress})` }}
+            aria-hidden
+          />
+          {/* Desktop horizontal track */}
+          <div
+            className="pointer-events-none absolute left-0 right-0 top-[22px] hidden h-px bg-gold/20 lg:block"
             aria-hidden
           />
           <div
@@ -65,20 +66,23 @@ export function HowItWorks() {
           />
 
           {HOW_IT_WORKS.steps.map((step, i) => {
-            const active = progress >= i / (HOW_IT_WORKS.steps.length - 1) - 0.05;
+            const active =
+              progress >= i / Math.max(HOW_IT_WORKS.steps.length - 1, 1) - 0.05;
             return (
               <li
                 key={step.number}
                 className={cn(
                   "relative pl-14 transition-opacity duration-500 lg:pl-0 lg:pt-14",
-                  active ? "opacity-100" : "opacity-40",
+                  active ? "opacity-100" : "opacity-45",
                 )}
               >
                 <span className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-full border border-gold bg-ivory font-serif text-sm text-noir lg:left-1/2 lg:top-0 lg:-translate-x-1/2">
                   {step.number}
                 </span>
-                <h3 className="font-serif text-2xl text-noir">{step.title}</h3>
-                <p className="mt-3 text-sm leading-[1.65] text-charcoal/75">
+                <h3 className="font-serif text-xl text-noir sm:text-2xl">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm leading-[1.65] text-pretty text-charcoal/75 sm:mt-3">
                   {step.copy}
                 </p>
               </li>
@@ -86,8 +90,8 @@ export function HowItWorks() {
           })}
         </ol>
 
-        <FadeIn className="mt-14 flex justify-center">
-          <Button href={HOW_IT_WORKS.cta.href} showArrow>
+        <FadeIn className="mt-12 flex justify-center sm:mt-14">
+          <Button href={HOW_IT_WORKS.cta.href} showArrow className="w-full max-w-sm sm:w-auto">
             {HOW_IT_WORKS.cta.label}
           </Button>
         </FadeIn>

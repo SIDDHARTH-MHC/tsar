@@ -1,4 +1,8 @@
+"use client";
+
+import Link from "next/link";
 import { FOOTER, NAV_LINKS, SITE } from "@/lib/constants";
+import { track } from "@/lib/analytics";
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -97,16 +101,29 @@ export function Footer() {
             </p>
             <ul className="space-y-3 text-sm text-ivory/75">
               <li>
-                <a href={`mailto:${SITE.email}`} className="gold-underline">
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="gold-underline break-all"
+                  onClick={() =>
+                    track("email_click", { placement: "footer" })
+                  }
+                >
                   {SITE.email}
                 </a>
               </li>
               <li>
-                <a href={SITE.phoneHref} className="gold-underline">
+                <a
+                  href={SITE.phoneHref}
+                  className="gold-underline"
+                  onClick={() =>
+                    track("phone_click", { placement: "footer" })
+                  }
+                >
                   {SITE.phone}
                 </a>
               </li>
-              <li>{SITE.city}</li>
+              <li className="max-w-xs leading-relaxed">{SITE.address}</li>
+              <li className="text-ivory/55">GSTIN {SITE.gstin}</li>
             </ul>
             <div className="mt-6 flex gap-4">
               <a
@@ -131,12 +148,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-ivory/10 pt-6 text-xs text-ivory/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-ivory/10 pt-6 text-xs text-ivory/45 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
           <p>© 2026 {SITE.parent}</p>
-          <div className="flex items-center gap-6">
-            <button type="button" className="gold-underline text-ivory/55">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Link
+              href="/privacy"
+              className="inline-flex min-h-11 items-center gold-underline text-ivory/55"
+            >
               Privacy Policy
-            </button>
+            </Link>
             <span className="tracking-[0.08em]">{FOOTER.madeIn}</span>
           </div>
         </div>

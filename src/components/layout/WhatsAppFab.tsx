@@ -6,6 +6,7 @@ import { track } from "@/lib/analytics";
 
 export function WhatsAppFab() {
   const [visible, setVisible] = useState(false);
+  const [stickyUp, setStickyUp] = useState(false);
 
   useEffect(() => {
     const enquiry = document.getElementById("enquiry");
@@ -17,13 +18,20 @@ export function WhatsAppFab() {
     const onScroll = () => {
       const doc = document.documentElement;
       const scrolled =
-        (window.scrollY + window.innerHeight) / doc.scrollHeight;
+        (window.scrollY + window.innerHeight) / Math.max(doc.scrollHeight, 1);
       pastHalf = scrolled >= 0.5;
+      setStickyUp(document.body.classList.contains("has-sticky-cta"));
       update();
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    const classObs = new MutationObserver(onScroll);
+    classObs.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     let formObs: IntersectionObserver | undefined;
     if (enquiry) {
@@ -39,6 +47,7 @@ export function WhatsAppFab() {
 
     return () => {
       window.removeEventListener("scroll", onScroll);
+      classObs.disconnect();
       formObs?.disconnect();
     };
   }, []);
@@ -52,7 +61,13 @@ export function WhatsAppFab() {
       rel="noopener noreferrer"
       aria-label="Message us on WhatsApp"
       onClick={() => track("whatsapp_click", { placement: "fab" })}
-      className="fixed bottom-20 right-4 z-40 flex size-12 items-center justify-center rounded-full bg-noir text-ivory shadow-[var(--shadow-hover)] transition-colors hover:bg-charcoal lg:bottom-8 lg:right-8"
+      className="fixed z-40 flex size-12 items-center justify-center rounded-full bg-noir text-ivory shadow-[var(--shadow-hover)] transition-colors active:bg-charcoal lg:size-14"
+      style={{
+        right: "max(1rem, var(--safe-right))",
+        bottom: stickyUp
+          ? "calc(var(--sticky-cta-h) + 0.75rem)"
+          : "max(1.25rem, calc(var(--safe-bottom) + 1rem))",
+      }}
     >
       <svg viewBox="0 0 24 24" className="size-5" fill="currentColor" aria-hidden>
         <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.4 0-2.79-.36-4.03-1.05l-.29-.17-3.12.82.83-3.04-.18-.3a8.2 8.2 0 0 1-1.26-4.5c0-4.54 3.7-8.25 8.06-8.25z" />

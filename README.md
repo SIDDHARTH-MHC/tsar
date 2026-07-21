@@ -5,11 +5,9 @@ Premium B2B scent-branding landing site for TSAR Darbaar (division of TSAR Perfu
 ## Stack
 
 - Next.js 15 (App Router) + TypeScript
-- Tailwind CSS 4
-- Framer Motion
-- React Hook Form + Zod
-- Resend (enquiry email)
-- GA4 / Meta Pixel / Clarity
+- Tailwind CSS 4 · Framer Motion (LazyMotion)
+- React Hook Form + Zod · Resend · reCAPTCHA v3
+- GA4 / Meta Pixel / Clarity · Sentry
 
 ## Getting started
 
@@ -21,19 +19,21 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Without `RESEND_API_KEY` / reCAPTCHA keys, the enquiry API still accepts leads (logs them) and skips email/captcha — suitable for local UI testing.
+Without email/reCAPTCHA/Sentry keys, the enquiry API still accepts leads (logs them) and skips those sinks — suitable for local UI testing.
+
+## Scripts
+
+- `npm run dev` — local server
+- `npm run build` — production build
+- `npm run typecheck` — `tsc --noEmit`
+- `npm run lint` — ESLint
 
 ## Env vars
 
-See [`.env.example`](.env.example). Required for production:
-
-- `RESEND_API_KEY`, `ENQUIRY_TO_EMAIL`, `ENQUIRY_FROM_EMAIL`
-- `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`, `RECAPTCHA_SECRET_KEY`
-- Analytics IDs as needed
-- Optional Google Sheets credentials for interim CRM
+See [`.env.example`](.env.example). Production needs Resend, reCAPTCHA, analytics, and optionally Sentry + Google Sheets.
 
 ## Content
 
-All copy lives in [`src/lib/constants.ts`](src/lib/constants.ts). Update contact placeholders (`SITE.phone`, `SITE.email`, `SITE.whatsapp`) before launch.
+All copy lives in [`src/lib/constants.ts`](src/lib/constants.ts). Update contact placeholders before launch.
 
-Place the Company Profile PDF at `public/downloads/TSAR-Darbaar-Company-Profile.pdf` to enable brochure download on `/thank-you` (otherwise a cancellable 5s redirect to tsarperfumes.com is shown).
+Place the Company Profile PDF at `public/downloads/TSAR-Darbaar-Company-Profile.pdf` to enable brochure download on `/thank-you`.

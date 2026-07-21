@@ -37,7 +37,7 @@ export function WhyTsar() {
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <FadeIn>
             <div
-              className="aspect-[2/3] w-full bg-gradient-to-br from-[#2a2218] via-[#4a3a28] to-[#1a1612] md:aspect-[3/4] lg:sticky lg:top-28 lg:max-h-[70vh]"
+              className="aspect-[4/5] w-full bg-gradient-to-br from-[#2a2218] via-[#4a3a28] to-[#1a1612] sm:aspect-[2/3] md:aspect-[3/4] lg:sticky lg:top-28 lg:max-h-[70vh]"
               aria-hidden
             >
               <div className="flex h-full items-end p-8">
@@ -69,7 +69,7 @@ export function WhyTsar() {
                   </span>
                   <p className="text-base leading-snug text-charcoal">
                     <strong className="font-semibold text-noir">{item.title}</strong>
-                    {" — "}
+                    {" - "}
                     {item.copy}
                   </p>
                 </li>
