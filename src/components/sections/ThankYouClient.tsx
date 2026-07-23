@@ -31,7 +31,7 @@ export function ThankYouClient({ brochureAvailable }: { brochureAvailable: boole
 
   return (
     <main className="film-grain flex min-h-[100svh] flex-col items-center justify-center bg-navy px-6 py-20 text-center text-ivory">
-      <BrandLogo variant="white" className="mx-auto h-10 sm:h-12 md:max-w-[320px]" />
+      <BrandLogo variant="white" size="lg" className="mx-auto" />
 
       <div className="mt-10 flex size-14 items-center justify-center rounded-full border border-gold">
         <Check className="size-7 text-gold" strokeWidth={1.75} aria-hidden />

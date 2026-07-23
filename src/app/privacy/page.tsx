@@ -14,7 +14,7 @@ export default function PrivacyPage() {
     <main className="min-h-[100svh] bg-ivory text-charcoal">
       <div className="container-site section-pad max-w-3xl">
         <Link href="/" className="inline-flex min-h-12 items-center" aria-label="Home">
-          <BrandLogo variant="navy" className="h-8 sm:h-9" />
+          <BrandLogo variant="navy" size="sm" />
         </Link>
         <Link
           href="/"

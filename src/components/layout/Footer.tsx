@@ -53,7 +53,7 @@ export function Footer() {
       <div className="container-site section-pad !pb-10 !pt-16 md:!pt-20">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <BrandLogo variant="white" className="h-10 sm:h-11 md:h-12 md:max-w-[300px]" />
+            <BrandLogo variant="white" size="lg" />
             <p className="mt-4 max-w-xs text-sm leading-[1.7] text-ivory/70">
               {FOOTER.tagline}
             </p>

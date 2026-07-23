@@ -45,24 +45,26 @@ export function Header() {
         <div className="container-site flex h-16 items-center justify-between gap-4 md:h-20">
           <Link
             href="/"
-            className="group relative flex min-h-12 min-w-0 items-center py-1"
+            className="group relative flex h-12 min-w-0 shrink-0 items-center overflow-hidden py-1"
             onClick={closeMenu}
             aria-label={`${SITE.name} home`}
           >
-            <span className="relative inline-block">
+            <span className="relative inline-block h-9 w-[8.75rem] sm:h-10 sm:w-[10rem] md:h-11 md:w-[11.5rem]">
               <BrandLogo
                 variant="navy"
+                size="md"
                 priority
                 className={cn(
-                  "transition-opacity duration-[var(--duration-base)]",
+                  "!absolute inset-0 !h-full !w-full transition-opacity duration-[var(--duration-base)]",
                   onDark ? "opacity-0" : "opacity-100",
                 )}
               />
               <BrandLogo
                 variant="white"
+                size="md"
                 priority
                 className={cn(
-                  "absolute left-0 top-0 transition-opacity duration-[var(--duration-base)]",
+                  "!absolute inset-0 !h-full !w-full transition-opacity duration-[var(--duration-base)]",
                   onDark ? "opacity-100" : "opacity-0",
                 )}
               />
