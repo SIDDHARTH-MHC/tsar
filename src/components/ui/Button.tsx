@@ -18,11 +18,11 @@ type ButtonProps = {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "btn-luxury-primary bg-gold text-navy border border-transparent",
+    "btn-luxury-primary bg-darbaar text-ivory border-[1.5px] border-darbaar",
   secondary:
-    "btn-luxury-secondary bg-transparent text-ivory border border-champagne/70",
+    "btn-luxury-secondary bg-transparent text-ivory border-[1.5px] border-ivory/50",
   ghost:
-    "btn-luxury-ghost bg-transparent text-navy border border-border",
+    "btn-luxury-ghost bg-transparent text-darbaar border-[1.5px] border-darbaar/45",
 };
 
 export function Button({
@@ -37,7 +37,7 @@ export function Button({
   "aria-label": ariaLabel,
 }: ButtonProps) {
   const classes = cn(
-    "btn-luxury inline-flex min-h-12 items-center justify-center gap-2.5 px-6 py-3.5 text-[13px] font-semibold tracking-[0.08em] uppercase rounded-[var(--radius-xs)] disabled:opacity-60 disabled:pointer-events-none group touch-manipulation sm:px-8",
+    "btn-luxury inline-flex min-h-12 items-center justify-center gap-2.5 px-7 py-3.5 text-[13.5px] font-semibold tracking-[0.1em] uppercase rounded-none disabled:opacity-60 disabled:pointer-events-none group touch-manipulation sm:px-8",
     variants[variant],
     className,
   );

@@ -80,15 +80,15 @@ export function HowItWorks() {
                 >
                   <span
                     className={cn(
-                      "absolute left-0 top-0 flex size-12 items-center justify-center rounded-full border bg-ivory font-serif text-base text-navy transition-all duration-[var(--duration-base)] lg:left-1/2 lg:top-0 lg:-translate-x-1/2",
+                      "absolute left-0 top-0 flex size-12 items-center justify-center rounded-full border bg-ivory font-serif text-base text-ink transition-all duration-[var(--duration-base)] lg:left-1/2 lg:top-0 lg:-translate-x-1/2",
                       active
-                        ? "border-gold scale-105 shadow-[0_0_0_4px_rgba(184,146,91,0.2)]"
-                        : "border-gold/50",
+                        ? "border-darbaar scale-105 shadow-[0_0_0_4px_rgba(143,20,37,0.16)]"
+                        : "border-darbaar/40",
                     )}
                   >
                     {step.number}
                   </span>
-                  <h3 className="font-serif text-xl text-navy sm:text-2xl">
+                  <h3 className="font-serif text-xl text-ink sm:text-2xl">
                     {step.title}
                   </h3>
                   <p className="mt-2 text-sm leading-[1.7] text-pretty text-charcoal sm:mt-3">

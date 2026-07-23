@@ -13,7 +13,7 @@ export function WhyScent() {
         <FadeIn>
           <p
             id="why-scent-heading"
-            className="mx-auto max-w-4xl text-center font-serif text-section text-balance text-navy"
+            className="mx-auto max-w-4xl text-center font-serif text-section text-balance text-ink"
           >
             {WHY_SCENT.editorial}
           </p>
@@ -31,7 +31,7 @@ export function WhyScent() {
           {WHY_SCENT.columns.map((col, i) => (
             <FadeIn key={col.title} delay={i * 0.08}>
               <div className="border-t border-gold/40 pt-5 sm:pt-6">
-                <h3 className="font-sans text-base font-semibold leading-snug text-navy sm:text-lg">
+                <h3 className="font-sans text-base font-semibold leading-snug text-ink sm:text-lg">
                   {col.title}
                 </h3>
                 <p className="mt-3 text-lede text-pretty text-charcoal">

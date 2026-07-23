@@ -21,7 +21,7 @@ export function Solutions() {
           <div className="mx-auto max-w-4xl text-center">
             <h2
               id="solutions-heading"
-              className="font-serif text-section text-balance text-navy"
+              className="font-serif text-section text-balance text-ink"
             >
               {SOLUTIONS.manifesto.headline}
             </h2>
@@ -82,7 +82,7 @@ function PlanCard({
       className={cn(
         "flex h-full flex-col border p-5 transition-[transform,box-shadow] duration-[var(--duration-base)] ease-[var(--ease-luxury)] hover:-translate-y-1 hover:shadow-[var(--shadow-hover)] sm:p-7 md:p-8",
         featured
-          ? "border-gold border-t-[3px] bg-navy text-ivory lg:-my-3 lg:py-10"
+          ? "border-ivory border-t-[3px] bg-darbaar-deep text-ivory lg:-my-3 lg:py-10"
           : "border-border bg-ivory",
       )}
     >
@@ -90,7 +90,7 @@ function PlanCard({
         <Badge
           className={cn(
             "mb-4 self-start",
-            featured && "border-gold/40 bg-gold/15 text-gold",
+            featured && "border-ivory/40 bg-ivory text-darbaar-deep",
           )}
         >
           {plan.badge}
@@ -101,7 +101,7 @@ function PlanCard({
       <h3
         className={cn(
           "font-serif text-3xl",
-          featured ? "text-ivory" : "text-navy",
+          featured ? "text-ivory" : "text-ink",
         )}
       >
         {plan.name}

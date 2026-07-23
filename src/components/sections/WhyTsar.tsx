@@ -31,16 +31,16 @@ export function WhyTsar() {
     <section
       id={WHY_TSAR.id}
       aria-labelledby="why-tsar-heading"
-      className="section-pad film-grain bg-navy text-ivory"
+      className="section-pad film-grain bg-darbaar-deep text-ivory"
     >
       <div className="container-site">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <FadeIn>
             <div
-              className="group relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-br from-[#1a2344] via-[#2a3558] to-[#0e1224] sm:aspect-[2/3] md:aspect-[3/4] lg:sticky lg:top-28 lg:max-h-[70vh]"
+              className="group relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-br from-[#8F1425] via-[#6E0E1C] to-[#5E0A16] sm:aspect-[2/3] md:aspect-[3/4] lg:sticky lg:top-28 lg:max-h-[70vh]"
               aria-hidden
             >
-              <div className="absolute inset-0 origin-center bg-[radial-gradient(circle_at_30%_20%,rgba(184,146,91,0.18),transparent_45%),linear-gradient(160deg,#1a2344_0%,#131936_55%,#0e1224_100%)] transition-transform duration-[var(--duration-ambient)] ease-out group-hover:scale-[1.04]" />
+              <div className="absolute inset-0 origin-center bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_45%),linear-gradient(160deg,#8F1425_0%,#5E0A16_70%)] transition-transform duration-[var(--duration-ambient)] ease-out group-hover:scale-[1.04]" />
               <div className="relative flex h-full items-end p-8">
                 <p className="font-serif text-2xl italic text-ivory/85">
                   In-house perfumery.
@@ -84,7 +84,7 @@ export function WhyTsar() {
             <div className="mt-12 grid gap-6 sm:grid-cols-2">
               {WHY_TSAR.reasons.map((reason, i) => (
                 <FadeIn key={reason.title} delay={0.1 + i * 0.08}>
-                  <div className="border border-champagne/25 bg-navy/40 p-6 backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-[var(--duration-base)] ease-[var(--ease-luxury)] hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)]">
+                  <div className="border border-ivory/20 bg-darbaar/30 p-6 backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-[var(--duration-base)] ease-[var(--ease-luxury)] hover:-translate-y-0.5 hover:border-ivory/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.2)]">
                     <h3 className="font-sans text-base font-semibold text-ivory">
                       {reason.title}
                     </h3>

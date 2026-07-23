@@ -22,7 +22,7 @@ export default function PrivacyPage() {
         >
           ← Back to home
         </Link>
-        <h1 className="mt-8 font-serif text-[36px] leading-[1.1] text-navy md:text-[48px]">
+        <h1 className="mt-8 font-serif text-[36px] leading-[1.1] text-ink md:text-[48px]">
           Privacy Policy
         </h1>
         <p className="mt-4 text-sm text-charcoal/60">Last updated: July 2026</p>

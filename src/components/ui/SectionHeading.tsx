@@ -28,7 +28,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-gold sm:mb-4 sm:text-[13px]">
+        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-darbaar sm:mb-4">
           {eyebrow}
         </p>
       ) : null}
@@ -36,7 +36,7 @@ export function SectionHeading({
         id={id}
         className={cn(
           "font-serif text-section text-balance",
-          tone === "dark" ? "text-ivory" : "text-navy",
+          tone === "dark" ? "text-ivory" : "text-ink",
         )}
       >
         {title}
@@ -46,7 +46,7 @@ export function SectionHeading({
           className={cn(
             "mt-4 text-lede text-pretty sm:mt-5",
             align === "center" && "mx-auto",
-            tone === "dark" ? "text-ivory/75" : "text-charcoal",
+            tone === "dark" ? "text-ivory/80" : "text-charcoal",
           )}
         >
           {lede}

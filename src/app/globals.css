@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  /* TSAR brand palette */
-  --navy: #131936;
-  --noir: #131936; /* brand dark surface = TSAR Navy */
-  --ink: #1a1817; /* charcoal — deepest neutral */
-  --charcoal: #6b5a47; /* soft brown — body / muted text */
-  --gold: #b8925b;
-  --gold-deep: #9a7849;
-  --champagne: #e6d5b8;
-  --sand: #efe7da;
-  --ivory: #f7f3ec;
+  /* Darbaar website v3 palette */
+  --darbaar: #8f1425;
+  --darbaar-deep: #5e0a16;
+  --navy: #8f1425; /* primary brand surface (maps existing bg-navy) */
+  --noir: #8f1425;
+  --ink: #16090c; /* headlines / primary text */
+  --charcoal: #6a5c5e; /* ash — body / muted text */
+  --gold: #8f1425; /* accent = Darbaar red */
+  --gold-deep: #5e0a16;
+  --champagne: #f0e8e9;
+  --sand: #f7f3f3; /* paper-2 */
+  --ivory: #ffffff; /* paper */
   --white: #ffffff;
-  --border: #ddd2c3;
+  --border: #e5ddde;
   --error: #a34a3a;
   --success: #6f8c5d;
   --saffron-whisper: #c97b4a;
@@ -38,11 +40,11 @@
   --duration-base: 300ms;
   --duration-slow: 600ms;
   --duration-ambient: 8s;
-  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-luxury: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: ease-out;
 
-  --shadow-hover: 0 12px 32px rgba(19, 25, 54, 0.08);
-  --shadow-button: 0 12px 28px rgba(19, 25, 54, 0.22);
+  --shadow-hover: 0 12px 32px rgba(22, 9, 12, 0.08);
+  --shadow-button: 0 12px 28px rgba(143, 20, 37, 0.22);
   --border-hairline: 1px solid var(--border);
   --border-gold: 1px solid var(--gold);
 
@@ -54,7 +56,7 @@
   --safe-right: env(safe-area-inset-right, 0px);
 
   --background: var(--ivory);
-  --foreground: var(--charcoal);
+  --foreground: var(--ink);
 }
 
 @media (min-width: 768px) {
@@ -64,6 +66,8 @@
 }
 
 @theme inline {
+  --color-darbaar: var(--darbaar);
+  --color-darbaar-deep: var(--darbaar-deep);
   --color-navy: var(--navy);
   --color-noir: var(--noir);
   --color-ink: var(--ink);
@@ -121,14 +125,21 @@ body {
   min-width: 320px;
   overflow-x: clip;
   background: var(--ivory);
-  color: var(--charcoal);
+  color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-left: var(--safe-left);
   padding-right: var(--safe-right);
   /* Room for sticky mobile CTA when active */
   padding-bottom: var(--sticky-cta-h);
+}
+
+.font-serif,
+.font-serif * {
+  font-variation-settings: "SOFT" 22, "WONK" 1;
 }
 
 body.has-sticky-cta {
@@ -158,13 +169,13 @@ textarea {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--gold) 35%, transparent);
-  color: var(--navy);
+  background: color-mix(in srgb, var(--darbaar) 28%, transparent);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
+  outline: 2px solid var(--darbaar);
+  outline-offset: 3px;
 }
 
 .skip-link {
@@ -172,9 +183,9 @@ textarea {
   left: 16px;
   top: -100px;
   z-index: 100;
-  background: var(--gold);
-  color: var(--navy);
-  padding: 12px 16px;
+  background: var(--ivory);
+  color: var(--darbaar);
+  padding: 12px 18px;
   font-size: 14px;
   font-weight: 600;
   min-height: 48px;
@@ -234,21 +245,25 @@ textarea {
 
 /* Fluid type helpers */
 .text-display {
-  font-size: clamp(2.125rem, 1.45rem + 3.4vw, 4.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.625rem, 1.6rem + 4.8vw, 5.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 30, "WONK" 1;
 }
 
 .text-section {
-  font-size: clamp(1.8rem, 1.4rem + 1.9vw, 3rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: clamp(2rem, 1.5rem + 2.4vw, 3.375rem);
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 22, "WONK" 1;
 }
 
 .text-lede {
-  font-size: clamp(1rem, 0.96rem + 0.28vw, 1.125rem);
-  line-height: 1.72;
-  max-width: 38rem;
+  font-size: clamp(1rem, 0.95rem + 0.35vw, 1.1875rem);
+  line-height: 1.58;
+  max-width: 46ch;
 }
 
 .text-body {
@@ -407,6 +422,12 @@ textarea {
   transition: opacity var(--duration-base) var(--ease-out);
 }
 
+.btn-on-navy.btn-luxury-primary {
+  background-color: var(--ivory);
+  color: var(--darbaar);
+  border-color: var(--ivory);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .btn-luxury:hover {
     transform: translateY(-2px);
@@ -417,27 +438,31 @@ textarea {
   }
 
   .btn-luxury-primary:hover {
-    background-color: var(--navy);
-    color: var(--ivory);
-    box-shadow: var(--shadow-button);
+    background-color: transparent;
+    color: var(--darbaar);
+    border-color: var(--darbaar);
+    box-shadow: none;
   }
 
   .btn-on-navy.btn-luxury-primary:hover {
-    background-color: var(--champagne);
-    color: var(--navy);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+    background-color: transparent;
+    color: var(--ivory);
+    border-color: var(--ivory);
+    box-shadow: none;
   }
 
   .btn-luxury-secondary:hover {
-    background-color: color-mix(in srgb, var(--ivory) 12%, transparent);
-    border-color: var(--champagne);
-    box-shadow: 0 10px 28px rgba(19, 25, 54, 0.18);
+    background-color: var(--ivory);
+    color: var(--darbaar);
+    border-color: var(--ivory);
+    box-shadow: none;
   }
 
   .btn-luxury-ghost:hover {
-    background-color: color-mix(in srgb, var(--navy) 6%, transparent);
-    border-color: var(--champagne);
-    box-shadow: 0 10px 28px rgba(19, 25, 54, 0.1);
+    background-color: var(--darbaar);
+    color: var(--ivory);
+    border-color: var(--darbaar);
+    box-shadow: none;
   }
 }
 
@@ -456,7 +481,7 @@ textarea {
   -webkit-appearance: none;
   padding-right: 2.75rem;
   background-color: color-mix(in srgb, var(--ivory) 88%, var(--champagne));
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath stroke='%236B5A47' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath stroke='%236A5C5E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 12px 8px;

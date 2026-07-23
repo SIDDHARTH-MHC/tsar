@@ -49,7 +49,7 @@ function LinkedInIcon({ className }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="film-grain bg-navy text-ivory">
+    <footer className="film-grain bg-darbaar-deep text-ivory">
       <div className="container-site section-pad !pb-10 !pt-16 md:!pt-20">
         <div className="grid gap-12 md:grid-cols-3">
           <div>

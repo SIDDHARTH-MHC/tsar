@@ -39,8 +39,8 @@ export function Accordion({
             className={cn(
               "rounded-[var(--radius-sm)] border border-transparent px-3 transition-[background-color,border-color,box-shadow] duration-[var(--duration-base)] ease-[var(--ease-luxury)] sm:px-4",
               isOpen
-                ? "border-gold/30 bg-champagne/35 shadow-[inset_0_0_0_1px_rgba(184,146,91,0.12)]"
-                : "hover:bg-champagne/20",
+                ? "border-darbaar/30 bg-sand shadow-[inset_0_0_0_1px_rgba(143,20,37,0.08)]"
+                : "hover:bg-sand/60",
             )}
           >
             <h3>
@@ -59,14 +59,14 @@ export function Accordion({
                 <span
                   className={cn(
                     "font-sans text-base font-semibold leading-snug transition-colors duration-[var(--duration-base)] md:text-lg",
-                    isOpen ? "text-navy" : "text-navy/85",
+                    isOpen ? "text-ink" : "text-ink/85",
                   )}
                 >
                   {item.question}
                 </span>
                 <Plus
                   className={cn(
-                    "size-5 shrink-0 text-gold transition-transform duration-[var(--duration-base)] ease-[var(--ease-luxury)]",
+                    "size-5 shrink-0 text-darbaar transition-transform duration-[var(--duration-base)] ease-[var(--ease-luxury)]",
                     isOpen && "rotate-45",
                   )}
                   strokeWidth={1.5}

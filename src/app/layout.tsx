@@ -1,52 +1,51 @@
-import { Cormorant_Garamond, Figtree } from "next/font/google";
+import { Fraunces, Archivo } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@/components/analytics/Analytics";
 import { allJsonLd } from "@/lib/seo";
 import "./globals.css";
 
-const serif = Cormorant_Garamond({
+const serif = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
   variable: "--font-serif",
   display: "swap",
   preload: true,
 });
 
-const sans = Figtree({
+const sans = Archivo({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "TSAR Darbaar | Scent Branding & Commercial Fragrance Solutions India",
+  title: "Darbaar by tsar | Scent Branding & Commercial Fragrance Solutions India",
   description:
-    "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service - across India. Request a consultation.",
+    "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service across India.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://darbaar.tsarperfumes.com",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://darbaarbytsar.com",
   ),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "TSAR Darbaar | Scent Branding & Commercial Fragrance Solutions India",
+    title: "Darbaar by tsar | Scent Branding & Commercial Fragrance Solutions India",
     description:
-      "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service - across India.",
+      "Signature scent identities for hotels, offices, retail and wellness spaces. In-house perfumery, professional installation, 24-hour service across India.",
     type: "website",
     locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
-    title: "TSAR Darbaar | Scent Branding India",
+    title: "Darbaar by tsar | Scent Branding India",
     description:
       "Signature scent identities for hotels, offices, retail and wellness spaces across India.",
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "TSAR Darbaar",
+    title: "Darbaar by tsar",
   },
   formatDetection: {
     telephone: true,
@@ -60,8 +59,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F7F3EC" },
-    { media: "(prefers-color-scheme: dark)", color: "#131936" },
+    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
+    { media: "(prefers-color-scheme: dark)", color: "#8F1425" },
   ],
   colorScheme: "light",
 };

@@ -45,21 +45,21 @@ export function Hero() {
         className="film-grain relative flex min-h-[100svh] items-end overflow-hidden bg-navy"
       >
         <m.div
-          className="absolute inset-0 origin-center bg-[radial-gradient(ellipse_at_35%_30%,#2a3558_0%,transparent_52%),linear-gradient(165deg,#131936_0%,#1a2344_42%,#0e1224_100%)]"
+          className="absolute inset-0 origin-center bg-[radial-gradient(ellipse_at_70%_20%,rgba(255,255,255,0.1)_0%,transparent_45%),linear-gradient(165deg,#8F1425_0%,#7A1020_42%,#5E0A16_100%)]"
           aria-hidden
           initial={reduce ? false : { scale: 1.06 }}
           animate={reduce ? undefined : { scale: 1 }}
           transition={{ duration: 8, ease: [0.22, 1, 0.36, 1] }}
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-navy via-navy/55 to-navy/10"
+          className="absolute inset-0 bg-gradient-to-t from-darbaar-deep/80 via-darbaar/40 to-transparent"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 opacity-45 md:opacity-50"
+          className="pointer-events-none absolute inset-0 opacity-50"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 72% 28%, rgba(184,146,91,0.22), transparent 42%)",
+              "radial-gradient(circle at 75% 15%, rgba(255,255,255,0.12), transparent 40%), radial-gradient(circle at 15% 85%, rgba(94,10,22,0.65), transparent 45%)",
           }}
           aria-hidden
         />
@@ -67,7 +67,7 @@ export function Hero() {
         <div className="container-site relative z-10 w-full pb-14 pt-[calc(5.25rem+var(--safe-top))] sm:pb-20 md:pb-28 md:pt-40">
           <div className="max-w-3xl lg:max-w-4xl">
             <m.p
-              className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-gold sm:mb-5 sm:text-[13px]"
+              className="mb-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-ivory/70 sm:mb-5"
               {...line(0.1)}
             >
               {HERO.eyebrow}
@@ -79,7 +79,7 @@ export function Hero() {
               {HERO.headline}
             </m.h1>
             <m.p
-              className="mt-5 max-w-2xl text-lede text-pretty text-ivory/78 sm:mt-6"
+              className="mt-5 max-w-2xl text-lede text-pretty text-ivory/85 sm:mt-6"
               {...line(0.3)}
             >
               {HERO.subheadline}
@@ -88,7 +88,7 @@ export function Hero() {
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
                 <Button
                   href={HERO.primaryCta.href}
-                  className="w-full sm:w-auto"
+                  className="btn-on-navy w-full sm:w-auto"
                   showArrow
                   onClick={() =>
                     track("hero_cta_click", { cta_label: HERO.primaryCta.label })
@@ -141,7 +141,7 @@ export function Hero() {
                     aria-hidden
                   />
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-navy">{item.title}</p>
+                    <p className="text-sm font-semibold text-ink">{item.title}</p>
                     <p className="mt-1 text-sm leading-[1.7] text-charcoal">
                       {item.copy}
                     </p>

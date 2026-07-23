@@ -94,7 +94,10 @@ export function Header() {
               <Button
                 href="#enquiry"
                 variant="primary"
-                className="!px-6 !py-3 text-[12px]"
+                className={cn(
+                  "!px-5 !py-2.5 text-[11.5px]",
+                  onDark && "btn-on-navy",
+                )}
                 onClick={() => track("nav_cta_click", { device: "desktop" })}
               >
                 Request a Consultation
@@ -105,7 +108,7 @@ export function Header() {
               type="button"
               className={cn(
                 "tap-target relative flex size-12 items-center justify-center rounded-[var(--radius-xs)] lg:hidden",
-                onDark ? "text-ivory" : "text-navy",
+                onDark ? "text-ivory" : "text-ink",
               )}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
@@ -164,7 +167,7 @@ export function Header() {
                   <li key={link.href}>
                     <m.a
                       href={link.href}
-                      className="flex min-h-14 items-center border-b border-border font-serif text-3xl text-navy"
+                      className="flex min-h-14 items-center border-b border-border font-serif text-3xl text-ink"
                       onClick={() => {
                         closeMenu();
                       }}
