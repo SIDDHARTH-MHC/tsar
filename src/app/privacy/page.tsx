@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -12,13 +13,16 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-[100svh] bg-ivory text-charcoal">
       <div className="container-site section-pad max-w-3xl">
+        <Link href="/" className="inline-flex min-h-12 items-center" aria-label="Home">
+          <BrandLogo variant="navy" className="h-8 sm:h-9" />
+        </Link>
         <Link
           href="/"
-          className="text-xs font-semibold uppercase tracking-[0.14em] text-gold"
+          className="mt-6 inline-flex text-xs font-semibold uppercase tracking-[0.14em] text-gold"
         >
-          ← TSAR Darbaar
+          ← Back to home
         </Link>
-        <h1 className="mt-8 font-serif text-[36px] leading-[1.1] text-noir md:text-[48px]">
+        <h1 className="mt-8 font-serif text-[36px] leading-[1.1] text-navy md:text-[48px]">
           Privacy Policy
         </h1>
         <p className="mt-4 text-sm text-charcoal/60">Last updated: July 2026</p>

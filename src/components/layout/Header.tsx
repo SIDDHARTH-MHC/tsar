@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LazyMotion, domAnimation, m, AnimatePresence, useReducedMotion } from "framer-motion";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { Button } from "@/components/ui/Button";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { track } from "@/lib/analytics";
@@ -44,24 +45,27 @@ export function Header() {
         <div className="container-site flex h-16 items-center justify-between gap-4 md:h-20">
           <Link
             href="/"
-            className="group flex min-w-0 flex-col py-1"
+            className="group relative flex min-h-12 min-w-0 items-center py-1"
             onClick={closeMenu}
+            aria-label={`${SITE.name} home`}
           >
-            <span
-              className={cn(
-                "font-serif text-[24px] lowercase leading-none tracking-tight transition-colors sm:text-[26px] md:text-[28px]",
-                onDark ? "text-ivory" : "text-navy",
-              )}
-            >
-              tsar <span className="text-gold">darbaar</span>
-            </span>
-            <span
-              className={cn(
-                "mt-1 truncate text-[9px] font-semibold uppercase tracking-[0.14em] transition-colors sm:text-[10px] sm:tracking-[0.16em]",
-                onDark ? "text-ivory/60" : "text-charcoal/70",
-              )}
-            >
-              by {SITE.parent}
+            <span className="relative inline-block">
+              <BrandLogo
+                variant="navy"
+                priority
+                className={cn(
+                  "transition-opacity duration-[var(--duration-base)]",
+                  onDark ? "opacity-0" : "opacity-100",
+                )}
+              />
+              <BrandLogo
+                variant="white"
+                priority
+                className={cn(
+                  "absolute left-0 top-0 transition-opacity duration-[var(--duration-base)]",
+                  onDark ? "opacity-100" : "opacity-0",
+                )}
+              />
             </span>
           </Link>
 

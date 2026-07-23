@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 import { Button } from "@/components/ui/Button";
 import { ENQUIRY, FOOTER, NAV_LINKS, SITE } from "@/lib/constants";
 import { track } from "@/lib/analytics";
@@ -52,9 +53,7 @@ export function Footer() {
       <div className="container-site section-pad !pb-10 !pt-16 md:!pt-20">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <p className="font-serif text-3xl lowercase tracking-tight md:text-[2.1rem]">
-              tsar <span className="text-gold">darbaar</span>
-            </p>
+            <BrandLogo variant="white" className="h-10 sm:h-11 md:h-12 md:max-w-[300px]" />
             <p className="mt-4 max-w-xs text-sm leading-[1.7] text-ivory/70">
               {FOOTER.tagline}
             </p>
