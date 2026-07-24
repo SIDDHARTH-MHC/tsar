@@ -5,9 +5,16 @@ import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { MotionProvider } from "@/components/ui/MotionProvider";
 import { Hero } from "@/components/sections/Hero";
+import { Pillars } from "@/components/sections/Pillars";
 
 const WhyScent = dynamic(() =>
   import("@/components/sections/WhyScent").then((m) => m.WhyScent),
+);
+const Science = dynamic(() =>
+  import("@/components/sections/Science").then((m) => m.Science),
+);
+const WhyDarbaar = dynamic(() =>
+  import("@/components/sections/WhyDarbaar").then((m) => m.WhyDarbaar),
 );
 const Industries = dynamic(() =>
   import("@/components/sections/Industries").then((m) => m.Industries),
@@ -15,11 +22,11 @@ const Industries = dynamic(() =>
 const Solutions = dynamic(() =>
   import("@/components/sections/Solutions").then((m) => m.Solutions),
 );
-const WhyTsar = dynamic(() =>
-  import("@/components/sections/WhyTsar").then((m) => m.WhyTsar),
-);
 const HowItWorks = dynamic(() =>
   import("@/components/sections/HowItWorks").then((m) => m.HowItWorks),
+);
+const Clients = dynamic(() =>
+  import("@/components/sections/Clients").then((m) => m.Clients),
 );
 const Faqs = dynamic(() =>
   import("@/components/sections/Faqs").then((m) => m.Faqs),
@@ -31,10 +38,10 @@ const EnquirySection = dynamic(
     loading: () => (
       <section
         id="enquiry"
-        className="scroll-mt-20 bg-ivory py-16 sm:py-24"
+        className="scroll-mt-20 bg-darbaar py-16 sm:py-24"
         aria-busy="true"
       >
-        <div className="container-site text-center text-sm text-charcoal/50">
+        <div className="container-site text-center text-sm text-ivory/50">
           Loading consultation form…
         </div>
       </section>
@@ -48,11 +55,14 @@ export default function HomePage() {
       <Header />
       <main id="main">
         <Hero />
+        <Pillars />
         <WhyScent />
+        <Science />
+        <WhyDarbaar />
         <Industries />
         <Solutions />
-        <WhyTsar />
         <HowItWorks />
+        <Clients />
         <Faqs />
         <EnquirySection />
       </main>

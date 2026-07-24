@@ -1,114 +1,105 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ENQUIRY, HOW_IT_WORKS } from "@/lib/constants";
+import { HOW_IT_WORKS } from "@/lib/constants";
 import { cn } from "@/lib/cn";
 
 export function HowItWorks() {
-  const ref = useRef<HTMLOListElement>(null);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const onScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const view = window.innerHeight * 0.7;
-      const raw = (view - rect.top) / Math.max(rect.height, 1);
-      setProgress(Math.min(1, Math.max(0, raw)));
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [active, setActive] = useState(0);
+  const step = HOW_IT_WORKS.steps[active];
+  const fillWidth =
+    (active / Math.max(HOW_IT_WORKS.steps.length - 1, 1)) * 88;
 
   return (
     <section
       id={HOW_IT_WORKS.id}
-      aria-labelledby="how-it-works-heading"
+      aria-labelledby="process-heading"
       className="section-pad bg-ivory"
     >
       <div className="container-site">
         <FadeIn>
-          <SectionHeading
-            id="how-it-works-heading"
-            title={HOW_IT_WORKS.headline}
-            align="center"
-            className="mb-10 sm:mb-14"
-          />
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-darbaar">
+            {HOW_IT_WORKS.eyebrow}
+          </p>
+          <h2
+            id="process-heading"
+            className="font-serif text-section text-balance text-ink"
+          >
+            {HOW_IT_WORKS.headline}
+          </h2>
         </FadeIn>
 
-        <ol
-          ref={ref}
-          className="relative grid gap-9 sm:gap-10 lg:grid-cols-5 lg:gap-5"
-        >
+        <FadeIn className="relative mt-10">
           <div
-            className="pointer-events-none absolute left-6 top-6 bottom-6 w-px bg-gold/20 lg:hidden"
+            className="pointer-events-none absolute left-[6%] right-[6%] top-[27px] hidden h-px bg-border lg:block"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute left-6 top-6 bottom-6 w-px origin-top bg-gold transition-transform duration-300 ease-out lg:hidden"
-            style={{ transform: `scaleY(${progress})` }}
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute left-0 right-0 top-[26px] hidden h-px bg-gold/20 lg:block"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute left-0 top-[26px] hidden h-px w-full origin-left bg-gold transition-transform duration-300 ease-out lg:block"
-            style={{ transform: `scaleX(${progress})` }}
+            className="pointer-events-none absolute left-[6%] top-[27px] hidden h-0.5 bg-darbaar transition-[width] duration-[450ms] ease-out lg:block"
+            style={{ width: `${fillWidth}%` }}
             aria-hidden
           />
 
-          {HOW_IT_WORKS.steps.map((step, i) => {
-            const threshold =
-              i / Math.max(HOW_IT_WORKS.steps.length - 1, 1) - 0.05;
-            const active = progress >= threshold;
-            return (
-              <FadeIn key={step.number} delay={i * 0.07} as="li">
-                <div
-                  className={cn(
-                    "relative pl-16 transition-[opacity,transform] duration-500 lg:pl-0 lg:pt-16",
-                    active ? "opacity-100" : "opacity-40",
-                  )}
+          <div
+            className="relative z-[2] flex overflow-x-auto scrollbar-none"
+            role="tablist"
+            aria-label="Process steps"
+          >
+            {HOW_IT_WORKS.steps.map((s, i) => {
+              const on = i <= active;
+              return (
+                <button
+                  key={s.number}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === active}
+                  className="min-w-[96px] flex-1 cursor-pointer bg-transparent text-center"
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
                 >
                   <span
                     className={cn(
-                      "absolute left-0 top-0 flex size-12 items-center justify-center rounded-full border bg-ivory font-serif text-base text-ink transition-all duration-[var(--duration-base)] lg:left-1/2 lg:top-0 lg:-translate-x-1/2",
-                      active
-                        ? "border-darbaar scale-105 shadow-[0_0_0_4px_rgba(143,20,37,0.16)]"
-                        : "border-darbaar/40",
+                      "mx-auto flex size-[54px] items-center justify-center rounded-full border-[1.5px] bg-ivory font-sans text-[15px] font-bold tabular-nums transition-[background-color,color,border-color,transform] duration-300",
+                      on
+                        ? "scale-[1.09] border-darbaar bg-darbaar text-ivory"
+                        : "border-border text-charcoal",
                     )}
                   >
-                    {step.number}
+                    {s.number}
                   </span>
-                  <h3 className="font-serif text-xl text-ink sm:text-2xl">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-[1.7] text-pretty text-charcoal sm:mt-3">
-                    {step.copy}
-                  </p>
-                </div>
-              </FadeIn>
-            );
-          })}
-        </ol>
+                  <span
+                    className={cn(
+                      "mt-3.5 block font-serif text-[17px] font-semibold transition-colors duration-300",
+                      on ? "text-ink" : "text-charcoal",
+                    )}
+                  >
+                    {s.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-        <FadeIn className="mt-10 flex flex-col items-center sm:mt-12">
-          <Button
-            href={HOW_IT_WORKS.cta.href}
-            showArrow
-            className="w-full max-w-sm sm:w-auto"
-          >
+          <div className="mt-[34px] grid grid-cols-1 items-start gap-3 border-t border-border pt-[26px] sm:grid-cols-[auto_1fr] sm:gap-[26px]">
+            <p
+              className="font-sans text-[44px] font-bold leading-[0.9] tracking-[-0.035em] text-darbaar/20 tabular-nums"
+              aria-hidden
+            >
+              {step.number}
+            </p>
+            <p className="max-w-[70ch] text-[17.5px] leading-[1.6] text-charcoal">
+              <b className="font-semibold text-ink">{step.title}.</b> {step.copy}
+            </p>
+          </div>
+        </FadeIn>
+
+        <FadeIn className="mt-8">
+          <Button href={HOW_IT_WORKS.cta.href}>
             {HOW_IT_WORKS.cta.label}
           </Button>
-          <p className="cta-note text-center">{ENQUIRY.ctaNote}</p>
         </FadeIn>
       </div>
     </section>

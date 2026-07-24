@@ -480,8 +480,8 @@ textarea {
   appearance: none;
   -webkit-appearance: none;
   padding-right: 2.75rem;
-  background-color: color-mix(in srgb, var(--ivory) 88%, var(--champagne));
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath stroke='%236A5C5E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' viewBox='0 0 12 8'%3E%3Cpath stroke='%23FFFFFF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 12px 8px;
@@ -489,8 +489,95 @@ textarea {
 
 /* Landscape phones: keep hero usable */
 @media (max-height: 500px) and (orientation: landscape) {
-  #hero {
+  #top {
     min-height: auto;
     padding-block: 5rem 3rem;
   }
+}
+
+/* Hero plumes */
+@keyframes plume-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(38px, -32px, 0) scale(1.12);
+  }
+}
+
+.plume-a {
+  animation: plume-drift 24s ease-in-out infinite alternate;
+}
+
+.plume-b {
+  animation: plume-drift 30s ease-in-out infinite alternate-reverse;
+}
+
+/* Clients marquee */
+.clients-marquee::before,
+.clients-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.clients-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--darbaar), rgba(143, 20, 37, 0));
+}
+
+.clients-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--darbaar), rgba(143, 20, 37, 0));
+}
+
+.clients-marquee-track {
+  animation: clients-marquee 52s linear infinite;
+}
+
+.clients-marquee:hover .clients-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes clients-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 720px) {
+  .clients-marquee::before,
+  .clients-marquee::after {
+    width: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plume-a,
+  .plume-b {
+    animation: none;
+  }
+
+  .clients-marquee {
+    overflow-x: auto;
+  }
+
+  .clients-marquee-track {
+    animation: none;
+  }
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

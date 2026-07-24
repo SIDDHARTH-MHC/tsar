@@ -10,69 +10,67 @@ export function EnquirySection() {
     <section
       id={ENQUIRY.id}
       aria-labelledby="enquiry-heading"
-      className="scroll-mt-[calc(var(--header-h)+var(--safe-top)+12px)] bg-ivory"
+      className="scroll-mt-[calc(var(--header-h)+var(--safe-top)+12px)] section-pad bg-darbaar text-ivory"
     >
-      <div className="grid lg:grid-cols-5">
-        <div className="film-grain bg-navy px-5 py-12 text-ivory sm:px-8 sm:py-14 md:px-12 lg:col-span-2 lg:px-14 lg:py-20">
-          <FadeIn>
-            <h2
-              id="enquiry-heading"
-              className="font-serif text-section text-balance tracking-[-0.01em]"
-            >
-              {ENQUIRY.headline}
-            </h2>
-            <p className="mt-4 max-w-md text-lede text-pretty text-ivory/75 sm:mt-5">
-              {ENQUIRY.reassurance}
-            </p>
-            <p className="mt-5 border-l border-gold/50 pl-4 text-sm font-medium tracking-[0.02em] text-gold">
-              {ENQUIRY.responsePromise}
-            </p>
-            <div className="mt-8 space-y-3 text-sm sm:mt-10">
-              <p className="text-ivory/55">{ENQUIRY.preferTalk}</p>
-              <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
-                <a
-                  href={SITE.phoneHref}
-                  className="inline-flex min-h-12 items-center gold-underline text-ivory"
-                  onClick={() =>
-                    track("phone_click", { placement: "enquiry_panel" })
-                  }
-                >
-                  {SITE.phone}
-                </a>
-                <span className="hidden text-ivory/40 sm:inline">·</span>
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="inline-flex min-h-12 items-center break-all gold-underline text-ivory"
-                  onClick={() =>
-                    track("email_click", { placement: "enquiry_panel" })
-                  }
-                >
-                  {SITE.email}
-                </a>
-              </div>
-              <p className="pt-2">
-                <a
-                  href={whatsappHref()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-12 items-center font-semibold text-gold gold-underline"
-                  onClick={() =>
-                    track("whatsapp_click", { placement: "enquiry_panel" })
-                  }
-                >
-                  {ENQUIRY.whatsappLabel}
-                </a>
-              </p>
-            </div>
-          </FadeIn>
-        </div>
+      <div className="container-site">
+        <FadeIn>
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-ivory/70">
+            {ENQUIRY.eyebrow}
+          </p>
+          <h2
+            id="enquiry-heading"
+            className="font-serif text-section text-balance tracking-[-0.018em]"
+          >
+            {ENQUIRY.headline}
+          </h2>
+        </FadeIn>
 
-        <div className="bg-ivory px-5 py-12 sm:px-8 sm:py-14 md:px-12 lg:col-span-3 lg:px-16 lg:py-20">
+        <div className="mt-10 grid gap-12 lg:mt-12 lg:grid-cols-[1.5fr_0.8fr] lg:gap-14">
           <FadeIn>
-            <p className="mb-6 text-sm font-medium text-charcoal/70 lg:hidden">
+            <EnquiryForm />
+          </FadeIn>
+
+          <FadeIn
+            delay={0.08}
+            className="border-t border-ivory/20 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0"
+          >
+            <h3 className="font-serif text-[21px] font-semibold text-ivory">
+              {ENQUIRY.sideTitle}
+            </h3>
+            <div className="mt-3">
+              <a
+                href={`mailto:${SITE.email}`}
+                className="block border-b border-ivory/15 py-2.5 text-[15.5px] text-ivory/85 transition-colors hover:text-ivory"
+                onClick={() =>
+                  track("email_click", { placement: "enquiry_panel" })
+                }
+              >
+                {SITE.email}
+              </a>
+              <a
+                href={SITE.phoneHref}
+                className="block border-b border-ivory/15 py-2.5 text-[15.5px] text-ivory/85 transition-colors hover:text-ivory"
+                onClick={() =>
+                  track("phone_click", { placement: "enquiry_panel" })
+                }
+              >
+                {SITE.phone}
+              </a>
+              <a
+                href={whatsappHref()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block border-b border-ivory/15 py-2.5 text-[15.5px] text-ivory/85 transition-colors hover:text-ivory"
+                onClick={() =>
+                  track("whatsapp_click", { placement: "enquiry_panel" })
+                }
+              >
+                {ENQUIRY.whatsappLabel}
+              </a>
+            </div>
+            <p className="mt-6 text-[14.5px] leading-[1.6] text-ivory/70">
               {ENQUIRY.responsePromise}
             </p>
-            <EnquiryForm />
           </FadeIn>
         </div>
       </div>

@@ -1,59 +1,62 @@
 "use client";
 
 import { FadeIn } from "@/components/ui/FadeIn";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { INDUSTRIES } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 
 export function Industries() {
+  const row1 = INDUSTRIES.cards.slice(0, 4);
+  const row2 = INDUSTRIES.cards.slice(4);
+
   return (
     <section
       id={INDUSTRIES.id}
       aria-labelledby="industries-heading"
-      className="section-pad bg-sand"
+      className="section-pad bg-ivory"
     >
       <div className="container-site">
         <FadeIn>
-          <SectionHeading
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-darbaar">
+            {INDUSTRIES.eyebrow}
+          </p>
+          <h2
             id="industries-heading"
-            title={INDUSTRIES.headline}
-            lede={INDUSTRIES.lede}
-          />
+            className="font-serif text-section text-balance text-ink"
+          >
+            {INDUSTRIES.headline}
+          </h2>
+          <p className="mt-4 text-lede text-pretty text-charcoal">
+            {INDUSTRIES.lede}
+          </p>
         </FadeIn>
 
-        <ul className="mt-8 hidden gap-4 md:mt-10 md:grid md:grid-cols-2 lg:grid-cols-4">
-          {INDUSTRIES.cards.map((card, i) => (
-            <FadeIn key={card.industry} delay={i * 0.06} as="li">
-              <IndustryCard {...card} revealAlways={false} />
-            </FadeIn>
+        <div className="mt-9 hidden flex-col gap-3.5 md:flex">
+          {[row1, row2].map((row, rowIndex) => (
+            <div key={rowIndex} className="flex h-[260px] gap-3.5">
+              {row.map((card) => (
+                <IndustryPanel key={card.industry} {...card} />
+              ))}
+            </div>
           ))}
-        </ul>
+        </div>
 
         <div className="relative mt-7 md:hidden">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-charcoal/45">
-            Swipe to explore
-          </p>
-          <div className="snap-carousel -mx-4 px-4 sm:-mx-5 sm:px-5">
+          <div className="flex flex-col gap-3.5">
             {INDUSTRIES.cards.map((card) => (
-              <div
-                key={card.industry}
-                className="w-[min(82vw,320px)] sm:w-[min(60vw,340px)]"
-              >
-                <IndustryCard {...card} revealAlways />
-              </div>
+              <IndustryPanel key={card.industry} {...card} mobile />
             ))}
           </div>
         </div>
 
-        <FadeIn className="mt-8 max-w-2xl sm:mt-10">
-          <p className="text-sm leading-[1.7] text-pretty text-charcoal/75">
+        <FadeIn className="mt-9 border-t border-border pt-[22px]">
+          <p className="text-[15.5px] leading-[1.7] text-pretty text-charcoal">
             {INDUSTRIES.specifierLine}{" "}
             <a
               href={INDUSTRIES.specifierCta.href}
-              className="inline-flex min-h-12 items-center font-semibold text-gold gold-underline"
+              className="font-semibold text-darbaar underline decoration-darbaar/35 underline-offset-2"
             >
-              {INDUSTRIES.specifierCta.label} →
+              {INDUSTRIES.specifierCta.label}
             </a>
           </p>
         </FadeIn>
@@ -62,22 +65,25 @@ export function Industries() {
   );
 }
 
-function IndustryCard({
+function IndustryPanel({
   industry,
   outcome,
   line,
   tone,
-  revealAlways,
+  mobile = false,
 }: {
   industry: string;
   outcome: string;
   line: string;
   tone: string;
-  revealAlways: boolean;
+  mobile?: boolean;
 }) {
   return (
     <article
-      className="group relative aspect-[3/4] overflow-hidden bg-navy transition-transform duration-[var(--duration-base)] ease-[var(--ease-luxury)] md:hover:-translate-y-1"
+      className={cn(
+        "group relative min-w-0 cursor-pointer overflow-hidden bg-darbaar transition-[flex] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]",
+        mobile ? "h-[190px] flex-none" : "flex-1 hover:flex-[2.1] focus-within:flex-[2.1]",
+      )}
       tabIndex={0}
       onClick={() => track("industry_card_click", { industry })}
       onKeyDown={(e) => {
@@ -88,33 +94,36 @@ function IndustryCard({
     >
       <div
         className={cn(
-          "absolute inset-0 origin-center bg-gradient-to-br will-change-transform",
+          "absolute inset-0 origin-center bg-gradient-to-br opacity-[0.42] transition-[opacity,transform] duration-500 group-hover:scale-105 group-hover:opacity-50",
           tone,
-          "md:scale-100 md:transition-transform md:duration-[var(--duration-ambient)] md:ease-out md:group-hover:scale-[1.08]",
         )}
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-navy via-navy/55 to-transparent transition-opacity duration-[var(--duration-base)] md:group-hover:opacity-95"
+        className="absolute inset-0 bg-gradient-to-b from-darbaar/45 to-darbaar-deep/[0.94]"
         aria-hidden
       />
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-transparent opacity-0 transition-opacity duration-[var(--duration-base)] md:group-hover:opacity-100"
+      <span
+        className="absolute right-5 top-5 size-6 opacity-60 transition duration-[400ms]"
         aria-hidden
-      />
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-gold transition-transform duration-[var(--duration-base)] ease-[var(--ease-luxury)] md:group-hover:translate-y-[-2px] sm:text-[11px] sm:tracking-[0.14em]">
+      >
+        <span className="absolute left-0 top-[11px] h-[1.5px] w-6 bg-ivory" />
+        <span className="absolute left-[11px] top-0 h-6 w-[1.5px] bg-ivory transition-transform duration-[400ms] group-hover:rotate-90" />
+      </span>
+      <div className="absolute inset-0 flex flex-col justify-end p-[22px] text-ivory">
+        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-ivory/70">
           {outcome}
         </p>
-        <h3 className="mt-2 font-sans text-[13px] font-semibold uppercase tracking-[0.06em] text-ivory transition-transform duration-[var(--duration-base)] ease-[var(--ease-luxury)] md:group-hover:translate-y-[-3px] sm:text-sm sm:tracking-[0.08em]">
+        <h3 className="font-serif text-xl font-semibold leading-[1.14]">
           {industry}
         </h3>
         <p
-          className={
-            revealAlways
-              ? "mt-3 text-sm leading-[1.7] text-ivory/80"
-              : "mt-3 max-h-0 overflow-hidden text-sm leading-[1.7] text-ivory/80 opacity-0 transition-all duration-[var(--duration-base)] ease-[var(--ease-luxury)] group-hover:max-h-28 group-hover:opacity-100 group-focus-within:max-h-28 group-focus-within:opacity-100"
-          }
+          className={cn(
+            "overflow-hidden text-[14.5px] leading-[1.45] text-ivory/85 transition-all duration-500",
+            mobile
+              ? "mt-2.5 max-h-20 opacity-100"
+              : "mt-0 max-h-0 opacity-0 group-hover:mt-2.5 group-hover:max-h-[90px] group-hover:opacity-100 group-focus-within:mt-2.5 group-focus-within:max-h-[90px] group-focus-within:opacity-100",
+          )}
         >
           {line}
         </p>

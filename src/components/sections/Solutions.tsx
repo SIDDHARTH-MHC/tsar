@@ -1,10 +1,7 @@
 "use client";
 
-import { Check } from "lucide-react";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ENQUIRY, SOLUTIONS } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
@@ -14,57 +11,42 @@ export function Solutions() {
     <section
       id={SOLUTIONS.id}
       aria-labelledby="solutions-heading"
-      className="section-pad bg-ivory"
+      className="section-pad bg-darbaar text-ivory"
     >
       <div className="container-site">
         <FadeIn>
-          <div className="mx-auto max-w-4xl text-center">
-            <h2
-              id="solutions-heading"
-              className="font-serif text-section text-balance text-ink"
-            >
-              {SOLUTIONS.manifesto.headline}
-            </h2>
-            {SOLUTIONS.manifesto.lines.map((line) => (
-              <p
-                key={line}
-                className="mx-auto mt-5 max-w-2xl text-base leading-[1.72] text-charcoal md:text-lg"
-              >
-                {line}
-              </p>
-            ))}
-          </div>
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-ivory/70">
+            {SOLUTIONS.eyebrow}
+          </p>
+          <h2
+            id="solutions-heading"
+            className="font-serif text-section text-balance text-ivory"
+          >
+            {SOLUTIONS.headline}
+          </h2>
+          <p className="mt-4 max-w-[46ch] text-lede text-pretty text-ivory/80">
+            {SOLUTIONS.lede}
+          </p>
         </FadeIn>
 
-        <div id="plans" className="mt-14 scroll-mt-28 sm:mt-16">
-          <FadeIn>
-            <SectionHeading
-              title={SOLUTIONS.plansHeader.headline}
-              lede={SOLUTIONS.plansHeader.lede}
-              align="center"
-              className="mb-10 sm:mb-12"
-            />
-          </FadeIn>
-
-          <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
-            {SOLUTIONS.plans.map((plan, i) => (
-              <FadeIn
-                key={plan.id}
-                delay={i * 0.08}
-                className={cn(
-                  "h-full",
-                  plan.featured && "order-first lg:order-none",
-                )}
-              >
-                <PlanCard plan={plan} />
-              </FadeIn>
-            ))}
-          </div>
-
-          <p className="mt-8 text-center text-sm text-charcoal/80">
-            {SOLUTIONS.note}
-          </p>
+        <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
+          {SOLUTIONS.plans.map((plan, i) => (
+            <FadeIn
+              key={plan.id}
+              delay={i * 0.08}
+              className={cn(
+                "h-full",
+                plan.featured && "order-first lg:order-none",
+              )}
+            >
+              <PlanCard plan={plan} />
+            </FadeIn>
+          ))}
         </div>
+
+        <p className="mt-8 max-w-[60ch] text-[15.5px] text-ivory/80">
+          {SOLUTIONS.note}
+        </p>
       </div>
     </section>
   );
@@ -80,63 +62,67 @@ function PlanCard({
   return (
     <article
       className={cn(
-        "flex h-full flex-col border p-5 transition-[transform,box-shadow] duration-[var(--duration-base)] ease-[var(--ease-luxury)] hover:-translate-y-1 hover:shadow-[var(--shadow-hover)] sm:p-7 md:p-8",
+        "relative flex h-full flex-col border-t-[3px] px-7 pb-[30px] pt-[34px]",
         featured
-          ? "border-ivory border-t-[3px] bg-darbaar-deep text-ivory lg:-my-3 lg:py-10"
-          : "border-border bg-ivory",
+          ? "border-t-ivory bg-darbaar-deep text-ivory"
+          : "border-t-darbaar bg-ivory text-ink",
       )}
     >
       {plan.badge ? (
-        <Badge
+        <span
           className={cn(
-            "mb-4 self-start",
-            featured && "border-ivory/40 bg-ivory text-darbaar-deep",
+            "absolute right-0 top-0 px-3 py-1.5 text-[9.5px] font-bold uppercase tracking-[0.18em]",
+            featured
+              ? "bg-ivory text-darbaar-deep"
+              : "bg-darbaar text-ivory",
           )}
         >
           {plan.badge}
-        </Badge>
-      ) : (
-        <div className="mb-4 h-[26px]" aria-hidden />
-      )}
-      <h3
-        className={cn(
-          "font-serif text-3xl",
-          featured ? "text-ivory" : "text-ink",
-        )}
-      >
+        </span>
+      ) : null}
+      <h3 className="font-serif text-[28px] font-semibold leading-[1.1]">
         {plan.name}
       </h3>
       <p
         className={cn(
-          "mt-2 text-sm italic leading-relaxed",
-          featured ? "text-ivory/70" : "text-charcoal",
+          "mt-2 text-[15px] leading-[1.5]",
+          featured ? "text-ivory/80" : "text-charcoal",
         )}
       >
         {plan.positioning}
       </p>
-      <ul className="mt-6 flex-1 space-y-3">
+      <ul
+        className={cn(
+          "mt-[22px] mb-[26px] flex-1 space-y-[11px] border-t pt-5",
+          featured ? "border-ivory/20" : "border-border",
+        )}
+      >
         {plan.features.map((feature) => (
           <li
-            key={feature}
+            key={feature.text}
             className={cn(
-              "flex gap-3 text-sm leading-[1.7]",
-              featured ? "text-ivory/80" : "text-charcoal",
+              "relative text-[14.5px] leading-[1.48]",
+              feature.head
+                ? cn(
+                    "pl-0 font-semibold",
+                    featured ? "text-ivory" : "text-ink",
+                  )
+                : cn(
+                    "pl-5 before:absolute before:left-0 before:top-[9px] before:h-[1.5px] before:w-[9px]",
+                    featured
+                      ? "text-ivory/85 before:bg-ivory"
+                      : "text-charcoal before:bg-darbaar",
+                  ),
             )}
           >
-            <Check
-              className="mt-0.5 size-[18px] shrink-0 text-gold"
-              strokeWidth={1.5}
-              aria-hidden
-            />
-            <span>{feature}</span>
+            {feature.text}
           </li>
         ))}
       </ul>
-      <div className="mt-8">
+      <div className="mt-auto">
         <Button
           href={`/?plan=${encodeURIComponent(plan.cta.planValue)}#enquiry`}
           className={cn("w-full", featured && "btn-on-navy")}
-          showArrow
           onClick={() => track("plan_cta_click", { plan: plan.cta.planValue })}
         >
           {plan.cta.label}

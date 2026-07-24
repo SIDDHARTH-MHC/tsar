@@ -1,26 +1,9 @@
 "use client";
 
 import { useReducedMotion, LazyMotion, domAnimation, m } from "framer-motion";
-import {
-  FlaskConical,
-  Library,
-  MapPinned,
-  Handshake,
-  ScrollText,
-  Landmark,
-} from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { ENQUIRY, HERO, LEGACY } from "@/lib/constants";
+import { HERO } from "@/lib/constants";
 import { track } from "@/lib/analytics";
-
-const icons = [
-  FlaskConical,
-  Landmark,
-  Library,
-  MapPinned,
-  Handshake,
-  ScrollText,
-];
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -41,57 +24,50 @@ export function Hero() {
   return (
     <LazyMotion features={domAnimation} strict>
       <section
-        id="hero"
-        className="film-grain relative flex min-h-[100svh] items-end overflow-hidden bg-navy"
+        id="top"
+        className="film-grain relative overflow-hidden bg-darbaar pb-14 pt-[calc(5.25rem+var(--safe-top))] text-ivory sm:pb-20 md:pb-24 md:pt-36"
       >
-        <m.div
-          className="absolute inset-0 origin-center bg-[radial-gradient(ellipse_at_70%_20%,rgba(255,255,255,0.1)_0%,transparent_45%),linear-gradient(165deg,#8F1425_0%,#7A1020_42%,#5E0A16_100%)]"
-          aria-hidden
-          initial={reduce ? false : { scale: 1.06 }}
-          animate={reduce ? undefined : { scale: 1 }}
-          transition={{ duration: 8, ease: [0.22, 1, 0.36, 1] }}
-        />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-darbaar-deep/80 via-darbaar/40 to-transparent"
+          className="plume plume-a pointer-events-none absolute -right-[150px] -top-[220px] size-[620px] rounded-full bg-ivory/[0.085] blur-[70px]"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute inset-0 opacity-50"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 75% 15%, rgba(255,255,255,0.12), transparent 40%), radial-gradient(circle at 15% 85%, rgba(94,10,22,0.65), transparent 45%)",
-          }}
+          className="plume plume-b pointer-events-none absolute -bottom-[250px] -left-[130px] size-[500px] rounded-full bg-darbaar-deep/70 blur-[70px]"
           aria-hidden
         />
 
-        <div className="container-site relative z-10 w-full pb-14 pt-[calc(5.25rem+var(--safe-top))] sm:pb-20 md:pb-28 md:pt-40">
+        <div className="container-site relative z-10">
           <div className="max-w-3xl lg:max-w-4xl">
             <m.p
-              className="mb-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-ivory/70 sm:mb-5"
+              className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-ivory/70"
               {...line(0.1)}
             >
               {HERO.eyebrow}
             </m.p>
             <m.h1
-              className="font-serif text-display text-balance text-ivory"
+              className="max-w-[15ch] font-serif text-display text-balance text-ivory"
               {...line(0.2)}
             >
               {HERO.headline}
+              <em className="mt-1 block font-normal italic opacity-90">
+                {HERO.headlineItalic}
+              </em>
             </m.h1>
             <m.p
-              className="mt-5 max-w-2xl text-lede text-pretty text-ivory/85 sm:mt-6"
+              className="mt-6 max-w-2xl text-[clamp(17px,1.6vw,21px)] leading-[1.58] text-pretty text-ivory/85"
               {...line(0.3)}
             >
               {HERO.subheadline}
             </m.p>
             <m.div className="mt-8 sm:mt-10" {...line(0.4)}>
-              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-[13px]">
                 <Button
                   href={HERO.primaryCta.href}
                   className="btn-on-navy w-full sm:w-auto"
-                  showArrow
                   onClick={() =>
-                    track("hero_cta_click", { cta_label: HERO.primaryCta.label })
+                    track("hero_cta_click", {
+                      cta_label: HERO.primaryCta.label,
+                    })
                   }
                 >
                   {HERO.primaryCta.label}
@@ -110,48 +86,12 @@ export function Hero() {
                 </Button>
               </div>
               <p className="cta-note cta-note-on-dark text-center sm:text-left">
-                {ENQUIRY.ctaNote}
+                {HERO.micro}
               </p>
             </m.div>
           </div>
         </div>
-
-        <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 md:bottom-8 md:block">
-          <div className="scroll-cue" aria-hidden />
-        </div>
       </section>
-
-      <div className="border-b border-border bg-ivory">
-        <div className="container-site py-8 sm:py-10 md:py-12">
-          <div className="mx-auto flex max-w-3xl items-center gap-4">
-            <span className="hidden h-px flex-1 bg-gold/50 sm:block" />
-            <p className="text-center font-serif text-[15px] italic leading-snug text-balance text-charcoal sm:text-base md:text-lg">
-              {LEGACY.bandLine}
-            </p>
-            <span className="hidden h-px flex-1 bg-gold/50 sm:block" />
-          </div>
-          <ul className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
-            {LEGACY.credentials.map((item, i) => {
-              const Icon = icons[i];
-              return (
-                <li key={item.title} className="flex gap-3.5">
-                  <Icon
-                    className="mt-0.5 size-[22px] shrink-0 text-gold"
-                    strokeWidth={1.5}
-                    aria-hidden
-                  />
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-ink">{item.title}</p>
-                    <p className="mt-1 text-sm leading-[1.7] text-charcoal">
-                      {item.copy}
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
     </LazyMotion>
   );
 }

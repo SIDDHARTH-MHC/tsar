@@ -2,12 +2,12 @@
 
 import { Accordion } from "@/components/ui/Accordion";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FAQS } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 
 export function Faqs() {
   const onOpen = (question_id: string) => track("faq_open", { question_id });
+  const mid = Math.ceil(FAQS.items.length / 2);
 
   return (
     <section
@@ -17,29 +17,30 @@ export function Faqs() {
     >
       <div className="container-site">
         <FadeIn>
-          <SectionHeading
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-darbaar">
+            {FAQS.eyebrow}
+          </p>
+          <h2
             id="faqs-heading"
-            title={FAQS.headline}
-            align="center"
-            className="mb-8 sm:mb-10"
-          />
+            className="font-serif text-section text-balance text-ink"
+          >
+            {FAQS.headline}
+          </h2>
         </FadeIn>
 
-        <FadeIn>
-          <div className="mx-auto max-w-[720px] lg:max-w-5xl">
-            <div className="lg:grid lg:grid-cols-2 lg:gap-x-12">
-              <Accordion
-                items={FAQS.items.slice(0, Math.ceil(FAQS.items.length / 2))}
-                defaultOpenId={FAQS.items[0].id}
-                onOpen={onOpen}
-              />
-              <Accordion
-                items={FAQS.items.slice(Math.ceil(FAQS.items.length / 2))}
-                defaultOpenId={undefined}
-                className="lg:border-t-0"
-                onOpen={onOpen}
-              />
-            </div>
+        <FadeIn className="mt-9">
+          <div className="lg:grid lg:grid-cols-2 lg:gap-x-11">
+            <Accordion
+              items={FAQS.items.slice(0, mid)}
+              defaultOpenId={FAQS.items[0].id}
+              onOpen={onOpen}
+            />
+            <Accordion
+              items={FAQS.items.slice(mid)}
+              defaultOpenId={undefined}
+              className="lg:border-t-0"
+              onOpen={onOpen}
+            />
           </div>
         </FadeIn>
       </div>

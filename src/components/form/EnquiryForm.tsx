@@ -72,6 +72,12 @@ async function getRecaptchaToken(siteKey: string | undefined) {
   });
 }
 
+const fieldClass =
+  "w-full min-h-[48px] rounded-none border border-ivory/34 bg-transparent px-3.5 py-3 text-[15.5px] text-ivory outline-none transition-colors placeholder:text-ivory/40 focus:border-ivory aria-[invalid=true]:border-error";
+
+const labelClass =
+  "mb-2 block text-[10.5px] font-semibold uppercase tracking-[0.18em] text-ivory/75";
+
 export function EnquiryForm() {
   const router = useRouter();
   const started = useRef(false);
@@ -191,7 +197,7 @@ export function EnquiryForm() {
   );
 
   return (
-    <form onSubmit={onSubmit} className="relative space-y-6" noValidate>
+    <form onSubmit={onSubmit} className="relative" noValidate>
       <div
         className="absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden"
         aria-hidden
@@ -205,99 +211,89 @@ export function EnquiryForm() {
         />
       </div>
 
-      <Field
-        id="name"
-        label="Full name"
-        required
-        autoComplete="name"
-        error={errors.name?.message}
-        registration={register("name")}
-        onFocus={onFirstFocus}
-      />
-      <Field
-        id="company"
-        label="Company"
-        required
-        autoComplete="organization"
-        error={errors.company?.message}
-        registration={register("company")}
-        onFocus={onFirstFocus}
-      />
-      <Field
-        id="email"
-        label="Work email"
-        type="email"
-        inputMode="email"
-        required
-        autoComplete="email"
-        error={errors.email?.message}
-        registration={register("email")}
-        onFocus={onFirstFocus}
-      />
-      <Field
-        id="phone"
-        label="Phone"
-        type="tel"
-        inputMode="tel"
-        required
-        autoComplete="tel"
-        error={errors.phone?.message}
-        registration={register("phone")}
-        onFocus={onFirstFocus}
-        hint="+91"
-      />
-
-      <div className="border-t border-noir/10 pt-6">
-        <p className="mb-5 text-[12px] font-semibold uppercase tracking-[0.12em] text-charcoal/50">
-          {ENQUIRY.optionalDivider}
-        </p>
-        <div className="space-y-6">
-          <SelectField
-            id="industry"
-            label="Industry"
-            registration={register("industry")}
-            options={ENQUIRY.industryOptions}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-[18px]">
+        <Field
+          id="name"
+          label="Full name"
+          required
+          autoComplete="name"
+          error={errors.name?.message}
+          registration={register("name")}
+          onFocus={onFirstFocus}
+        />
+        <Field
+          id="company"
+          label="Company"
+          required
+          autoComplete="organization"
+          error={errors.company?.message}
+          registration={register("company")}
+          onFocus={onFirstFocus}
+        />
+        <Field
+          id="email"
+          label="Work email"
+          type="email"
+          inputMode="email"
+          required
+          autoComplete="email"
+          error={errors.email?.message}
+          registration={register("email")}
+          onFocus={onFirstFocus}
+        />
+        <Field
+          id="phone"
+          label="Phone"
+          type="tel"
+          inputMode="tel"
+          required
+          autoComplete="tel"
+          error={errors.phone?.message}
+          registration={register("phone")}
+          onFocus={onFirstFocus}
+          placeholder="+91"
+        />
+        <SelectField
+          id="industry"
+          label="Industry"
+          registration={register("industry")}
+          options={ENQUIRY.industryOptions}
+          onFocus={onFirstFocus}
+        />
+        <Field
+          id="city"
+          label="City"
+          error={errors.city?.message}
+          registration={register("city")}
+          onFocus={onFirstFocus}
+        />
+        <SelectField
+          id="locations"
+          label="Number of locations"
+          registration={register("locations")}
+          options={ENQUIRY.locationOptions}
+          onFocus={onFirstFocus}
+        />
+        <SelectField
+          id="plan"
+          label="Interested in"
+          registration={register("plan")}
+          options={ENQUIRY.planOptions}
+          allowEmpty={false}
+          onFocus={onFirstFocus}
+        />
+        <div className="sm:col-span-2">
+          <label htmlFor="field-message" className={labelClass}>
+            Message
+          </label>
+          <textarea
+            id="field-message"
+            rows={4}
+            enterKeyHint="done"
+            className={cn(fieldClass, "min-h-[100px] resize-y")}
+            {...register("message")}
             onFocus={onFirstFocus}
           />
-          <Field
-            id="city"
-            label="City"
-            error={errors.city?.message}
-            registration={register("city")}
-            onFocus={onFirstFocus}
-          />
-          <SelectField
-            id="locations"
-            label="Number of locations"
-            registration={register("locations")}
-            options={ENQUIRY.locationOptions}
-            onFocus={onFirstFocus}
-          />
-          <SelectField
-            id="plan"
-            label="Interested in"
-            registration={register("plan")}
-            options={ENQUIRY.planOptions}
-            allowEmpty={false}
-            onFocus={onFirstFocus}
-          />
-          <div>
-            <label
-              htmlFor="field-message"
-              className="mb-2 block text-sm font-medium text-noir"
-            >
-              Message
-            </label>
-            <textarea
-              id="field-message"
-              rows={4}
-              placeholder={ENQUIRY.messagePlaceholder}
-              enterKeyHint="done"
-              className="input-field min-h-[120px] resize-y placeholder:text-charcoal/40"
-              {...register("message")}
-              onFocus={onFirstFocus}
-            />
-          </div>
         </div>
       </div>
 
@@ -311,18 +307,22 @@ export function EnquiryForm() {
       {serverError ? (
         <div
           role="alert"
-          className="border border-error/40 bg-error/5 px-4 py-3 text-sm text-error"
+          className="mt-5 border border-ivory/40 bg-ivory/10 px-4 py-3 text-sm text-ivory"
         >
           {serverError}
         </div>
       ) : null}
 
-      <Button type="submit" className="w-full" disabled={isSubmitting} showArrow>
-        {isSubmitting ? "Sending…" : ENQUIRY.submitLabel}
-      </Button>
-      <p className="text-center text-xs leading-relaxed text-charcoal/55">
-        {ENQUIRY.underButton}
-      </p>
+      <div className="mt-7">
+        <Button
+          type="submit"
+          className="btn-on-navy"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending…" : ENQUIRY.submitLabel}
+        </Button>
+        <p className="mt-4 text-[12.5px] text-ivory/68">{ENQUIRY.underButton}</p>
+      </div>
     </form>
   );
 }
@@ -335,7 +335,7 @@ function Field({
   type = "text",
   inputMode,
   autoComplete,
-  hint,
+  placeholder,
   registration,
   onFocus,
 }: {
@@ -346,43 +346,33 @@ function Field({
   type?: string;
   inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   autoComplete?: string;
-  hint?: string;
+  placeholder?: string;
   registration: UseFormRegisterReturn;
   onFocus?: () => void;
 }) {
   return (
     <div>
-      <label htmlFor={`field-${id}`} className="mb-2 block text-sm font-medium text-noir">
+      <label htmlFor={`field-${id}`} className={labelClass}>
         {label}
-        {required ? <span className="text-gold"> *</span> : null}
+        {required ? " *" : null}
       </label>
-      <div className="relative">
-        {hint ? (
-          <span className="pointer-events-none absolute left-4 top-1/2 z-[1] -translate-y-1/2 text-sm text-charcoal/45">
-            {hint}
-          </span>
-        ) : null}
-        <input
-          id={`field-${id}`}
-          type={type}
-          inputMode={inputMode}
-          autoComplete={autoComplete}
-          enterKeyHint="next"
-          aria-invalid={!!error}
-          aria-describedby={error ? `error-${id}` : undefined}
-          className={cn(
-            "input-field",
-            hint && "pl-12",
-            error && "border-error",
-          )}
-          {...registration}
-          onFocus={() => {
-            onFocus?.();
-          }}
-        />
-      </div>
+      <input
+        id={`field-${id}`}
+        type={type}
+        inputMode={inputMode}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        enterKeyHint="next"
+        aria-invalid={!!error}
+        aria-describedby={error ? `error-${id}` : undefined}
+        className={fieldClass}
+        {...registration}
+        onFocus={() => {
+          onFocus?.();
+        }}
+      />
       {error ? (
-        <p id={`error-${id}`} className="mt-1.5 text-[13px] text-error">
+        <p id={`error-${id}`} className="mt-1.5 text-[13px] text-ivory/90">
           {error}
         </p>
       ) : null}
@@ -407,12 +397,12 @@ function SelectField({
 }) {
   return (
     <div>
-      <label htmlFor={`field-${id}`} className="mb-2 block text-sm font-medium text-noir">
+      <label htmlFor={`field-${id}`} className={labelClass}>
         {label}
       </label>
       <select
         id={`field-${id}`}
-        className="input-field input-select"
+        className={cn(fieldClass, "input-select appearance-none")}
         {...registration}
         onFocus={() => {
           onFocus?.();
@@ -420,7 +410,7 @@ function SelectField({
       >
         {allowEmpty ? <option value="">Select…</option> : null}
         {options.map((opt) => (
-          <option key={opt} value={opt}>
+          <option key={opt} value={opt} className="text-ink">
             {opt}
           </option>
         ))}

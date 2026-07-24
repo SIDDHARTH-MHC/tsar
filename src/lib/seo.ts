@@ -50,7 +50,7 @@ export function serviceJsonLd() {
   return SOLUTIONS.plans.map((plan) => ({
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `TSAR Darbaar ${plan.name}`,
+    name: `Darbaar by tsar ${plan.name}`,
     description: plan.positioning,
     provider: {
       "@type": "Organization",
