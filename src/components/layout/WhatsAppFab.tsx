@@ -5,54 +5,21 @@ import { whatsappHref } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 
 export function WhatsAppFab() {
-  const [visible, setVisible] = useState(false);
   const [stickyUp, setStickyUp] = useState(false);
 
   useEffect(() => {
-    const enquiry = document.getElementById("enquiry");
-    let pastHalf = false;
-    let formInView = false;
-
-    const update = () => setVisible(pastHalf && !formInView);
-
-    const onScroll = () => {
-      const doc = document.documentElement;
-      const scrolled =
-        (window.scrollY + window.innerHeight) / Math.max(doc.scrollHeight, 1);
-      pastHalf = scrolled >= 0.5;
+    const sync = () =>
       setStickyUp(document.body.classList.contains("has-sticky-cta"));
-      update();
-    };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    const classObs = new MutationObserver(onScroll);
+    sync();
+    const classObs = new MutationObserver(sync);
     classObs.observe(document.body, {
       attributes: true,
       attributeFilter: ["class"],
     });
 
-    let formObs: IntersectionObserver | undefined;
-    if (enquiry) {
-      formObs = new IntersectionObserver(
-        ([entry]) => {
-          formInView = entry.isIntersecting;
-          update();
-        },
-        { threshold: 0.15 },
-      );
-      formObs.observe(enquiry);
-    }
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      classObs.disconnect();
-      formObs?.disconnect();
-    };
+    return () => classObs.disconnect();
   }, []);
-
-  if (!visible) return null;
 
   return (
     <a
@@ -61,7 +28,7 @@ export function WhatsAppFab() {
       rel="noopener noreferrer"
       aria-label="Message us on WhatsApp"
       onClick={() => track("whatsapp_click", { placement: "fab" })}
-      className="fixed z-40 flex size-12 items-center justify-center rounded-full bg-darbaar text-ivory shadow-[var(--shadow-hover)] transition-colors hover:bg-ivory hover:text-darbaar active:bg-darbaar-deep lg:size-14"
+      className="fixed z-40 flex size-12 items-center justify-center rounded-full border-2 border-ivory bg-darbaar text-ivory shadow-[0_8px_24px_rgba(22,9,12,0.25)] transition-colors hover:bg-ivory hover:text-darbaar active:bg-darbaar-deep lg:size-14"
       style={{
         right: "max(1rem, var(--safe-right))",
         bottom: stickyUp

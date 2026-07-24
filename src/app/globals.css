@@ -48,7 +48,7 @@
   --border-hairline: 1px solid var(--border);
   --border-gold: 1px solid var(--gold);
 
-  --header-h: 64px;
+  --header-h: 70px;
   --sticky-cta-h: 0px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -61,7 +61,7 @@
 
 @media (min-width: 768px) {
   :root {
-    --header-h: 80px;
+    --header-h: 70px;
   }
 }
 

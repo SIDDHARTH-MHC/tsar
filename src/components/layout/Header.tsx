@@ -2,24 +2,21 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { LazyMotion, domAnimation, m, AnimatePresence, useReducedMotion } from "framer-motion";
+import {
+  LazyMotion,
+  domAnimation,
+  m,
+  AnimatePresence,
+  useReducedMotion,
+} from "framer-motion";
 import { BrandLogo } from "@/components/brand/BrandLogo";
-import { Button } from "@/components/ui/Button";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const reduce = useReducedMotion();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -29,60 +26,37 @@ export function Header() {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
-  const onDark = !scrolled && !menuOpen;
 
   return (
     <LazyMotion features={domAnimation} strict>
       <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-[var(--duration-base)]",
-          scrolled || menuOpen
-            ? "border-b border-border bg-ivory/90 backdrop-blur-xl"
-            : "border-b border-transparent bg-transparent",
-        )}
+        className="fixed inset-x-0 top-0 z-50 border-b border-ivory/20 bg-darbaar text-ivory"
         style={{ paddingTop: "var(--safe-top)" }}
       >
-        <div className="container-site flex h-16 items-center justify-between gap-4 md:h-20">
+        <div className="container-site flex h-[70px] items-center justify-between gap-6">
           <Link
-            href="/"
-            className="group relative flex h-12 min-w-0 shrink-0 items-center overflow-hidden py-1"
+            href="/#top"
+            className="flex h-10 shrink-0 items-center"
             onClick={closeMenu}
             aria-label={`${SITE.name} home`}
           >
-            <span className="relative inline-block h-9 w-[8.75rem] sm:h-10 sm:w-[10rem] md:h-11 md:w-[11.5rem]">
-              <BrandLogo
-                variant="navy"
-                size="md"
-                priority
-                className={cn(
-                  "!absolute inset-0 !h-full !w-full transition-opacity duration-[var(--duration-base)]",
-                  onDark ? "opacity-0" : "opacity-100",
-                )}
-              />
-              <BrandLogo
-                variant="white"
-                size="md"
-                priority
-                className={cn(
-                  "!absolute inset-0 !h-full !w-full transition-opacity duration-[var(--duration-base)]",
-                  onDark ? "opacity-100" : "opacity-0",
-                )}
-              />
-            </span>
+            <BrandLogo
+              variant="white"
+              size="sm"
+              priority
+              className="!h-8 !w-[7.75rem] sm:!h-9 sm:!w-[9.5rem]"
+            />
           </Link>
 
           <nav
-            className="hidden items-center gap-10 xl:gap-12 lg:flex"
+            className="hidden items-center gap-5 lg:flex xl:gap-[26px]"
             aria-label="Primary"
           >
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  "gold-underline py-2 text-[13px] font-medium tracking-[0.04em] transition-colors",
-                  onDark ? "text-ivory/90" : "text-charcoal",
-                )}
+                className="border-b border-transparent py-1 text-[11.5px] font-medium uppercase tracking-[0.1em] text-ivory/85 transition-colors hover:border-ivory hover:text-ivory xl:text-[12.5px]"
               >
                 {link.label}
               </a>
@@ -90,49 +64,40 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <div className="hidden lg:block">
-              <Button
-                href="#enquiry"
-                variant="primary"
-                className={cn(
-                  "!px-5 !py-2.5 text-[11.5px]",
-                  onDark && "btn-on-navy",
-                )}
-                onClick={() => track("nav_cta_click", { device: "desktop" })}
-              >
-                Request a Consultation
-              </Button>
-            </div>
+            <a
+              href="#enquiry"
+              className="hidden items-center justify-center border-[1.5px] border-ivory bg-ivory px-5 py-[11px] text-[11.5px] font-semibold uppercase tracking-[0.1em] text-darbaar transition-colors hover:bg-transparent hover:text-ivory lg:inline-flex"
+              onClick={() => track("nav_cta_click", { device: "desktop" })}
+            >
+              Request a Consultation
+            </a>
 
             <button
               type="button"
-              className={cn(
-                "tap-target relative flex size-12 items-center justify-center rounded-[var(--radius-xs)] lg:hidden",
-                onDark ? "text-ivory" : "text-ink",
-              )}
+              className="tap-target relative flex size-11 items-center justify-center text-ivory lg:hidden"
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               onClick={() => setMenuOpen((v) => !v)}
             >
               <span className="sr-only">{menuOpen ? "Close" : "Menu"}</span>
-              <span className="relative block h-3.5 w-5" aria-hidden>
+              <span className="relative block h-3.5 w-6" aria-hidden>
                 <span
                   className={cn(
-                    "absolute left-0 top-0 h-px w-full bg-current transition-transform duration-[var(--duration-base)]",
-                    menuOpen && "translate-y-[7px] rotate-45",
+                    "absolute left-0 top-0 h-0.5 w-full bg-current transition-transform duration-[var(--duration-base)]",
+                    menuOpen && "translate-y-[6px] rotate-45",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute left-0 top-[7px] h-px w-full bg-current transition-opacity duration-[var(--duration-base)]",
+                    "absolute left-0 top-[6px] h-0.5 w-full bg-current transition-opacity duration-[var(--duration-base)]",
                     menuOpen && "opacity-0",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute left-0 top-[14px] h-px w-full bg-current transition-transform duration-[var(--duration-base)]",
-                    menuOpen && "-translate-y-[7px] -rotate-45",
+                    "absolute left-0 top-[12px] h-0.5 w-full bg-current transition-transform duration-[var(--duration-base)]",
+                    menuOpen && "-translate-y-[6px] -rotate-45",
                   )}
                 />
               </span>
@@ -148,59 +113,35 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
-            className="fixed inset-0 z-40 bg-ivory lg:hidden"
-            style={{ paddingTop: "calc(var(--header-h) + var(--safe-top))" }}
+            className="fixed inset-x-0 bottom-0 z-40 bg-darbaar-deep lg:hidden"
+            style={{ top: "calc(70px + var(--safe-top))" }}
             initial={reduce ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={reduce ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            <m.nav
-              className="container-site flex h-full flex-col justify-between pb-[max(2rem,var(--safe-bottom))] pt-8"
-              aria-label="Mobile"
-              initial={reduce ? false : { y: 16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <ul className="space-y-1">
-                {NAV_LINKS.map((link, i) => (
-                  <li key={link.href}>
-                    <m.a
-                      href={link.href}
-                      className="flex min-h-14 items-center border-b border-border font-serif text-3xl text-ink"
-                      onClick={() => {
-                        closeMenu();
-                      }}
-                      initial={reduce ? false : { opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.35,
-                        delay: 0.08 + i * 0.05,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                    >
-                      {link.label}
-                    </m.a>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="space-y-3">
-                <Button
-                  href="#enquiry"
-                  className="w-full"
-                  onClick={() => {
-                    track("nav_cta_click", { device: "mobile_menu" });
-                    closeMenu();
-                  }}
+            <nav className="flex flex-col" aria-label="Mobile">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="border-b border-ivory/10 px-5 py-4 text-[14px] uppercase tracking-[0.08em] text-ivory sm:px-8"
+                  onClick={closeMenu}
                 >
-                  Request a Consultation
-                </Button>
-                <p className="cta-note text-center">
-                  Free consultation · No obligation
-                </p>
-              </div>
-            </m.nav>
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#enquiry"
+                className="px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-ivory sm:px-8"
+                onClick={() => {
+                  track("nav_cta_click", { device: "mobile_menu" });
+                  closeMenu();
+                }}
+              >
+                Request a Consultation
+              </a>
+            </nav>
           </m.div>
         ) : null}
       </AnimatePresence>
