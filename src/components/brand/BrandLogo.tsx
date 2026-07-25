@@ -18,20 +18,20 @@ const SRC: Record<BrandLogoVariant, string> = {
   gold: "/brand/darbaar-by-tsar-gold.png",
 };
 
-/** Fixed boxes so Next/Image cannot expand to intrinsic 1400px width */
+/** Fixed boxes so Next/Image cannot expand to intrinsic width (aspect ≈ 2.62 : 1) */
 const SIZE: Record<BrandLogoSize, string> = {
-  sm: "h-8 w-[7.5rem] sm:h-9 sm:w-[8.75rem]",
-  md: "h-9 w-[8.75rem] sm:h-10 sm:w-[10rem] md:h-11 md:w-[11.5rem]",
-  lg: "h-10 w-[10rem] sm:h-11 sm:w-[11.5rem] md:h-12 md:w-[13rem]",
+  sm: "h-8 w-[5.25rem] sm:h-9 sm:w-[5.9rem]",
+  md: "h-9 w-[5.9rem] sm:h-10 sm:w-[6.55rem] md:h-11 md:w-[7.2rem]",
+  lg: "h-10 w-[6.55rem] sm:h-11 sm:w-[7.2rem] md:h-12 md:w-[7.85rem]",
 };
 
-/** Official Darbaar by TSAR lockup — aspect ≈ 3.2 : 1 */
+/** Official Darbaar by tsar lockup — Devanagari + Latin */
 export function BrandLogo({
   variant = "navy",
   size = "md",
   className,
   priority = false,
-  alt = "Darbaar by TSAR",
+  alt = "Darbaar by tsar",
 }: BrandLogoProps) {
   return (
     <span

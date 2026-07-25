@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { CLIENTS } from "@/lib/constants";
 
@@ -34,11 +35,23 @@ export function Clients() {
               <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-darbaar">
                 {client.segment}
               </span>
-              <div
-                className="my-[18px] mb-5 flex h-[58px] items-center justify-center border border-dashed border-ink/20 text-[9.5px] uppercase tracking-[0.24em] text-charcoal/70"
-                aria-hidden
-              >
-                Logo
+              <div className="my-[18px] mb-5 flex h-[72px] items-center justify-center overflow-hidden border border-ink/10 bg-paper-2/60 px-3">
+                {"logo" in client && client.logo ? (
+                  <Image
+                    src={client.logo}
+                    alt=""
+                    width={220}
+                    height={72}
+                    className="max-h-[58px] w-auto max-w-full object-contain"
+                  />
+                ) : (
+                  <span
+                    className="text-[9.5px] uppercase tracking-[0.24em] text-charcoal/55"
+                    aria-hidden
+                  >
+                    Logo
+                  </span>
+                )}
               </div>
               <h3 className="font-serif text-[21px] font-semibold leading-[1.18] text-ink">
                 {client.name}

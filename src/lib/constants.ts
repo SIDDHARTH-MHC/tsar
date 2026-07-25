@@ -31,14 +31,11 @@ export const NAV_LINKS = [
 ] as const;
 
 export const HERO = {
-  eyebrow: "Darbaar by tsar",
   headline: "Every darbaar had a scent.",
   headlineItalic: "Yours is still waiting.",
   subheadline:
     "Signature scent identities for India's most considered spaces.",
-  primaryCta: { label: "Request a Consultation", href: "#enquiry" },
-  secondaryCta: { label: "Explore Our Plans", href: "#solutions" },
-  micro: "Free consultation · No obligation",
+  cta: { label: "Explore Our Plans", href: "#solutions" },
 } as const;
 
 export const PILLARS = {
@@ -301,22 +298,26 @@ export const CLIENTS = {
   items: [
     {
       segment: "Hotel",
-      name: "Bel-la-monde NH8",
+      name: "Bel-la Mondè NH8",
+      logo: "/images/clients/bel-la-monde-hotels.png",
       quote: "Guests ask about the fragrance before they ask about the rooms.",
     },
     {
       segment: "Hotel",
-      name: "Bel-la-monde Chattarpur",
+      name: "Bel-la Mondè Chattarpur",
+      logo: "/images/clients/bel-la-monde-hotels.png",
       quote: "The lobby finally smells the way the property looks.",
     },
     {
       segment: "Hotel",
-      name: "Bel-la-monde Blue",
+      name: "Bel-la Mondè Blue",
+      logo: "/images/clients/bel-la-monde-hotels.png",
       quote: "Three halls, one scent, and you can never spot a machine.",
     },
     {
       segment: "Hotel",
-      name: "Bel-la-monde Jim Corbett",
+      name: "Bel-la Mondè Jim Corbett",
+      logo: "/images/clients/bel-la-monde-river-side.png",
       quote: "Even out by the river, the arrival still smells like us.",
     },
     {
@@ -327,17 +328,25 @@ export const CLIENTS = {
     {
       segment: "Hotel",
       name: "Oodles Chattarpur",
+      logo: "/images/clients/oodles.png",
       quote: "Back to back events and the scent never drops off.",
     },
     {
       segment: "Hotel",
       name: "Cinderella Chattarpur",
+      logo: "/images/clients/cinderella-chattarpur.png",
       quote: "Wedding clients notice it during the site visit itself.",
     },
     {
       segment: "Hotel",
       name: "Chandbagh Chattarpur",
       quote: "Two thousand guests in and the hall still smells fresh.",
+    },
+    {
+      segment: "Automotive",
+      name: "Škoda",
+      logo: "/images/clients/skoda.png",
+      quote: "Walk into the showroom and the brand is already in the air.",
     },
   ],
 } as const;
@@ -430,9 +439,6 @@ export const ENQUIRY = {
   responsePromise: "Business enquiries answered within one working day.",
   whatsappLabel: "Message on WhatsApp →",
   submitLabel: "Request Consultation",
-  underButton:
-    "Free consultation · No obligation. No spam. Your details stay with us.",
-  ctaNote: "Free consultation · No obligation",
   industryOptions: [
     "Hotels & Resorts",
     "Corporate & Tech Parks",

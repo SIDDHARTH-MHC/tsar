@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { WHY_SCENT } from "@/lib/constants";
@@ -11,12 +12,16 @@ export function WhyScent() {
     >
       <div className="container-site">
         <FadeIn>
-          <div className="grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-12">
-            <div
-              className="flex aspect-square items-center justify-center border border-border bg-ivory text-[10.5px] font-semibold uppercase tracking-[0.26em] text-charcoal"
-              aria-hidden
-            >
-              Image
+          <div className="grid items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-12">
+            <div className="relative aspect-[4/3] overflow-hidden border border-border bg-ivory">
+              <Image
+                src="/images/why-scent-lobby.jpg"
+                alt="Guest welcomed at a hotel lobby reception"
+                fill
+                sizes="(max-width: 768px) 100vw, 45vw"
+                className="object-cover object-center"
+                priority={false}
+              />
             </div>
             <div>
               <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-darbaar">

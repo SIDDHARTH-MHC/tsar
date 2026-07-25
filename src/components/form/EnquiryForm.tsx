@@ -321,7 +321,6 @@ export function EnquiryForm() {
         >
           {isSubmitting ? "Sending…" : ENQUIRY.submitLabel}
         </Button>
-        <p className="mt-4 text-[12.5px] text-ivory/68">{ENQUIRY.underButton}</p>
       </div>
     </form>
   );

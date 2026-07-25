@@ -23,10 +23,16 @@ export function Science() {
 
         <FadeIn className="mt-11">
           <ul className="grid grid-cols-1 divide-y divide-ivory/20 md:grid-cols-4 md:divide-x md:divide-y-0">
-            {SCIENCE.stats.map((stat) => (
+            {SCIENCE.stats.map((stat, index) => (
               <li
                 key={stat.figure}
-                className="py-6 first:pt-0 last:pb-0 md:px-6 md:py-0 md:first:pl-0 md:last:pr-0 md:pt-8"
+                className={
+                  index === 0
+                    ? "py-6 first:pt-0 md:py-0 md:pr-6 md:pt-8"
+                    : index === SCIENCE.stats.length - 1
+                      ? "py-6 last:pb-0 md:py-0 md:pl-6 md:pt-8"
+                      : "py-6 md:px-6 md:py-0 md:pt-8"
+                }
               >
                 <p className="font-sans text-[clamp(38px,4.4vw,54px)] font-bold leading-none tracking-[-0.035em] tabular-nums text-ivory">
                   {stat.figure}

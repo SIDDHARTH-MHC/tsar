@@ -38,56 +38,34 @@ export function Hero() {
 
         <div className="container-site relative z-10">
           <div className="max-w-3xl lg:max-w-4xl">
-            <m.p
-              className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-ivory/70"
-              {...line(0.1)}
-            >
-              {HERO.eyebrow}
-            </m.p>
             <m.h1
-              className="max-w-[15ch] font-serif text-display text-balance text-ivory"
-              {...line(0.2)}
+              className="max-w-[28ch] font-serif text-display text-pretty text-ivory"
+              {...line(0.15)}
             >
-              {HERO.headline}
-              <em className="mt-1 block font-normal italic opacity-90">
+              <span className="block">{HERO.headline}</span>
+              <em className="mt-[0.18em] block font-normal italic text-[0.94em] tracking-[-0.01em] text-ivory/90">
                 {HERO.headlineItalic}
               </em>
             </m.h1>
             <m.p
               className="mt-6 max-w-2xl text-[clamp(17px,1.6vw,21px)] leading-[1.58] text-pretty text-ivory/85"
-              {...line(0.3)}
+              {...line(0.25)}
             >
               {HERO.subheadline}
             </m.p>
-            <m.div className="mt-8 sm:mt-10" {...line(0.4)}>
-              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-[13px]">
-                <Button
-                  href={HERO.primaryCta.href}
-                  className="btn-on-navy w-full sm:w-auto"
-                  onClick={() =>
-                    track("hero_cta_click", {
-                      cta_label: HERO.primaryCta.label,
-                    })
-                  }
-                >
-                  {HERO.primaryCta.label}
-                </Button>
-                <Button
-                  href={HERO.secondaryCta.href}
-                  variant="secondary"
-                  className="w-full sm:w-auto"
-                  onClick={() =>
-                    track("hero_cta_click", {
-                      cta_label: HERO.secondaryCta.label,
-                    })
-                  }
-                >
-                  {HERO.secondaryCta.label}
-                </Button>
-              </div>
-              <p className="cta-note cta-note-on-dark text-center sm:text-left">
-                {HERO.micro}
-              </p>
+            <m.div className="mt-8 sm:mt-10" {...line(0.35)}>
+              <Button
+                href={HERO.cta.href}
+                variant="secondary"
+                className="w-full sm:w-auto"
+                onClick={() =>
+                  track("hero_cta_click", {
+                    cta_label: HERO.cta.label,
+                  })
+                }
+              >
+                {HERO.cta.label}
+              </Button>
             </m.div>
           </div>
         </div>

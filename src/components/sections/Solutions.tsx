@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { ENQUIRY, SOLUTIONS } from "@/lib/constants";
+import { SOLUTIONS } from "@/lib/constants";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 
@@ -127,14 +127,6 @@ function PlanCard({
         >
           {plan.cta.label}
         </Button>
-        <p
-          className={cn(
-            "cta-note text-center",
-            featured && "cta-note-on-dark",
-          )}
-        >
-          {ENQUIRY.ctaNote}
-        </p>
       </div>
     </article>
   );

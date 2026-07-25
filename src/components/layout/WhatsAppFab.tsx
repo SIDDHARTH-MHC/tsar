@@ -28,7 +28,7 @@ export function WhatsAppFab() {
       rel="noopener noreferrer"
       aria-label="Message us on WhatsApp"
       onClick={() => track("whatsapp_click", { placement: "fab" })}
-      className="fixed z-40 flex size-12 items-center justify-center rounded-full border-2 border-ivory bg-darbaar text-ivory shadow-[0_8px_24px_rgba(22,9,12,0.25)] transition-colors hover:bg-ivory hover:text-darbaar active:bg-darbaar-deep lg:size-14"
+      className="fixed z-40 flex size-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_28px_rgba(37,211,102,0.45)] ring-2 ring-white/90 transition-[transform,background-color,box-shadow] hover:scale-105 hover:bg-[#1ebe57] hover:shadow-[0_10px_32px_rgba(37,211,102,0.55)] active:scale-95 active:bg-[#18a84c] lg:size-14"
       style={{
         right: "max(1rem, var(--safe-right))",
         bottom: stickyUp

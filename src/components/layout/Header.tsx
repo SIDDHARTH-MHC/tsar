@@ -44,7 +44,7 @@ export function Header() {
               variant="white"
               size="sm"
               priority
-              className="!h-8 !w-[7.75rem] sm:!h-9 sm:!w-[9.5rem]"
+              className="!h-9 !w-[5.9rem] sm:!h-10 sm:!w-[6.55rem]"
             />
           </Link>
 
