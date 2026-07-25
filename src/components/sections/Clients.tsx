@@ -3,6 +3,16 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { CLIENTS } from "@/lib/constants";
 import { cn } from "@/lib/cn";
 
+type ClientItem = (typeof CLIENTS.items)[number];
+
+function clientLogo(client: ClientItem) {
+  return "logo" in client ? client.logo : undefined;
+}
+
+function clientDarkWell(client: ClientItem) {
+  return "logoBg" in client && client.logoBg === "dark";
+}
+
 export function Clients() {
   const loop = [...CLIENTS.items, ...CLIENTS.items];
 
@@ -29,13 +39,8 @@ export function Clients() {
       <div className="clients-marquee relative mt-10 overflow-hidden">
         <div className="clients-marquee-track flex w-max gap-5">
           {loop.map((client, i) => {
-            const hasLogo = "logo" in client && Boolean(client.logo);
-            const fit =
-              "logoFit" in client && client.logoFit === "cover"
-                ? "cover"
-                : "contain";
-            const darkWell =
-              "logoBg" in client && client.logoBg === "dark";
+            const logo = clientLogo(client);
+            const darkWell = clientDarkWell(client);
 
             return (
               <article
@@ -48,17 +53,13 @@ export function Clients() {
                     darkWell ? "bg-ink" : "bg-white",
                   )}
                 >
-                  {hasLogo ? (
+                  {logo ? (
                     <Image
-                      src={client.logo!}
+                      src={logo}
                       alt=""
                       fill
                       sizes="320px"
-                      className={cn(
-                        fit === "cover"
-                          ? "object-cover object-center"
-                          : "object-contain object-center p-6 sm:p-7",
-                      )}
+                      className="object-contain object-center p-6 sm:p-7"
                     />
                   ) : (
                     <div
