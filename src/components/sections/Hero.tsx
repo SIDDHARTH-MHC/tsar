@@ -38,9 +38,15 @@ export function Hero() {
 
         <div className="container-site relative z-10">
           <div className="max-w-3xl lg:max-w-4xl">
+            <m.p
+              className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-ivory/70"
+              {...line(0.1)}
+            >
+              {HERO.eyebrow}
+            </m.p>
             <m.h1
               className="max-w-[15ch] font-serif text-display text-balance text-ivory"
-              {...line(0.15)}
+              {...line(0.2)}
             >
               {HERO.headline}
               <em className="mt-1 block font-normal italic opacity-90">
@@ -49,11 +55,11 @@ export function Hero() {
             </m.h1>
             <m.p
               className="mt-6 max-w-2xl text-[clamp(17px,1.6vw,21px)] leading-[1.58] text-pretty text-ivory/85"
-              {...line(0.25)}
+              {...line(0.3)}
             >
               {HERO.subheadline}
             </m.p>
-            <m.div className="mt-8 sm:mt-10" {...line(0.35)}>
+            <m.div className="mt-8 sm:mt-10" {...line(0.4)}>
               <Button
                 href={HERO.cta.href}
                 variant="secondary"

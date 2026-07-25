@@ -31,6 +31,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const HERO = {
+  eyebrow: "Darbaar by tsar",
   headline: "Every darbaar had a scent.",
   headlineItalic: "Yours is still waiting.",
   subheadline:
