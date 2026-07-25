@@ -319,7 +319,6 @@ export const CLIENTS = {
       segment: "Hotel",
       name: "Bel-la Mondè Jim Corbett",
       logo: "/images/clients/bel-la-monde-river-side.png",
-      logoBg: "dark" as const,
       quote: "Even out by the river, the arrival still smells like us.",
     },
     {

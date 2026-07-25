@@ -1,16 +1,11 @@
 import Image from "next/image";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { CLIENTS } from "@/lib/constants";
-import { cn } from "@/lib/cn";
 
 type ClientItem = (typeof CLIENTS.items)[number];
 
 function clientLogo(client: ClientItem) {
   return "logo" in client ? client.logo : undefined;
-}
-
-function clientDarkWell(client: ClientItem) {
-  return "logoBg" in client && client.logoBg === "dark";
 }
 
 export function Clients() {
@@ -40,19 +35,13 @@ export function Clients() {
         <div className="clients-marquee-track flex w-max gap-5">
           {loop.map((client, i) => {
             const logo = clientLogo(client);
-            const darkWell = clientDarkWell(client);
 
             return (
               <article
                 key={`${client.name}-${i}`}
                 className="flex w-[280px] shrink-0 flex-col overflow-hidden bg-ivory text-ink sm:w-[320px]"
               >
-                <div
-                  className={cn(
-                    "relative h-[128px] w-full",
-                    darkWell ? "bg-ink" : "bg-white",
-                  )}
-                >
+                <div className="relative h-[128px] w-full bg-white">
                   {logo ? (
                     <Image
                       src={logo}
