@@ -39,11 +39,11 @@ export function Hero() {
         <div className="container-site relative z-10">
           <div className="max-w-3xl lg:max-w-4xl">
             <m.h1
-              className="max-w-[28ch] font-serif text-display text-pretty text-ivory"
+              className="max-w-[15ch] font-serif text-display text-balance text-ivory"
               {...line(0.15)}
             >
-              <span className="block">{HERO.headline}</span>
-              <em className="mt-[0.18em] block font-normal italic text-[0.94em] tracking-[-0.01em] text-ivory/90">
+              {HERO.headline}
+              <em className="mt-1 block font-normal italic opacity-90">
                 {HERO.headlineItalic}
               </em>
             </m.h1>

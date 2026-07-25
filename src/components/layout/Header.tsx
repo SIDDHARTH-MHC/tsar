@@ -65,11 +65,11 @@ export function Header() {
 
           <div className="flex items-center gap-2">
             <a
-              href="#enquiry"
+              href="#solutions"
               className="hidden items-center justify-center border-[1.5px] border-ivory bg-ivory px-5 py-[11px] text-[11.5px] font-semibold uppercase tracking-[0.1em] text-darbaar transition-colors hover:bg-transparent hover:text-ivory lg:inline-flex"
               onClick={() => track("nav_cta_click", { device: "desktop" })}
             >
-              Request a Consultation
+              Explore Our Plans
             </a>
 
             <button
@@ -132,14 +132,14 @@ export function Header() {
                 </a>
               ))}
               <a
-                href="#enquiry"
+                href="#solutions"
                 className="px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.08em] text-ivory sm:px-8"
                 onClick={() => {
                   track("nav_cta_click", { device: "mobile_menu" });
                   closeMenu();
                 }}
               >
-                Request a Consultation
+                Explore Our Plans
               </a>
             </nav>
           </m.div>

@@ -245,11 +245,11 @@ textarea {
 
 /* Fluid type helpers */
 .text-display {
-  font-size: clamp(2.125rem, 1.25rem + 2.8vw, 3.875rem);
-  line-height: 1.1;
-  letter-spacing: -0.018em;
-  font-weight: 500;
-  font-variation-settings: "SOFT" 28, "WONK" 1;
+  font-size: clamp(2.625rem, 1.6rem + 4.8vw, 5.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  font-variation-settings: "SOFT" 30, "WONK" 1;
 }
 
 .text-section {

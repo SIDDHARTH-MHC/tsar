@@ -65,7 +65,6 @@ export function Footer() {
                   {SITE.phone}
                 </a>
               </li>
-              <li className="max-w-xs leading-[1.7]">{SITE.address}</li>
               <li>GSTIN {SITE.gstin}</li>
             </ul>
           </div>
