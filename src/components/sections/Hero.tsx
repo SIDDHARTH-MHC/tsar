@@ -25,7 +25,7 @@ export function Hero() {
     <LazyMotion features={domAnimation} strict>
       <section
         id="top"
-        className="film-grain relative overflow-hidden bg-darbaar pb-14 pt-[calc(5.25rem+var(--safe-top))] text-ivory sm:pb-20 md:pb-24 md:pt-36"
+        className="film-grain relative flex min-h-[100svh] flex-col justify-center overflow-hidden bg-darbaar pb-16 pt-[calc(var(--header-h)+var(--safe-top)+1.5rem)] text-ivory sm:pb-20"
       >
         <div
           className="plume plume-a pointer-events-none absolute -right-[150px] -top-[220px] size-[620px] rounded-full bg-ivory/[0.085] blur-[70px]"
@@ -60,18 +60,31 @@ export function Hero() {
               {HERO.subheadline}
             </m.p>
             <m.div className="mt-8 sm:mt-10" {...line(0.4)}>
-              <Button
-                href={HERO.cta.href}
-                variant="secondary"
-                className="w-full sm:w-auto"
-                onClick={() =>
-                  track("hero_cta_click", {
-                    cta_label: HERO.cta.label,
-                  })
-                }
-              >
-                {HERO.cta.label}
-              </Button>
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-[13px]">
+                <Button
+                  href={HERO.primaryCta.href}
+                  className="btn-on-navy w-full sm:w-auto"
+                  onClick={() =>
+                    track("hero_cta_click", {
+                      cta_label: HERO.primaryCta.label,
+                    })
+                  }
+                >
+                  {HERO.primaryCta.label}
+                </Button>
+                <Button
+                  href={HERO.secondaryCta.href}
+                  variant="secondary"
+                  className="w-full sm:w-auto"
+                  onClick={() =>
+                    track("hero_cta_click", {
+                      cta_label: HERO.secondaryCta.label,
+                    })
+                  }
+                >
+                  {HERO.secondaryCta.label}
+                </Button>
+              </div>
             </m.div>
           </div>
         </div>

@@ -36,7 +36,8 @@ export const HERO = {
   headlineItalic: "Yours is still waiting.",
   subheadline:
     "Signature scent identities for India's most considered spaces.",
-  cta: { label: "Explore Our Plans", href: "#solutions" },
+  primaryCta: { label: "Request a Consultation", href: "#enquiry" },
+  secondaryCta: { label: "Explore Our Plans", href: "#solutions" },
 } as const;
 
 export const PILLARS = {
@@ -322,7 +323,8 @@ export const CLIENTS = {
       segment: "Hotel",
       name: "Bel-la Mondè Jim Corbett",
       logo: "/images/clients/bel-la-monde-river-side.png",
-      logoFit: "cover",
+      logoFit: "contain",
+      logoBg: "dark",
       quote: "Even out by the river, the arrival still smells like us.",
     },
     {
@@ -341,7 +343,7 @@ export const CLIENTS = {
       segment: "Hotel",
       name: "Cinderella Chattarpur",
       logo: "/images/clients/cinderella-chattarpur.png",
-      logoFit: "cover",
+      logoFit: "contain",
       quote: "Wedding clients notice it during the site visit itself.",
     },
     {
@@ -353,8 +355,8 @@ export const CLIENTS = {
       segment: "Automotive",
       name: "Škoda",
       logo: "/images/clients/skoda.png",
-      logoFit: "cover",
-      quote: "Walk into the showroom and the brand is already in the air.",
+      logoFit: "contain",
+      quote: "Cabin scents composed for their cars - not the showroom.",
     },
   ],
 } as const;

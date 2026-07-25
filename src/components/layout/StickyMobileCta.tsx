@@ -8,7 +8,7 @@ export function StickyMobileCta() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const hero = document.getElementById("hero");
+    const hero = document.getElementById("top");
     const enquiry = document.getElementById("enquiry");
     if (!hero || !enquiry) return;
 
@@ -55,12 +55,12 @@ export function StickyMobileCta() {
       style={{ paddingBottom: "max(0.75rem, var(--safe-bottom))" }}
     >
       <Button
-        href="#solutions"
+        href="#enquiry"
         className="h-12 w-full !py-0 text-[12px] sm:text-[13px]"
         showArrow
         onClick={() => track("nav_cta_click", { device: "mobile_sticky" })}
       >
-        Explore Our Plans
+        Request a Consultation
       </Button>
     </div>
   );

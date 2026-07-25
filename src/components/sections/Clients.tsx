@@ -34,6 +34,8 @@ export function Clients() {
               "logoFit" in client && client.logoFit === "cover"
                 ? "cover"
                 : "contain";
+            const darkWell =
+              "logoBg" in client && client.logoBg === "dark";
 
             return (
               <article
@@ -43,7 +45,7 @@ export function Clients() {
                 <div
                   className={cn(
                     "relative h-[128px] w-full",
-                    fit === "contain" ? "bg-white" : "bg-ink",
+                    darkWell ? "bg-ink" : "bg-white",
                   )}
                 >
                   {hasLogo ? (
@@ -55,7 +57,7 @@ export function Clients() {
                       className={cn(
                         fit === "cover"
                           ? "object-cover object-center"
-                          : "object-contain object-center p-7 sm:p-8",
+                          : "object-contain object-center p-6 sm:p-7",
                       )}
                     />
                   ) : (
