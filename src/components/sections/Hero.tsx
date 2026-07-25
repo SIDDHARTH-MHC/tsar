@@ -60,31 +60,17 @@ export function Hero() {
               {HERO.subheadline}
             </m.p>
             <m.div className="mt-8 sm:mt-10" {...line(0.4)}>
-              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-[13px]">
-                <Button
-                  href={HERO.primaryCta.href}
-                  className="btn-on-navy w-full sm:w-auto"
-                  onClick={() =>
-                    track("hero_cta_click", {
-                      cta_label: HERO.primaryCta.label,
-                    })
-                  }
-                >
-                  {HERO.primaryCta.label}
-                </Button>
-                <Button
-                  href={HERO.secondaryCta.href}
-                  variant="secondary"
-                  className="w-full sm:w-auto"
-                  onClick={() =>
-                    track("hero_cta_click", {
-                      cta_label: HERO.secondaryCta.label,
-                    })
-                  }
-                >
-                  {HERO.secondaryCta.label}
-                </Button>
-              </div>
+              <Button
+                href={HERO.primaryCta.href}
+                className="btn-on-navy w-full sm:w-auto"
+                onClick={() =>
+                  track("hero_cta_click", {
+                    cta_label: HERO.primaryCta.label,
+                  })
+                }
+              >
+                {HERO.primaryCta.label}
+              </Button>
             </m.div>
           </div>
         </div>

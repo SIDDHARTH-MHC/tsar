@@ -37,7 +37,6 @@ export const HERO = {
   subheadline:
     "Signature scent identities for India's most considered spaces.",
   primaryCta: { label: "Request a Consultation", href: "#enquiry" },
-  secondaryCta: { label: "Explore Our Plans", href: "#solutions" },
 } as const;
 
 export const PILLARS = {
@@ -349,7 +348,7 @@ export const CLIENTS = {
       segment: "Automotive",
       name: "Škoda",
       logo: "/images/clients/skoda.png",
-      quote: "Cabin scents composed for their cars - not the showroom.",
+      quote: "Cabin scents composed for their cars.",
     },
   ],
 } as const;
