@@ -45,10 +45,10 @@ function fieldRows(lead: LeadPayload) {
 
 export async function sendEnquiryEmails(lead: LeadPayload) {
   const resend = getResend();
-  const to = process.env.ENQUIRY_TO_EMAIL ?? SITE.email;
+  const to = process.env.ENQUIRY_TO_EMAIL ?? "hello@darbaarbytsar.com";
   const from =
     process.env.ENQUIRY_FROM_EMAIL ??
-    `TSAR Darbaar <no-reply@darbaarbytsar.com>`;
+    `Darbaar by tsar <no-reply@darbaarbytsar.com>`;
 
   if (!resend) {
     console.info("[email] RESEND_API_KEY missing - skipping send", {
@@ -60,6 +60,7 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
 
   const subject = `New enquiry · ${lead.company} · ${lead.industry ?? "-"} · ${lead.city ?? "-"}`;
 
+  // 1) Notify the team
   const internal = await resend.emails.send({
     from,
     to: [to],
@@ -67,7 +68,7 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
     subject,
     html: `
       <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#16090C;">
-        <h1 style="font-size:22px;font-weight:400;">New TSAR Darbaar enquiry</h1>
+        <h1 style="font-size:22px;font-weight:400;">New Darbaar by tsar enquiry</h1>
         <table style="width:100%;border-collapse:collapse;font-family:system-ui,sans-serif;font-size:14px;">
           ${fieldRows(lead)}
         </table>
@@ -79,30 +80,36 @@ export async function sendEnquiryEmails(lead: LeadPayload) {
     throw new Error(internal.error.message);
   }
 
+  // 2) Confirmation to the person who submitted the form
   const ack = await resend.emails.send({
     from,
     to: [lead.email],
-    subject: "We've received your enquiry - TSAR Darbaar",
+    replyTo: to,
+    subject: "We've received your enquiry — Darbaar by tsar",
     html: `
       <div style="font-family:Georgia,serif;max-width:560px;margin:0 auto;color:#16090C;background:#F7F3F3;padding:32px;">
-        <p style="font-size:28px;margin:0 0 16px;">tsar <span style="color:#8F1425;">darbaar</span></p>
+        <p style="font-size:22px;margin:0 0 16px;letter-spacing:0.04em;">Darbaar <span style="color:#8F1425;">by tsar</span></p>
         <h1 style="font-size:24px;font-weight:400;margin:0 0 12px;">We've received your enquiry</h1>
         <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#6A5C5E;">
-          Thank you, ${escapeHtml(lead.name)}. A TSAR Darbaar consultant will respond within one business day - with questions, not a sales pitch.
+          Thank you, ${escapeHtml(lead.name)}. Our team will respond within one business day.
         </p>
         <p style="font-family:system-ui,sans-serif;font-size:14px;color:#6A5C5E;margin-top:24px;">
           Prefer to talk sooner?<br/>
-          <a href="mailto:${SITE.email}" style="color:#B08D57;">${SITE.email}</a>
+          <a href="mailto:${SITE.email}" style="color:#8F1425;">${SITE.email}</a>
           ·
-          <a href="${SITE.phoneHref}" style="color:#B08D57;">${SITE.phone}</a>
+          <a href="${SITE.phoneHref}" style="color:#8F1425;">${SITE.phone}</a>
         </p>
       </div>
     `,
   });
 
   if (ack.error) {
-    console.error("[email] acknowledgement failed", ack.error);
+    throw new Error(`Confirmation email failed: ${ack.error.message}`);
   }
 
-  return { skipped: false as const, id: internal.data?.id };
+  return {
+    skipped: false as const,
+    id: internal.data?.id,
+    confirmationId: ack.data?.id,
+  };
 }

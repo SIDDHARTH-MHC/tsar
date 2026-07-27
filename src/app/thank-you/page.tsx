@@ -13,7 +13,7 @@ export default function ThankYouPage() {
     process.cwd(),
     "public",
     "downloads",
-    "TSAR-Darbaar-Company-Profile.pdf",
+    "darbaar-by-tsar.pdf",
   );
   const brochureAvailable = existsSync(brochurePath);
 

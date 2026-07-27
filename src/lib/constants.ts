@@ -470,9 +470,9 @@ export const FOOTER = {
 
 export const THANK_YOU = {
   headline: "Thank you. Your scent story has begun.",
-  body: "A Darbaar by tsar consultant will call you within one business day.",
-  brochureLabel: "Download Our Company Profile (PDF)",
+  body: "A Darbaar by tsar consultant will call you within one business day. Your brochure download should start automatically.",
+  brochureLabel: "Download brochure (PDF)",
   exploreLabel: "Explore tsar Perfumes →",
   redirectNote:
-    "Company Profile coming soon - you can explore tsar Perfumes meanwhile.",
+    "Brochure coming soon - you can explore tsar Perfumes meanwhile.",
 } as const;
